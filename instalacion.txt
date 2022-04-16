@@ -1,0 +1,21 @@
+1.- Instalar Python 3.9.4
+Link: https://www.python.org/downloads/release/python-394/
+
+2.- Instalar Django 4.0.4 con el comando
+    pip install Django==4.0.4
+
+3.- Instalar virtualenv
+    pip install virtualenv
+
+4.- Crear Ambiente virtual
+    En la raiz de la carpeta odyssey ejecutar: 
+    virtualenv venv
+
+5.- Para correr el ambiente virtual ejecutar el archivo
+    ambiente virtual.bat
+
+6.- Para instalar librerias, dentro del ambiente virtual ejecutar:
+    pip install -r requirements.txt
+
+6.- Para lanzar el servidor:
+    dentro del cmd que se abre ir a la carpeta odyssey_web y ejecutar python manage.py runserver
