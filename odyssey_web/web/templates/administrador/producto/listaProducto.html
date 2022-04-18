@@ -1,0 +1,44 @@
+{% include 'administrador/baseadmin.html' %}
+{% load static %}
+
+
+
+
+
+<div class="container-sm" id="producto">
+    <button type="button" class="btn btn-success"><a href="{% url 'agregar_producto' %}">Agregar Producto</a></button>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Nombre</th>
+                <th scope="col">Precio</th>
+                <th scope="col">Marca</th>
+                <th scope="col">Categoria</th>
+                <th scope="col">Descripcion</th>
+                <th scope="col">Stock</th>
+                <th scope="col">opciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for p in entity %}
+            <tr>
+                <td>{{ p.nombre | title }}</td>
+                <td>{{ p.precio | title }}</td>
+                <td>{{ p.Proveedor | title }}</td>
+                <td>{{ p.categoria | title }}</td>
+                <td>{{ p.descripcion | title }}</td>
+                <td>{{ p.stock | title }}</td>
+
+
+                <td>
+                    <button type="button" class="btn btn-danger"><a href="{% url 'eliminar_producto' p.id %}">Eliminar</a></button>
+                    <button type="button" class="btn btn-warning"><a href="{% url 'modificar_producto' p.id %}">Editar</a></button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+

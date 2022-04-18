@@ -1,0 +1,49 @@
+body {
+    background: white url("../imagenes/fondo.jpg") ;
+}
+
+.btn a{
+    text-decoration: none;
+    color: white;
+
+}
+
+#salir{
+    color: white;
+}
+
+#salir:hover {
+    color: blue;
+}
+
+#homeAdmin{
+    margin-top: 40px;
+}
+
+#proveedores{
+    background-color: white;
+    margin-top: 40px;
+    border-radius: 10px;
+    width: 80%;
+}
+
+#btnAgregar{
+    margin-top: 15px;
+    
+}
+
+#body{
+    padding-top: 15px;
+}
+
+#categorias{
+    background-color: white;
+    border-radius: 10px;
+    margin-top: 40px;
+}
+
+#producto{
+    background-color: white;
+    border-radius: 10px;
+    margin-top: 40px;
+}

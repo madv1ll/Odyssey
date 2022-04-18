@@ -1,0 +1,31 @@
+{% include 'administrador/baseadmin.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+<div class="group">
+
+
+    <div class="row">
+      <div class="col-12 col-md-6 offset-md-3">
+        <div class="card">
+          <div class="card-body">
+            <h4>Nueva Producto</h2>
+              <hr />
+              <form action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %} {{ form | crispy}}
+
+                <div class="d-flex justify-content-end">
+                  <input type="reset" value="Cancelar" class="btn tbn-secondary" />
+                  &nbsp;
+                  <input type="submit" value="Guardar" class="btn btn-primary" />
+                </div>
+              </form>
+              {{ mensaje }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="btn">
+      
+      <a href="{% url 'listar_productos' %}" class="btn btn-primary">atras</a>
+  </div>
+  </div>
