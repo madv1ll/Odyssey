@@ -1,11 +1,17 @@
+from re import template
 from django.urls import path
+from django.contrib.auth.views import LoginView, LogoutView
 from .views import home, administrador, listar_proveedor, agregar_proveedor, eliminar_proveedor, modificar_proveedor, \
     modificar_proveedor, listar_categoria, agregar_categoria, eliminar_categoria, modificar_categoria, \
-    listar_productos, agregar_producto, eliminar_producto, modificar_producto    
+    listar_productos, agregar_producto, eliminar_producto, modificar_producto, registro   
 
 urlpatterns = [
     path('', home, name="home"),
     path('administrador/', administrador, name="administrador"),
+    #register
+    path('registro/', registro, name="registro"),
+    path('login/', LoginView.as_view(template_name = 'user/login.html'), name='login'),
+    path('logout/', LogoutView.as_view(template_name = 'web/home.html'), name='logout'),
     # proveedores
     path('proveedores/', listar_proveedor, name="proveedores"),
     path('agregar-proveedor/', agregar_proveedor, name="agregar_proveedor"),
