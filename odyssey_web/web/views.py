@@ -134,7 +134,7 @@ def listar_productos(request):
     productos = Producto.objects.all()
     page = request.GET.get('page', 1)
     try:
-        paginator = Paginator(productos, 5)
+        paginator = Paginator(productos, 10)
         productos = paginator.page(page)
     except:
         raise Http404
@@ -143,6 +143,8 @@ def listar_productos(request):
         'paginator': paginator
     }
     return render(request, 'administrador/producto/listaProducto.html', data)
+
+
 
 def agregar_producto(request):
     data = {
@@ -181,3 +183,19 @@ def modificar_producto(request, id):
     return render(request, 'administrador/producto/modificar_producto.html', data)
 
 
+
+
+
+def listar_productosVenta(request):
+    productos = Producto.objects.all()
+    page = request.GET.get('page', 1)
+    try:
+        paginator = Paginator(productos, 10)
+        productos = paginator.page(page)
+    except:
+        raise Http404
+    data = {
+        'entity': productos,
+        'paginator': paginator
+    }
+    return render(request, 'web/productos.html', data)
