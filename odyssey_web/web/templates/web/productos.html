@@ -1,0 +1,41 @@
+{% include 'web/base.html' %}
+{% load static %}
+
+<section id="productos">
+    <div class="container-sm">
+
+        <form class="d-flex" id="barraBusqueda">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+
+    </div>
+    <div class="container-sm">
+        <p>Todos los productos</p>
+    </div>
+</section>
+<section>
+    <div class="container-sm">
+        
+        <div class="row row-cols-2 row-cols-md-6 g-4">
+            {% for p in entity %}
+            <div class="col">
+                <div class="card">
+                    <img src="{{ p.imagen.url }}" class="card-img-top" alt="..." >
+                    <div class="card-body">
+                        <h5 class="card-title">{{ p.nombre | title }}</h5>
+                        <h6 class="card-text"> {{ p.Proveedor | title }}</h6>
+                        <p class="card-text"> {{ p.categoria | title }}</p>
+                        <p class="card-text">$ {{ p.precio | title }}</p>
+                        <p><button type="button" class="btn btn-primary">comprar</button></p>
+                        
+                        
+                    </div>
+                </div>
+            </div>   
+            {% endfor %} 
+        </div>
+
+    </div>
+    
+</section>

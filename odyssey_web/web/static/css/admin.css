@@ -1,6 +1,13 @@
 body {
     background: white url("../imagenes/fondo.jpg") ;
 }
+#navbarNav a{
+    color: white;
+}
+
+#navbarNav a:hover{
+    color: blue;
+}
 
 .btn a{
     text-decoration: none;
@@ -23,7 +30,7 @@ body {
 #proveedores{
     background-color: white;
     margin-top: 40px;
-    border-radius: 10px;
+    border-radius: 15px;
     width: 80%;
 }
 
