@@ -8,15 +8,15 @@ from .models import Proveedor, Categoria, Producto
 
 def listar_productos(request):
     productos = Producto.objects.all()
-    # page = request.GET.get('page', 1)
-    # try:
-    #     paginator = Paginator(productos, 5)
-    #     productos = paginator.page(page)
-    # except:
-    #     raise Http404
+    page = request.GET.get('page', 1)
+    try:
+        paginator = Paginator(productos, 5)
+        productos = paginator.page(page)
+    except:
+        raise Http404
     data = {
         'entity': productos,
-        # 'paginator': paginator
+        'paginator': paginator
     }
     return render(request, 'producto/listaProducto.html', data)
 
@@ -31,7 +31,7 @@ def agregar_producto(request):
             messages.success(request, "Producto Registrado")
         else:
             data["form"] = formulario
-    return render(request, 'administrador/producto/agregar_producto.html', data)
+    return render(request, 'producto/agregar_producto.html', data)
 
 
 def eliminar_producto(request, id): 
@@ -69,7 +69,7 @@ def listar_proveedor(request):
         'entity': proveedores,
         'paginator': paginator
     }
-    return render(request, 'administrador/proveedor/listaProveedores.html', data)
+    return render(request, 'proveedor/listaProveedores.html', data)
 
 def agregar_proveedor(request):
     data = {
@@ -82,7 +82,7 @@ def agregar_proveedor(request):
             messages.success(request, "Proveedor Creado correctamente")
             return redirect(to="proveedores")
         data["form"] = formulario   
-    return render(request, 'administrador/proveedor/agregar_proveedor.html', data)
+    return render(request, 'proveedor/agregar_proveedor.html', data)
 
 def eliminar_proveedor(request, id):
     proveedor = get_object_or_404(Proveedor, id_proveedor=id)
@@ -103,7 +103,7 @@ def modificar_proveedor(request, id):
             return redirect(to="proveedores")
         else:
             data["form"] = formulario
-    return render(request, 'administrador/proveedor/modificar_proveedor.html', data)
+    return render(request, 'proveedor/modificar_proveedor.html', data)
 
 def listar_categoria(request):
     categorias = Categoria.objects.all()
@@ -117,7 +117,7 @@ def listar_categoria(request):
         'entity': categorias,
         'paginator': paginator
     }
-    return render(request, 'administrador/categoria/listaCategorias.html', data)
+    return render(request, 'categoria/listaCategorias.html', data)
 
 
 def agregar_categoria(request):
@@ -131,7 +131,7 @@ def agregar_categoria(request):
             messages.success(request, "Categoria creado correctamente")
             return redirect(to="categorias")
         data["form"] = formulario
-    return render(request, 'administrador/categoria/agregar_categoria.html', data)
+    return render(request, 'categoria/agregar_categoria.html', data)
 
 def eliminar_categoria(request, id):
     categoria = get_object_or_404(Categoria, id=id)
@@ -151,4 +151,4 @@ def modificar_categoria(request, id):
             messages.success(request, "modificado correctamente")
             return redirect(to="categorias")
         data["form"] = formulario
-    return render(request, 'administrador/categoria/modificar_categoria.html', data)    
+    return render(request, 'categoria/modificar_categoria.html', data)    

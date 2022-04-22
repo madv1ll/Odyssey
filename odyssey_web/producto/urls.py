@@ -5,7 +5,7 @@ from .views import agregar_categoria, agregar_proveedor, eliminar_categoria, eli
 
 urlpatterns = [
     #producto
-    path('listar-productos/', listar_productos, name="temp_productos"),
+    path('listar-productos/', listar_productos, name="listar_productos"),
     path('agregar-producto/', agregar_producto, name="agregar_producto"),
     path('eliminar-producto/<id>/', eliminar_producto, name="eliminar_producto"),
     path('modificar-producto/<id>/', modificar_producto, name="modificar_producto"),
