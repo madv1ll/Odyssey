@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     #modulos web
     'web',
     'user',
-    'producto',
+    'producto.apps.ProductoConfig',
     'administrador',
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap4'

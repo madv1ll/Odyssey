@@ -8,17 +8,17 @@ from .models import Proveedor, Categoria, Producto
 
 def listar_productos(request):
     productos = Producto.objects.all()
-    page = request.GET.get('page', 1)
-    try:
-        paginator = Paginator(productos, 5)
-        productos = paginator.page(page)
-    except:
-        raise Http404
+    # page = request.GET.get('page', 1)
+    # try:
+    #     paginator = Paginator(productos, 5)
+    #     productos = paginator.page(page)
+    # except:
+    #     raise Http404
     data = {
         'entity': productos,
-        'paginator': paginator
+        # 'paginator': paginator
     }
-    return render(request, 'listaProducto.html', data)
+    return render(request, 'producto/listaProducto.html', data)
 
 def agregar_producto(request):
     data = {
