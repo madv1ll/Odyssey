@@ -1,9 +1,9 @@
 from django.db import models
 
-# Create your models here.
 class Proveedor(models.Model):
     id_proveedor =models.AutoField(primary_key=True)
     nombres = models.CharField(max_length=50)
+    
     def __str__(self):
         return self.nombres  
 
@@ -23,6 +23,5 @@ class Producto(models.Model):
     imagen = models.ImageField(upload_to="productos", null=True)
     stock = models.IntegerField(null = True)
     
-
     def __str__(self):
         return self.nombre

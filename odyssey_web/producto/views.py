@@ -1,9 +1,10 @@
-from pyexpat.errors import messages
+
 from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect, render
-from django.core.paginator import Page, Paginator
+from django.core.paginator import Paginator
 from .forms import CategoriaForm, ProductoForm, ProveedorForm
 from .models import Proveedor, Categoria, Producto
+from django.contrib import messages
 
 
 def listar_productos(request):
@@ -33,13 +34,11 @@ def agregar_producto(request):
             data["form"] = formulario
     return render(request, 'producto/agregar_producto.html', data)
 
-
 def eliminar_producto(request, id): 
     producto = get_object_or_404(Producto, id=id)
     producto.delete()
     messages.success(request, "eleiminado correctamente")
     return redirect(to="listar_productos")    
-
 
 def modificar_producto(request, id):
     producto = get_object_or_404(Producto, id=id)
@@ -118,7 +117,6 @@ def listar_categoria(request):
         'paginator': paginator
     }
     return render(request, 'categoria/listaCategorias.html', data)
-
 
 def agregar_categoria(request):
     data = {

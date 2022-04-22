@@ -6,4 +6,6 @@ urlpatterns = [
     path('', include('web.urls')),
     # producto
     path('productos/', include('producto.urls')),
+    #admin
+    path('administrador/',include('administrador.urls'))
 ]
