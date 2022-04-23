@@ -1,0 +1,29 @@
+{% include 'user/baseUser.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+<div class="container-sm" id="producto">
+    <button type="button" class="btn btn-success"><a href="{% url 'agregar_producto' %}">Agregar Producto</a></button>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">UserNames</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for p in entity %}
+            <tr>
+                <td>{{ p.username | title }}</td>
+                <td>
+                    <button type="button" class="btn btn-danger"><a
+                            href="#">Eliminar</a></button>
+                    <button type="button" class="btn btn-warning"><a
+                            href="#">Editar</a></button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</div>
