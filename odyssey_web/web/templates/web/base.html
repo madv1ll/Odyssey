@@ -16,7 +16,7 @@
     <title>Hello, world!</title>
 </head>
 
-<body style="background-color: black;">
+<body>
     <header>
 
         <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -48,16 +48,19 @@
               <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav m-auto">
                   <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="#">Productos</a>
+                    <a class="nav-link" href="{% url 'productosVenta' %}">Productos</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="#">Contacto</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link " href="{% url 'administrador' %}">Administrador</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link " href="{% url 'registro' %}">Registrarse</a>
                   </li>
                 </ul>
               </div>

@@ -1,4 +1,4 @@
-{% include 'baseadmin.html' %}
+{% include 'baseAdmin.html' %}
 {% load static %}
 
 
@@ -38,6 +38,18 @@
                             Lista de los proveedores 
                         </p>
                         <button type="button" class="btn btn-success"><a href="{% url 'proveedores' %}">Ver</a></button>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <img src="{% static 'imagenes/users.jpeg' %}" class= "card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Usuarios</h5>
+                        <p>
+                            Lista de usuarios
+                        </p>
+                        <button type="button" class="btn btn-success"><a href="{% url 'users' %}">Ver</a></button>
                     </div>
                 </div>
             </div>
