@@ -1,0 +1,10 @@
+{% include 'web/base.html' %}
+{% block title %}Registrarse{% endblock%}
+
+{% block body %}
+<form action="" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" name="submit">
+</form>
+{% endblock %}
