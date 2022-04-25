@@ -1,0 +1,12 @@
+#administrador-cache
+odyssey_web\administrador\__pycache__
+#carrito-cache
+odyssey_web\carrito\__pycache__
+#odyseey_web-cache
+odyssey_web\odyssey_web\__pycache__
+#producto-cache
+odyssey_web\producto\__pycache__
+#user-cache
+odyssey_web\user\__pycache__
+#web-cache
+odyssey_web\web\__pycache__
