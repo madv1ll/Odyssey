@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'user',
     'producto.apps.ProductoConfig',
     'administrador',
+    'carrito',
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 MIDDLEWARE = [
