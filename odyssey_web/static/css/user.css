@@ -1,3 +1,8 @@
+.btn a{
+    text-decoration: none;
+    color: white;
+
+}
 #cajaRegister{
     background-color: white;
     margin-top: 50px;
@@ -14,3 +19,13 @@
     text-align: center;
     color: white;
 }
+
+#barraBusqueda{
+    width: 300px;
+    margin-top: 50px;
+}
+
+#user{
+    margin-top: 50px;
+}
+
