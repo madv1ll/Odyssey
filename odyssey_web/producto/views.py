@@ -5,14 +5,22 @@ from django.core.paginator import Paginator
 from .forms import CategoriaForm, ProductoForm, ProveedorForm
 from .models import Proveedor, Categoria, Producto
 from django.contrib import messages
+from django.db.models import Q
 
 
 def listar_productos(request):
+    busqueda = request.GET.get("buscar")
     productos = Producto.objects.all()
-    data = {
-        'entity': productos,
-    }
-    return render(request, 'producto/listaProducto.html', data)
+    if busqueda:
+        productos = Producto.objects.filter(
+            Q(nombre__icontains = busqueda) |
+            Q(descripcion__icontains = busqueda)  
+        ).distinct()
+   
+    return render(request, 'producto/listaProducto.html', {'entity':productos})
+    
+
+
 
 def agregar_producto(request):
     data = {
@@ -50,18 +58,24 @@ def modificar_producto(request, id):
 
 # Proveedores
 def listar_proveedor(request):
+    busqueda = request.GET.get("buscar")
     proveedores = Proveedor.objects.all()
-    page = request.GET.get('page', 1)
-    try:
-        paginator = Paginator(proveedores, 5)
-        proveedores = paginator.page(page)
-    except:
-        raise Http404   
-    data = {
-        'entity': proveedores,
-        'paginator': paginator
-    }
-    return render(request, 'proveedor/listaProveedores.html', data)
+    if busqueda:
+        proveedores = Proveedor.objects.filter(
+            Q(nombres__icontains = busqueda)  
+        ).distinct()
+    return render(request, 'proveedor/listaProveedores.html', {'entity':proveedores})
+
+
+def listar_categoria(request):
+    busqueda = request.GET.get("buscar")
+    categorias = Categoria.objects.all()
+    if busqueda:
+        categorias = Categoria.objects.filter(
+            Q(Categoria__icontains = busqueda)  
+        ).distinct()
+    return render(request, 'categoria/listaCategorias.html', {'entity':categorias})
+
 
 def agregar_proveedor(request):
     data = {
@@ -97,19 +111,18 @@ def modificar_proveedor(request, id):
             data["form"] = formulario
     return render(request, 'proveedor/modificar_proveedor.html', data)
 
+
+
+
 def listar_categoria(request):
+    busqueda = request.GET.get("buscar")
     categorias = Categoria.objects.all()
-    page = request.GET.get('page',1)
-    try:
-        paginator = Paginator(categorias, 5)
-        categorias = paginator.page(page)
-    except:
-        raise Http404
-    data = {
-        'entity': categorias,
-        'paginator': paginator
-    }
-    return render(request, 'categoria/listaCategorias.html', data)
+    if busqueda:
+        categorias = Categoria.objects.filter(
+            Q(Categoria__icontains = busqueda)  
+        ).distinct()
+    return render(request, 'categoria/listaCategorias.html', {'entity':categorias})
+
 
 def agregar_categoria(request):
     data = {

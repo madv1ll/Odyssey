@@ -25,6 +25,7 @@ body {
 
 #homeAdmin{
     margin-top: 40px;
+    
 }
 
 #proveedores{
@@ -52,5 +53,10 @@ body {
 #producto{
     background-color: white;
     border-radius: 10px;
+    margin-top: 40px;
+}
+
+#barraBusqueda{
+    width: 400px;
     margin-top: 40px;
 }
