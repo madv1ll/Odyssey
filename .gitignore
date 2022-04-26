@@ -1,12 +1,20 @@
 #administrador-cache
-odyssey_web\administrador\__pycache__
+odyssey_web/administrador/__pycache__
+odyssey_web/administrador/migrations/__pycache__
 #carrito-cache
-odyssey_web\carrito\__pycache__
+odyssey_web/carrito/__pycache__
+odyssey_web/carrito/migrations/__pycache__
 #odyseey_web-cache
-odyssey_web\odyssey_web\__pycache__
+odyssey_web/odyssey_web/__pycache__
+odyssey_web/odyssey_web/__pycache__
 #producto-cache
-odyssey_web\producto\__pycache__
+odyssey_web/producto/__pycache__
+odyssey_web/producto/migrations/__pycache__
 #user-cache
-odyssey_web\user\__pycache__
+odyssey_web/user/__pycache__
+odyssey_web/user/migrations/__pycache__
 #web-cache
-odyssey_web\web\__pycache__
+odyssey_web/web/__pycache__
+odyssey_web/web/migrations/__pycache__
+#ambiente virtual
+venv
