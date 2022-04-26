@@ -10,3 +10,5 @@ odyssey_web\producto\__pycache__
 odyssey_web\user\__pycache__
 #web-cache
 odyssey_web\web\__pycache__
+#ambiente virtual
+venv
