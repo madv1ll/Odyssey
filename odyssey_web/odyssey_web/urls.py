@@ -11,7 +11,9 @@ urlpatterns = [
     #admin
     path('administrador/',include('administrador.urls')),
     #user
-    path('user/',include('user.urls'))
+    path('user/',include('user.urls')),
+    #carrito
+    path('carrito/',include('carrito.urls')),
 ]
 
 if settings.DEBUG:
