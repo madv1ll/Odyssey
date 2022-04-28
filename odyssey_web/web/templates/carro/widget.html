@@ -1,0 +1,39 @@
+<div class="container-sm" id="widget">
+    {% if request.session.carro.items %}
+    {% for key, value in request.session.carro.items %}
+    <div class="card" id="carrito_lista">
+      <div class="card-body">
+        <div class="row">
+          <div class="col">
+            <div id="img_lista">
+              <img src="{{ value.imagen }}" class="card-img-top" alt="..." style="width: 43%;">
+            </div>
+          </div>
+          <div class="col">
+            <h5 class="card-title">{{value.nombre}}</h5>
+          </div>
+          <div class="col">
+            <h6>Precio</h6>
+            <p class="card-text">$ {{value.precio}}</p>
+          </div>
+          <div class="col">
+            <h6>Cantidad</h6>
+            {{value.cantidad}}
+            <a href="{% url 'carrito:sumar_carro' value.producto_id %}" class="btn btn-sm btn-primary" id="btn_mas">+</a>
+            <a href="{% url 'carrito:restar_carro' value.producto_id %}" class="btn btn-sm btn-primary"
+              id="btn_menos">-</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  
+    {% else %}
+    <div class="alert alert-danger text-center">
+      Sin productos
+    </div>
+    </td>
+    {% endif %}
+  
+    
+  </div>

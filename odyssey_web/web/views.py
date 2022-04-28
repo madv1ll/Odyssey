@@ -17,3 +17,7 @@ def listar_productosVenta(request):
     return render(request, 'web/productos.html', {'entity':productos})
 
 
+def carrito(request):
+    return render(request, 'carro/carrito.html')     
+
+

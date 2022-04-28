@@ -8,6 +8,11 @@ header {
     position: fixed;
     z-index: 100;
 }
+.btn a{
+    text-decoration: none;
+    color: white;
+
+}
 
 #mama{
     background-color: blue;
@@ -41,6 +46,42 @@ header {
     background-color: red;
 }
 
+/* home */
+/* #titleNosotros{
+    text-align: center;
+}
+
+#titleNosotros h1{
+    font-size: 50px;
+}
+
+#cuNostros{
+    margin-top: 20px;
+} */
+
+#nosotros{
+    margin-top: 40px;
+
+      
+}
+
+#nosotros img{
+    width: 450px;
+}
+
+#nosotros h1{
+    text-align: center;
+}
+#nosotros p{
+    text-align: center;
+}
+
+/* #parrafoNosotros p{
+    margin-top: 30px;
+} */
+
+
+/* productos cliente */
 #barraBusqueda{
     width: 300px;
 }
@@ -48,4 +89,33 @@ header {
     padding-top: 100px;
    
 }
+
+#hola{
+    padding-top: 50px;
+}
+
+/* carrito */
+
+#carrito{
+    padding-top: 90px;
+}
+
+
+#carrito_lista{
+    margin: 24px;
+}
+#btn_mas{
+    margin: 3px;
+}
+
+#total{
+    margin-top: 30px;
+}
+
+#RealizarCompra{
+    margin-top: 20px;
+}
+
+
+
 
