@@ -1,9 +1,11 @@
 # from email import message
 # from multiprocessing import context
 from django.shortcuts import render, redirect, get_object_or_404
-# from .forms import  CustomUserCreationForm
+# from .forms import  CustomUserCreationForm 
 from django.views.generic import CreateView
 from django.contrib.auth import authenticate, forms, login
+#import Q  para busqueda 
+from django.db.models import Q
 # from django.contrib import messages
 
 from django.contrib.auth.models import User
