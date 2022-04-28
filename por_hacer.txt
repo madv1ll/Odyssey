@@ -1,0 +1,3 @@
+configurar la tabla USUARIO y unificar con el perfil de django
+modificar el modelo ER segun el modelo Producto en > producto/models.py
+crear variables de entorno
