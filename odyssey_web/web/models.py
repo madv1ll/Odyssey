@@ -1,3 +1,26 @@
 from django.db import models
 
-# Create your models here.
+class Pais(models.Model):
+    id_pais = models.AutoField(primary_key=True)
+    sigla   = models.CharField(max_length=3)
+    nombre  = models.CharField(max_length=60,null=False)
+
+    def __str__(self):
+        return self.nombre
+
+class Region(models.Model):
+    id_region = models.AutoField(primary_key=True)
+    nombre    = models.CharField(max_length=60)
+    id_pais   = models.ForeignKey(Pais, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.nombre
+
+class Comuna(models.Model):
+    id_comuna = models.AutoField(primary_key=True)
+    sigla     = models.CharField(max_length=3)
+    nombre    = models.CharField(max_length=30)
+    id_region   = models.ForeignKey(Region, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.nombre
