@@ -1,3 +1,2 @@
-configurar la tabla USUARIO y unificar con el perfil de django
---modificar el modelo ER segun el modelo Producto en > producto/models.py
+Modificar permisos de usuario para que solo admin pueda entrar al sitio admin
 crear variables de entorno PARA CONEXION A BD
