@@ -2,6 +2,8 @@
 {% load crispy_forms_tags %}
 {% load static %}
 
+
+
 <div class="container-sm">
 
     <form class="d-flex" id="barraBusqueda" method="GET">
@@ -36,13 +38,18 @@
                 <td>{{ p.categoria | title }}</td>
                 <td>{{ p.descripcion | title }}</td>
                 <td>{{ p.stock | title }}</td>
-               
-                
-                
+
+
+
 
                 <td>
-                    <button type="button" class="btn btn-danger"><a href="{% url 'eliminar_producto' p.id %}">Eliminar</a></button>
-                    <button type="button" class="btn btn-warning"><a href="{% url 'modificar_producto' p.id %}">Editar</a></button>
+                    <button type="button" class="btn btn-danger"><a
+                            href="#" id="clickMe" onclick="AlertEliminarProducto({{ p.id }});">Eliminar</a>
+                    </button>
+                    <button type="button" class="btn btn-warning"><a
+                            href="{% url 'modificar_producto' p.id %}">Editar</a>
+                    </button>
+
                 </td>
             </tr>
             {% endfor %}
@@ -51,3 +58,4 @@
 
 </div>
 
+<script src="{% static 'js/alert.js' %}"></script>
