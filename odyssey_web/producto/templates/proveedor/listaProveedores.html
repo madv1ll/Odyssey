@@ -38,7 +38,7 @@
 
           <td>
             <button type="button" class="btn btn-danger"><a
-                href="{% url 'eliminar_proveedor' p.id_proveedor %}">Eliminar</a></button>
+                href="#" onclick="AlertEliminarProveedor({{ p.id_proveedor }});">Eliminar</a></button>
             <button type="button" class="btn btn-warning"><a
                 href="{% url 'modificar_proveedor' p.id_proveedor %}">Editar</a></button>
           </td>
@@ -49,3 +49,5 @@
 
   </div>
 </div>
+
+<script src="{% static 'js/alert.js' %}"></script>

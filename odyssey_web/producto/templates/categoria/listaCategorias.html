@@ -28,7 +28,7 @@
                 <td>{{ p.Categoria | title }}</td>
 
                 <td>
-                    <button type="button" class="btn btn-danger"><a href="{% url 'eliminar_categoria' p.id %}">Eliminar</a></button>
+                    <button type="button" class="btn btn-danger"><a href="#" onclick="AlertEliminarCategoria({{ p.id }});">Eliminar</a></button>
                     <button type="button" class="btn btn-warning"><a href="{% url 'modificar_categoria' p.id %}">Editar</a></button>
                 </td>
             </tr>
@@ -37,3 +37,4 @@
     </table>
 </div>
 
+<script src="{% static 'js/alert.js' %}"></script>
