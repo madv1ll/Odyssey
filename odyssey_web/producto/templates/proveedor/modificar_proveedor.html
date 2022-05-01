@@ -1,24 +1,27 @@
-{% include 'baseadmin.html' %}
+{% extends 'baseadmin.html' %}
 {% load crispy_forms_tags %}
 {% load static %}
-
-<div class="row">
-    <div class="col-12 col-md-6 offset-md-3">
-        <div class="card">
-            <div class="card-body">
-                <h4>Editar Producto</h2>
-                    <hr />
-                    <form action="" method="post" enctype="multipart/form-data">
-                        {% csrf_token %} {{ form | crispy}}
-
-                        <div class="d-flex justify-content-end">
-                            <input type="reset" value="Cancelar" class="btn tbn-secondary" />
-                            &nbsp;
-                            <input type="submit" value="Editar" class="btn btn-primary" />
-                        </div>
-                    </form>
-                    {{ mensaje }}
+{% block titulo %}Administrador | Editar Proveedor{% endblock %}
+{% block body %}
+<div class="group mt-4">
+    <div class="row">
+        <div class="col-12 col-md-6 offset-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <h4>Editar Proveedor</h2>
+                        <hr />
+                        <form action="" method="post" enctype="multipart/form-data">
+                            {% csrf_token %} {{ form | crispy}}
+                            <div class="d-flex justify-content-end mt-2">
+                                <a href="{% url 'proveedores' %}" class="btn btn-secondary">Cancelar</a>
+                                &nbsp;
+                                <input type="submit" value="Editar" class="btn btn-primary" />
+                            </div>
+                        </form>
+                        {{ mensaje }}
+                </div>
             </div>
         </div>
     </div>
 </div>
+{% endblock %}

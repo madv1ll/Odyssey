@@ -1,21 +1,17 @@
-{% include 'web/base.html' %}
+{% extends 'web/base.html' %}
 {% load static %}
-<!-- {% include 'carro/widget.html' %} -->
-
-
+{% block titulo %}Odyssey | Carrito{% endblock %}
+{% block body %}
 <div class="container-sm" id="carrito">
   <div class="row">
     <div class="col-8">
       {% include 'carro/widget.html' %}
-
     </div>
     <div class="col-4">
-
       <div class="card">
         <div class="card-body">
           <h4>Resumen de compra</h4>
           <div class="row" id="total">
-
             <div class="col">
               <h5>Total:</h5>
             </div>
@@ -23,7 +19,6 @@
               <h5 class="card-title">${{importe_total_carro}}</h5>
             </div>
           </div>
-
           <button type="button" class="btn btn-primary" id="RealizarCompra" style="border-radius: 25px;">Realizar compra</button>
         </div>
       </div>
@@ -31,3 +26,4 @@
   </div>
 </div>
 </div>
+{% endblock %}
