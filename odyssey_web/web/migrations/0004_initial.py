@@ -13,29 +13,4 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.CreateModel(
-            name='Pais',
-            fields=[
-                ('id_pais', models.AutoField(primary_key=True, serialize=False)),
-                ('sigla', models.CharField(max_length=3)),
-                ('nombre', models.CharField(max_length=60)),
-            ],
-        ),
-        migrations.CreateModel(
-            name='Region',
-            fields=[
-                ('id_region', models.AutoField(primary_key=True, serialize=False)),
-                ('nombre', models.CharField(max_length=60)),
-                ('id_pais', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='web.pais')),
-            ],
-        ),
-        migrations.CreateModel(
-            name='Comuna',
-            fields=[
-                ('id_comuna', models.AutoField(primary_key=True, serialize=False)),
-                ('sigla', models.CharField(max_length=3)),
-                ('nombre', models.CharField(max_length=30)),
-                ('id_region', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='web.region')),
-            ],
-        ),
     ]

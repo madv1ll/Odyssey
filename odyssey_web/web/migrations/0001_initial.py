@@ -13,29 +13,28 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Categoria',
+            name='Pais',
             fields=[
-                ('id', models.AutoField(primary_key=True, serialize=False)),
-                ('Categoria', models.CharField(max_length=50)),
+                ('id_pais', models.AutoField(primary_key=True, serialize=False)),
+                ('sigla', models.CharField(max_length=3)),
+                ('nombre', models.CharField(max_length=60)),
             ],
         ),
         migrations.CreateModel(
-            name='Proveedor',
+            name='Region',
             fields=[
-                ('id_proveedor', models.AutoField(primary_key=True, serialize=False)),
-                ('nombres', models.CharField(max_length=50)),
+                ('id_region', models.AutoField(primary_key=True, serialize=False)),
+                ('nombre', models.CharField(max_length=60)),
+                ('id_pais', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='web.pais')),
             ],
         ),
         migrations.CreateModel(
-            name='Producto',
+            name='Comuna',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('nombre', models.CharField(max_length=50)),
-                ('precio', models.IntegerField()),
-                ('descripcion', models.TextField()),
-                ('imagen', models.ImageField(null=True, upload_to='productos')),
-                ('Proveedor', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='web.proveedor')),
-                ('categoria', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='web.categoria')),
+                ('id_comuna', models.AutoField(primary_key=True, serialize=False)),
+                ('sigla', models.CharField(max_length=3)),
+                ('nombre', models.CharField(max_length=30)),
+                ('id_region', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='web.region')),
             ],
         ),
     ]
