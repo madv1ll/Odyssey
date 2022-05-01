@@ -34,8 +34,8 @@
             <tr>
                 <td>{{ p.nombre | title }}</td>
                 <td>{{ p.precio | title }}</td>
-                <td>{{ p.Proveedor | title }}</td>
-                <td>{{ p.categoria | title }}</td>
+                <td>{{ p.id_proveedor | title }}</td>
+                <td>{{ p.id_categoria | title }}</td>
                 <td>{{ p.descripcion | title }}</td>
                 <td>{{ p.stock | title }}</td>
 
@@ -44,10 +44,10 @@
 
                 <td>
                     <button type="button" class="btn btn-danger"><a
-                            href="#" id="clickMe" onclick="AlertEliminarProducto({{ p.id }});">Eliminar</a>
+                            href="#" id="clickMe" onclick="AlertEliminarProducto({{ p.id_producto }});">Eliminar</a>
                     </button>
                     <button type="button" class="btn btn-warning"><a
-                            href="{% url 'modificar_producto' p.id %}">Editar</a>
+                            href="{% url 'modificar_producto' p.id_producto %}">Editar</a>
                     </button>
 
                 </td>

@@ -25,11 +25,11 @@
         <tbody>
             {% for p in entity %}
             <tr>
-                <td>{{ p.Categoria | title }}</td>
+                <td>{{ p.descripcion | title }}</td>
 
                 <td>
-                    <button type="button" class="btn btn-danger"><a href="#" onclick="AlertEliminarCategoria({{ p.id }});">Eliminar</a></button>
-                    <button type="button" class="btn btn-warning"><a href="{% url 'modificar_categoria' p.id %}">Editar</a></button>
+                    <button type="button" class="btn btn-danger"><a href="#" onclick="AlertEliminarCategoria({{ p.id_categoria }});">Eliminar</a></button>
+                    <button type="button" class="btn btn-warning"><a href="{% url 'modificar_categoria' p.id_categoria %}">Editar</a></button>
                 </td>
             </tr>
             {% endfor %}
