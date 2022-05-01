@@ -1,3 +1,4 @@
+from xmlrpc.client import MININT
 from django.db import models
 from web.models import Pais, Region, Comuna
 

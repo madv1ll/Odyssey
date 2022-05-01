@@ -28,6 +28,7 @@
       <thead>
         <tr>
           <th scope="col">Nombre</th>
+          <th scope="col">Rut</th>
           <th scope="col">Opciones</th>
         </tr>
       </thead>
@@ -35,6 +36,7 @@
         {% for p in entity %}
         <tr>
           <td>{{ p.nombre | title }}</td>
+          <td>{{ p.rut | title }}</td>
 
           <td>
             <button type="button" class="btn btn-danger"><a

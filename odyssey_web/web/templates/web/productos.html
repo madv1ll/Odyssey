@@ -27,8 +27,9 @@
                         <h5 class="card-title">{{ p.nombre | title }}</h5>
                         <h6 class="card-text"> {{ p.Proveedor | title }}</h6>
                         <p class="card-text"> {{ p.categoria | title }}</p>
+                        <p class="card-text"> {{ p.id_producto | title }}</p>
                         <p class="card-text">$ {{ p.precio | title }}</p>
-                        <p><button type="button" class="btn btn-primary"><a href="#" onclick="AlertAgregarCarrito({{ p.id }});">Comprar</a></button></p>
+                        <p><button type="button" class="btn btn-primary"><a href="#" onclick="AlertAgregarCarrito({{p.id_producto}})" >Comprar</a></button></p>
                         
                         
                     </div>

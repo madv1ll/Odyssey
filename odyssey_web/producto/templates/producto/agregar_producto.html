@@ -16,7 +16,7 @@
                 <div class="d-flex justify-content-end">
                   <input type="reset" value="Cancelar" class="btn tbn-secondary" />
                   &nbsp;
-                  <input type="submit" value="Guardar" class="btn btn-primary" />
+                  <input type="submit" value="Guardar" onclick="AgregarProducto()" class="btn btn-primary" />
                 </div>
               </form>
               {{ mensaje }}
@@ -29,3 +29,5 @@
       <a href="{% url 'listar_productos' %}" class="btn btn-primary">atras</a>
   </div>
   </div>
+
+  <script src="{% static 'js/alert.js' %}"></script>

@@ -11,20 +11,24 @@ class Carro:
         self.carro = carro    
 
     def agregar(self, producto): 
-        if(str(producto.id) not in self.carro.keys()):
-            self.carro[producto.id]= {
-                "producto_id":producto.id,
+        if(str(producto.id_producto) not in self.carro.keys()):
+            self.carro[producto.id_producto]= {
+                "producto_id":producto.id_producto,
                 "nombre": producto.nombre,
                 "precio": str(producto.precio),
                 "cantidad": 1,
                 "imagen": producto.imagen.url
-            }  
+            }
+        
         else:
             for key, value in self.carro.items():
-                if key == str(producto.id):   
-                    value ["cantidad"] = value["cantidad"]+1
-                    value ["precio"] = float(value["precio"])+producto.precio 
+                if key == str(producto.id_producto):
+                    print(value ["cantidad"])
+                    if (value ["cantidad"] < producto.stock):
+                        value ["cantidad"] = value["cantidad"]+1   
+                        value ["precio"] = float(value["precio"])+producto.precio 
                     break 
+        
 
         self.guardar_carro()  
 
@@ -33,14 +37,14 @@ class Carro:
         self.session.modified =True
 
     def eliminar (self, producto):
-        producto.id = str(producto.id)
-        if producto.id in self.carro:
-            del self.carro[producto.id]
+        producto.id_producto = str(producto.id_producto)
+        if producto.id_producto in self.carro:
+            del self.carro[producto.id_producto]
             self.guardar_carro() 
 
     def restar_producto(self, producto):
         for key, value in self.carro.items():
-                if key == str(producto.id):   
+                if key == str(producto.id_producto):   
                     value ["cantidad"] = value["cantidad"]-1 
                     value ["precio"] = float(value["precio"])-producto.precio 
                     if value["cantidad"] <1:

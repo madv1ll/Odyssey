@@ -2,7 +2,7 @@
 from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect, render
 from django.core.paginator import Paginator
-from .forms import CategoriaForm, ProductoForm, ProveedorForm
+from .forms import CategoriaForm, ProductoForm, ProveedorForm, ProveedorEditForm, ProductoEditForm
 from .models import Proveedor, Categoria, Producto
 from django.contrib import messages
 from django.db.models import Q
@@ -36,18 +36,18 @@ def agregar_producto(request):
     return render(request, 'producto/agregar_producto.html', data)
 
 def eliminar_producto(request, id): 
-    producto = get_object_or_404(Producto, id=id)
+    producto = get_object_or_404(Producto, id_producto=id)
     producto.delete()
-    messages.success(request, "eleiminado correctamente")
+    messages.success(request, "Eliminado correctamente")
     return redirect(to="listar_productos")    
 
 def modificar_producto(request, id):
-    producto = get_object_or_404(Producto, id=id)
+    producto = get_object_or_404(Producto, id_producto=id)
     data = {
-        'form': ProductoForm(instance=producto)
+        'form': ProductoEditForm(instance=producto)
     }
     if request.method == 'POST':
-        formulario = ProductoForm(data=request.POST, instance=producto, files=request.FILES)
+        formulario = ProductoEditForm(data=request.POST, instance=producto, files=request.FILES)
         if formulario.is_valid():
             formulario.save()
             messages.success(request, "modificado correctamente")
@@ -93,16 +93,16 @@ def agregar_proveedor(request):
 def eliminar_proveedor(request, id):
     proveedor = get_object_or_404(Proveedor, id_proveedor=id)
     proveedor.delete()
-    messages.success(request, "eleiminado correctamente")
+    messages.success(request, "Eliminado correctamente")
     return redirect(to="proveedores")
 
 def modificar_proveedor(request, id): 
     proveedor = get_object_or_404(Proveedor, id_proveedor=id)
     data = {
-        'form': ProveedorForm(instance=proveedor)
+        'form': ProveedorEditForm(instance=proveedor)
     }
     if request.method == 'POST':
-        formulario = ProveedorForm(data=request.POST, instance=proveedor)
+        formulario = ProveedorEditForm(data=request.POST, instance=proveedor)
         if formulario.is_valid():
             formulario.save()
             messages.success(request, "modificado correctamente")
@@ -113,7 +113,7 @@ def modificar_proveedor(request, id):
 
 
 
-
+#Categoria
 def listar_categoria(request):
     busqueda = request.GET.get("buscar")
     categorias = Categoria.objects.all()
@@ -138,13 +138,13 @@ def agregar_categoria(request):
     return render(request, 'categoria/agregar_categoria.html', data)
 
 def eliminar_categoria(request, id):
-    categoria = get_object_or_404(Categoria, id=id)
+    categoria = get_object_or_404(Categoria, id_categoria=id)
     categoria.delete()
-    messages.success(request, "eliminado correctamente")
+    messages.success(request, "Eliminado correctamente")
     return redirect(to="categorias")
 
 def modificar_categoria(request, id):
-    categorias = get_object_or_404(Categoria, id=id)
+    categorias = get_object_or_404(Categoria, id_categoria=id)
     data ={
         'form': CategoriaForm(instance=categorias)
     }
