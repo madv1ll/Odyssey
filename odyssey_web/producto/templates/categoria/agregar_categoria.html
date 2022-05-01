@@ -1,9 +1,10 @@
-{% include 'baseadmin.html' %}
+{% extends 'baseadmin.html' %}
 {% load crispy_forms_tags %}
 {% load static %}
-<div class="group">
-
-
+{% block titulo %}Administrador | Agregar Categoria{% endblock %}
+{% block body %}
+<div class="container mt-4">
+  <div class="group">
     <div class="row">
       <div class="col-12 col-md-6 offset-md-3">
         <div class="card">
@@ -25,7 +26,8 @@
       </div>
     </div>
     <div class="btn">
-      
       <a href="{% url 'categorias' %}" class="btn btn-primary">atras</a>
+    </div>
   </div>
-  </div>
+</div>
+  {% endblock %}

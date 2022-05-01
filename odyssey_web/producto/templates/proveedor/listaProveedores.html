@@ -1,29 +1,18 @@
-{% include 'baseadmin.html' %}
+{% extends 'baseadmin.html' %}
+{% load crispy_forms_tags %}
 {% load static %}
-
+{% block titulo %}Administrador | Proveedores{% endblock %}
+{% block body %}
 <div class="container-sm">
-
   <form class="d-flex" id="barraBusqueda" method="GET">
       <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="buscar"
           value="{{request.GET.buscar}}">
       <button class="btn btn-outline-success" type="submit">Buscar</button>
   </form>
-
 </div>
-
-
-<div class="container" id="btnAgregar">
-  <div class="row">
-    <div class="col-4 ">
-      <button type="button" class="btn btn-success"><a href="{% url 'agregar_proveedor' %}">Agregar Proveedor</a></button>
-    </div>
-  </div>
-</div>
-<!-- <div class="container-sm" id="btnAgregar">
-  <button type="button" class="btn btn-success"><a href="{% url 'agregar_proveedor' %}">Agregar Proveedor</a></button>
-</div> -->
 <div class="container" id="cajaProveedores">
   <div class="container-sm" id="proveedores">
+    <button type="button" class="btn btn-success mt-1"><a href="{% url 'agregar_proveedor' %}">Agregar Proveedor</a></button>
     <table class="table">
       <thead>
         <tr>
@@ -35,7 +24,6 @@
         {% for p in entity %}
         <tr>
           <td>{{ p.nombre | title }}</td>
-
           <td>
             <button type="button" class="btn btn-danger"><a
                 href="#" onclick="AlertEliminarProveedor({{ p.id_proveedor }});">Eliminar</a></button>
@@ -46,8 +34,7 @@
         {% endfor %}
       </tbody>
     </table>
-
   </div>
 </div>
-
 <script src="{% static 'js/alert.js' %}"></script>
+{% endblock %}

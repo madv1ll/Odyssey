@@ -1,8 +1,9 @@
-{% include 'baseadmin.html' %}
+{% extends 'baseadmin.html' %}
 {% load crispy_forms_tags %}
 {% load static %}
-
-<div class="container-sm" id="proveedores">
+{% block titulo %}Administrador | Agregar Proveedor{% endblock %}
+{% block body %}
+<div class="container mt-4">
   <div class="group">
     <div class="row">
       <div class="col-12 col-md-6 offset-md-3">
@@ -25,9 +26,9 @@
       </div>
     </div>
     <div class="btn">
-
       <a href="{% url 'proveedores' %}" class="btn btn-primary">atras</a>
     </div>
   </div>
 </div>
+{% endblock %}
 

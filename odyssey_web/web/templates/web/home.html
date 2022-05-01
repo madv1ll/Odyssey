@@ -1,7 +1,7 @@
-{% include 'web/base.html' %}
+{% extends 'web/base.html' %}
 {% load static %}
-<!-- {% block content %}
-{% endblock %} -->
+{% block titulo %}Odyssey | Home{% endblock %}
+{% block body %}
 <section>
     <div id="ff" class="container-fluid">
         <img src="{% static 'imagenes/setup2.jpg' %}" class="img-fluid" alt="...">
@@ -21,3 +21,4 @@
         </div>
     </div>
 </section>
+{% endblock %}

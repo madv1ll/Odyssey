@@ -7,7 +7,6 @@ from .models import Proveedor, Categoria, Producto
 from django.contrib import messages
 from django.db.models import Q
 
-
 def listar_productos(request):
     busqueda = request.GET.get("buscar")
     productos = Producto.objects.all()
@@ -19,9 +18,6 @@ def listar_productos(request):
    
     return render(request, 'producto/listaProducto.html', {'entity':productos})
     
-
-
-
 def agregar_producto(request):
     data = {
         'form': ProductoForm()
@@ -42,7 +38,7 @@ def eliminar_producto(request, id):
     return redirect(to="listar_productos")    
 
 def modificar_producto(request, id):
-    producto = get_object_or_404(Producto, id=id)
+    producto = get_object_or_404(Producto, id_producto=id)
     data = {
         'form': ProductoForm(instance=producto)
     }
@@ -56,7 +52,7 @@ def modificar_producto(request, id):
             data["form"] = formulario
     return render(request, 'producto/modificar_producto.html', data)
 
-# Proveedores
+#--------------------------Proveedores-----------------------------------------------------
 def listar_proveedor(request):
     busqueda = request.GET.get("buscar")
     proveedores = Proveedor.objects.all()
@@ -111,9 +107,7 @@ def modificar_proveedor(request, id):
             data["form"] = formulario
     return render(request, 'proveedor/modificar_proveedor.html', data)
 
-
-
-
+#--------------------------Categorias-----------------------------------------------------
 def listar_categoria(request):
     busqueda = request.GET.get("buscar")
     categorias = Categoria.objects.all()
@@ -122,7 +116,6 @@ def listar_categoria(request):
             Q(Categoria__icontains = busqueda)  
         ).distinct()
     return render(request, 'categoria/listaCategorias.html', {'entity':categorias})
-
 
 def agregar_categoria(request):
     data = {
@@ -138,13 +131,13 @@ def agregar_categoria(request):
     return render(request, 'categoria/agregar_categoria.html', data)
 
 def eliminar_categoria(request, id):
-    categoria = get_object_or_404(Categoria, id=id)
+    categoria = get_object_or_404(Categoria, id_categoria=id)
     categoria.delete()
     messages.success(request, "eliminado correctamente")
     return redirect(to="categorias")
 
 def modificar_categoria(request, id):
-    categorias = get_object_or_404(Categoria, id=id)
+    categorias = get_object_or_404(Categoria, id_categoria=id)
     data ={
         'form': CategoriaForm(instance=categorias)
     }
