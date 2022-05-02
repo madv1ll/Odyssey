@@ -1,2 +1,0 @@
-Modificar permisos de usuario para que solo admin pueda entrar al sitio admin
-crear variables de entorno PARA CONEXION A BD
