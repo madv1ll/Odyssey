@@ -19,11 +19,21 @@
               <h5 class="card-title">${{importe_total_carro}}</h5>
             </div>
           </div>
-          <button type="button" class="btn btn-primary" id="RealizarCompra" style="border-radius: 25px;">Realizar compra</button>
+
+          <form action="#" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="id_producto" value="">
+            <button class="btn btn-primary" type="submit">Prueba de integracion</button>
+          </form>
+          
+          
         </div>
       </div>
     </div>
   </div>
 </div>
 </div>
+<div>
+</div>
+<h5>Rut de usuario:{{user.rut}}</h5>
 {% endblock %}
