@@ -1,15 +1,14 @@
-{% include 'web/base.html' %}
+{% extends 'web/base.html' %}
 {% load static %}
-
+{% block titulo %}Odyssey | Productos{% endblock %}
+{% block body %}
 <section id="productos">
     <div class="container-sm">
-
         <form class="d-flex" id="barraBusqueda" method="GET">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="buscar"
                 value="{{request.GET.buscar}}">
             <button class="btn btn-outline-success" type="submit">Buscar</button>
         </form>
-    
     </div>
     <div class="container-sm">
         <p>Todos los productos</p>
@@ -17,7 +16,6 @@
 </section>
 <section>
     <div class="container-sm">
-        
         <div class="row row-cols-2 row-cols-md-6 g-4">
             {% for p in entity %}
             <div class="col">
@@ -27,18 +25,15 @@
                         <h5 class="card-title">{{ p.nombre | title }}</h5>
                         <h6 class="card-text"> {{ p.Proveedor | title }}</h6>
                         <p class="card-text"> {{ p.categoria | title }}</p>
+                        <p class="card-text"> {{ p.id_producto | title }}</p>
                         <p class="card-text">$ {{ p.precio | title }}</p>
-                        <p><button type="button" class="btn btn-primary"><a href="#" onclick="AlertAgregarCarrito({{ p.id }});">Comprar</a></button></p>
-                        
-                        
+                        <p><button type="button" class="btn btn-primary"><a href="#" onclick="AlertAgregarCarrito({{ p.id_producto }});">Comprar</a></button></p>              
                     </div>
                 </div>
             </div>   
             {% endfor %} 
         </div>
-
     </div>
-    
 </section>
-
 <script src="{% static 'js/alert.js' %}"></script>
+{% endblock %}

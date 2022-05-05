@@ -1,57 +1,58 @@
-{% include 'baseAdmin.html' %}
+{% extends 'baseAdmin.html' %}
 {% load static %}
-
-
-    <div class="container-sm" id="homeAdmin">
-        <div class="row row-cols-1 row-cols-md-3 g-4">
-            <div class="col">
-                <div class="card">
-                    <img src="{% static 'imagenes/setup2.jpg' %}" class= "card-img-top" alt="...">
-                    
-                    <div class="card-body">
-                        <h5 class="card-title">Productos</h5>
-                        <p>
-                            Lista de nuestros productos a la venta
-                        </p>
-                        <button type="button" class="btn btn-success"><a href="{% url 'listar_productos' %}">Ver</a></button>
-                    </div>
+{% block titulo %}Administrador | Home{% endblock %}
+{% block body %}
+<div class="container-sm" id="homeAdmin">
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="col">
+            <div class="card">
+                <img src="{% static 'imagenes/setup2.jpg' %}" class= "card-img-top" alt="...">
+                
+                <div class="card-body">
+                    <h5 class="card-title">Productos</h5>
+                    <p>
+                        Lista de nuestros productos a la venta
+                    </p>
+                    <button type="button" class="btn btn-success"><a href="{% url 'listar_productos' %}">Ver</a></button>
                 </div>
             </div>
-            <div class="col">
-                <div class="card">
-                    <img src="{% static 'imagenes/pc.jpg' %}" class= "card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Categorias</h5>
-                        <p>
-                            Lista de las categorias disponibles 
-                        </p>
-                        <button type="button" class="btn btn-success"><a href="{% url 'categorias' %}">Ver</a></button>
-                    </div>
+        </div>
+        <div class="col">
+            <div class="card">
+                <img src="{% static 'imagenes/pc.jpg' %}" class= "card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Categorias</h5>
+                    <p>
+                        Lista de las categorias disponibles 
+                    </p>
+                    <button type="button" class="btn btn-success"><a href="{% url 'categorias' %}">Ver</a></button>
                 </div>
             </div>
-            <div class="col">
-                <div class="card">
-                    <img src="{% static 'imagenes/setup.jpg' %}" class= "card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Proveedores</h5>
-                        <p>
-                            Lista de los proveedores 
-                        </p>
-                        <button type="button" class="btn btn-success"><a href="{% url 'proveedores' %}">Ver</a></button>
-                    </div>
+        </div>
+        <div class="col">
+            <div class="card">
+                <img src="{% static 'imagenes/setup.jpg' %}" class= "card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Proveedores</h5>
+                    <p>
+                        Lista de los proveedores 
+                    </p>
+                    <button type="button" class="btn btn-success"><a href="{% url 'proveedores' %}">Ver</a></button>
                 </div>
             </div>
-            <div class="col">
-                <div class="card">
-                    <img src="{% static 'imagenes/users.jpeg' %}" class= "card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Usuarios</h5>
-                        <p>
-                            Lista de usuarios
-                        </p>
-                        <button type="button" class="btn btn-success"><a href="{% url 'users' %}">Ver</a></button>
-                    </div>
+        </div>
+        <div class="col">
+            <div class="card">
+                <img src="{% static 'imagenes/users.jpeg' %}" class= "card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Usuarios</h5>
+                    <p>
+                        Lista de usuarios
+                    </p>
+                    <button type="button" class="btn btn-success"><a href="{% url 'users' %}">Ver</a></button>
                 </div>
             </div>
         </div>
     </div>
+</div>
+{% endblock %}

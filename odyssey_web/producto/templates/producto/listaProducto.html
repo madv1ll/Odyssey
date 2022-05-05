@@ -1,22 +1,17 @@
-{% include 'baseadmin.html' %}
+{% extends 'baseadmin.html' %}
 {% load crispy_forms_tags %}
 {% load static %}
-
-
-
+{% block titulo %}Administrador | Productos{% endblock %}
+{% block body %}
 <div class="container-sm">
-
     <form class="d-flex" id="barraBusqueda" method="GET">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="buscar"
             value="{{request.GET.buscar}}">
         <button class="btn btn-outline-success" type="submit">Buscar</button>
     </form>
-
 </div>
-
 <div class="container-sm" id="producto">
-    <button type="button" class="btn btn-success"><a href="{% url 'agregar_producto' %}">Agregar Producto</a></button>
-
+    <button type="button" class="btn btn-success mt-1"><a href="{% url 'agregar_producto' %}">Agregar Producto</a></button>
     <table class="table">
         <thead>
             <tr>
@@ -26,7 +21,7 @@
                 <th scope="col">Categoria</th>
                 <th scope="col">Descripcion</th>
                 <th scope="col">Stock</th>
-                <th scope="col">opciones</th>
+                <th scope="col">Opciones</th>
             </tr>
         </thead>
         <tbody>
@@ -38,10 +33,6 @@
                 <td>{{ p.id_categoria | title }}</td>
                 <td>{{ p.descripcion | title }}</td>
                 <td>{{ p.stock | title }}</td>
-
-
-
-
                 <td>
                     <button type="button" class="btn btn-danger"><a
                             href="#" id="clickMe" onclick="AlertEliminarProducto({{ p.id_producto }});">Eliminar</a>
@@ -49,13 +40,11 @@
                     <button type="button" class="btn btn-warning"><a
                             href="{% url 'modificar_producto' p.id_producto %}">Editar</a>
                     </button>
-
                 </td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
-
 </div>
-
 <script src="{% static 'js/alert.js' %}"></script>
+{% endblock %}

@@ -9,7 +9,6 @@ from django.views import View
 from django.template.loader import get_template
 from django.core.mail import EmailMultiAlternatives
 
-from django.contrib.auth.models import User
 from django.contrib.auth import login, logout
 from .models import  Usuario
 from .forms import UsuarioForm
@@ -56,7 +55,7 @@ def my_view(request):
 
 def users(request):
     busqueda = request.GET.get("buscar")
-    u = Usuario.objects.filter(is_staff = 0)
+    u = Usuario.objects.all()
     if busqueda:
         u = Usuario.objects.filter(
             Q(username__icontains = busqueda) 
@@ -72,21 +71,6 @@ def eliminar(request, id):
     messages.success(request, "eliminado correctamente")
     return redirect(to="users")
 
-
-# def modificar_usuario(request, id):
-#     user = get_object_or_404(User, id=id)
-#     data = {
-#         'form': CustomUserCreationForm(instance=user)
-#     }
-#     if request.method == 'POST':
-#         formulario = CustomUserCreationForm(data=request.POST, instance=user, files=request.FILES)
-#         if formulario.is_valid():
-#             formulario.save()
-#             messages.success(request, "modificado correctamente")
-#             return redirect(to="users")
-#         else:
-#             data["form"] = formulario
-#     return render(request, 'user/modificar_usuario.html', data)
 class PasswordResetView(View):
     def get(self, request):
         return render(request, 'recuperarcontra/password_reset.html')
@@ -123,3 +107,18 @@ class PasswordResetConfirmView(View):
 class PasswordResetCompleteView(View):
     def get(self, request):
         return render(request, 'recuperarcontra/password_reset_complete.html')
+
+def modificar_usuario(request, id):
+    user = get_object_or_404(Usuario, rut=id)
+    data = {
+        'form': UsuarioForm(instance=user)
+    }
+    if request.method == 'POST':
+        formulario = UsuarioForm(data=request.POST, instance=user, files=request.FILES)
+        if formulario.is_valid():
+            formulario.save()
+            messages.success(request, "modificado correctamente")
+            return redirect(to="users")
+        else:
+            data["form"] = formulario
+    return render(request, 'user/modificar_usuario.html', data)
