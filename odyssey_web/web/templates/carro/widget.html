@@ -9,14 +9,14 @@
               <img src="{{ value.imagen }}" class="card-img-top" alt="..." style="width: 43%;">
             </div>
           </div>
-          <div class="col">
+          <div class="col-sm">
             <h5 class="card-title">{{value.nombre}}</h5>
           </div>
-          <div class="col">
+          <div class="col-sm">
             <h6>Precio</h6>
             <p class="card-text">$ {{value.precio}}</p>
           </div>
-          <div class="col">
+          <div class="col-sm">
             <h6>Cantidad</h6>
             {{value.cantidad}}
             <a href="{% url 'carrito:sumar_carro' value.producto_id %}" class="btn btn-sm btn-primary" id="btn_mas">+</a>

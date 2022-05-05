@@ -6,12 +6,13 @@ function AlertEliminarProducto(id) {
     showCancelButton: true,
     confirmButtonColor: '#3085d6',
     cancelButtonColor: '#d33',
-    confirmButtonText: 'Si, Eliminar!'
-  }).then((result) => {
-    if (result.isConfirmed) {
-      window.location.href = "/productos/eliminar-producto/" + id + "/"
-    }
-  })
+    confirmButtonText: 'Si, Eliminar!',
+    cancelButtonColor: '#d33',
+  }).then(function(result){
+      if (result.isConfirmed) {
+        window.location.href = "/productos/eliminar-producto/" + id + "/"
+      }
+    })
 }
 
 function AlertEliminarProveedor(id) {
@@ -22,13 +23,18 @@ function AlertEliminarProveedor(id) {
     showCancelButton: true,
     confirmButtonColor: '#3085d6',
     cancelButtonColor: '#d33',
-    confirmButtonText: 'Si, Eliminar!'
+    confirmButtonText: 'Si, Eliminar!',
+    cancelButtonColor: '#d33',
   }).then((result) => {
     if (result.isConfirmed) {
+
       window.location.href = "/productos/eliminar-proveedor/" + id + "/"
+
     }
   })
 }
+
+
 
 function AlertEliminarCategoria(id) {
   Swal.fire({
@@ -61,7 +67,5 @@ function AlertAgregarCarrito(id) {
     }
   })
 }
-
-
 
 

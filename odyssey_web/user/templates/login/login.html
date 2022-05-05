@@ -1,13 +1,13 @@
+{% include 'web/base.html' %}
 {% load static %}
 <!Doctype html>
 <html class="no-js" lang="es">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Inicio de Sesión </title>
+    <title>Odyssey | Iniciar Sesión </title>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	
     <link rel="icon" type="image/png" href="{% static path %}imagenes/icono3.1.png"/>
 	<link rel="stylesheet" type="text/css" href="{% static path %}login/vendor/bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="{% static path %}login/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
@@ -20,6 +20,7 @@
 	<link rel="stylesheet" type="text/css" href="{% static path %}login/css/util.css">
 	<link rel="stylesheet" type="text/css" href="{% static path %}login/css/main.css">
 </head>
+{% block body %}
 <div class="limiter">
     <div class="container-login100">
         <div class="wrap-login100 p-t-50 p-b-90">
@@ -41,56 +42,21 @@
                 <span>
                     <img src="{% static path %}imagenes/icono3.1.png" alt="logo" class="logo-login">
                 </span>
-                
                 <div class="wrap-input100 validate-input m-b-16" data-validate = "Username is required">
                     {{ form.username }}
                     <span class="focus-input100"></span>
                 </div>
-                
-                
                 <div class="wrap-input100 validate-input m-b-16" data-validate = "Password is required">
                     {{ form.password }}
                     <span class="focus-input100"></span>
                 </div>
-
                 <div class="container-login100-form-btn m-t-17">
                     <button class="login100-form-btn">
                         Iniciar Sesi&oacute;n
                     </button>
                 </div>
-
             </form>
         </div>
     </div>
 </div>
-
-
-<div id="dropDownSelect1"></div>
-
-<script src="{% static path %}login/vendor/jquery/jquery-3.2.1.min.js"></script>
-	<script src="{% static path %}login/vendor/animsition/js/animsition.min.js"></script>
-	<script src="{% static path %}login/vendor/bootstrap/js/popper.js"></script>
-	<script src="{% static path %}login/vendor/bootstrap/js/bootstrap.min.js"></script>
-	<script src="{% static path %}login/vendor/select2/select2.min.js"></script>
-	<script src="{% static path %}login/vendor/daterangepicker/moment.min.js"></script>
-	<script src="{% static path %}login/vendor/daterangepicker/daterangepicker.js"></script>
-	<script src="{% static path %}login/vendor/countdowntime/countdowntime.js"></script>
-	<script src="{% static path %}login/js/main.js"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
-    <script src="{% static 'js/main.js' %}"></script>
-
-    {% block paginator%}
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    {% for pacientes in page_obj %}
-    {{ Paciente.full_name|upper }}<br>
-     {% endfor %}
-    <div class="pagination">
-    </div>
-  {% endblock %}
-
-</body>
-</html>
+{% endblock %}
