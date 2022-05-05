@@ -30,13 +30,11 @@ def sumar_producto(request, producto_id):
     carro.agregar(producto = producto)
     return redirect("carrito")    
 
-
 def restar_producto(request, producto_id):
     carro=Carro(request)
     producto=Producto.objects.get(id_producto =producto_id)
     carro.restar_producto(producto= producto)
     return redirect("carrito")
-
 
 def limpiar_carro(request):
     carro=Carro(request)
@@ -53,17 +51,21 @@ class CarritoView(View):
         return render(request, 'carro/carrito.html')
 
     def post(self,request,*args,**kwargs):
+        total = 0
+        for key, value in request.session["carro"].items():
+            total=total+(float(value["precio"]))
+        print(request.session["carro"].items())
+        amount = total
         buy_order="1"
         session_id="1"
-        amount = 99000
-        return_url= 'http://127.0.0.1:8000/confirmacion/'
+        return_url= 'http://localhost:8000/carrito/confirmacion/'
 
         tx = Transaction(WebpayOptions(IntegrationCommerceCodes.WEBPAY_PLUS,
         IntegrationApiKeys.WEBPAY,
         IntegrationType.TEST))
         resp = tx.create(buy_order, session_id, amount, return_url)
         print(resp)
-        return render(request,"carro/confirmacion.html",{"resp":resp})        
+        return render(request,"carro/confirmacion.html",{"resp":resp})
 
  
 class DetalleCompra(View):
@@ -74,8 +76,6 @@ class DetalleCompra(View):
         print(success)
         return render(request,"carro/confirmacion.html",{"success":success})
 	
-
-
 
 # {'vci': 'TSY',
 #  'amount': 99000, 
