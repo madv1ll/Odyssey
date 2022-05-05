@@ -2,7 +2,7 @@
 {% load static %}
 {% block titulo %}Odyssey | Carrito{% endblock %}
 {% block body %}
-<div class="container-sm" id="carrito">
+<!-- <div class="container-sm" id="carrito">
   <div class="row">
     <div class="col-sm-8">
       {% include 'carro/widget.html' %}
@@ -35,5 +35,55 @@
 </div>
 <div>
 </div>
-<h5>Rut de usuario:{{user.rut}}</h5>
+<h5>Rut de usuario:{{user.rut}}</h5> -->
+
+
+{% if carrito.products.exists %}
+    <div class="col-8">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col">Cantidad</th>
+                    <th scope="col">Precio</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product  in carrito.products.all %}
+                    <tr>
+                        <th>{{ forloop.counter }}</th>
+                        <th>
+                            {% if product.imagen %}
+                                <img src="{{ product.imagen.url }}" alt="Imagen del producto">
+                            {% endif %}
+                        </th>
+                        <th>
+                            {{product.nombre}}
+                        </th>
+                        <th>1</th>
+                        <th>
+                            <span class="font-weight-bold text-danger">{{product.precio}}</span>
+                        </th>
+                        <th>{% include 'web/snippets/remove.html' %}</th>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="col">
+        <div class="card">
+          <div class="card-body">
+            <div class="font-weight-bold">
+              total ({{carrito.products.count}}): <span class="text-danger">{{carrito.subtotal}}</span>
+            </div>
+          </div>
+        </div>
+    </div>
+{% else %}
+<div class="col">
+  <p class="h3">Tu carrito de compras esta vacio</p>
+</div>
+{% endif %}
 {% endblock %}

@@ -1,0 +1,38 @@
+{% if carrito.productos.exits %}
+    <div class="col-8">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col">Cantidad</th>
+                    <th scope="col">Precio</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for productos in carrito.productos %}
+                    <tr>
+                        <th>{{ forloop.counter }}</th>
+                        <th>
+                            {% if product.image %}
+                                <img src="{{producto.imagen.url}}" alt="Imagen del producto">
+                            {endif}
+                        </th>
+                        <th>
+                            {{producto.nombre}}
+                        </th>
+                        <th>1</th>
+                        <th>
+                            <span class="font-weight-bold text-danger">{{producto.precio}}</span>
+                        </th>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="col">
+
+    </div>
+
+{% endif %}

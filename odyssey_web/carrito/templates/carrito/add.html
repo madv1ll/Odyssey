@@ -1,0 +1,11 @@
+<div class="col-3">
+    {% if producto.imagen %}
+        <img src="{{ producto.imagen.url }}" alt="imgen del producto">
+    {% endif %}
+</div>
+<div class="h3 font-weight-bold text-seccess">
+    producto agregado al carrito de compras
+</div>
+<div class="">
+    <a href="{% url 'productosVenta' %}">Seguir Comprando</a>
+</div>

@@ -22,12 +22,16 @@
                 <div class="card">
                     <img src="{{ p.imagen.url }}" class="card-img-top" alt="..." >
                     <div class="card-body">
+                        <h5 class="card-title">{{ p.id_producto | title }}</h5>
                         <h5 class="card-title">{{ p.nombre | title }}</h5>
                         <h6 class="card-text"> {{ p.Proveedor | title }}</h6>
                         <p class="card-text"> {{ p.categoria | title }}</p>
                         <p class="card-text"> {{ p.id_producto | title }}</p>
                         <p class="card-text">$ {{ p.precio | title }}</p>
-                        <p><button type="button" class="btn btn-primary"><a href="#" onclick="AlertAgregarCarrito({{ p.id_producto }});">Comprar</a></button></p>              
+                        <p><button type="button" class="btn btn-primary"><a href="#" onclick="AlertAgregarCarrito({{ p.id_producto }});">Comprar</a></button></p> 
+                        <div class="">
+                            {% include 'web/snippets/add.html' %}
+                        </div>             
                     </div>
                 </div>
             </div>   

@@ -8,6 +8,8 @@ from carrito.models import Detalle_compra
 from django.views.generic.edit import CreateView
 from django.urls import reverse
 from django.views.generic import View
+from carrito.models import Carrito
+from carrito.utils import get_or_create_carrito
 #transbank
 from transbank.webpay.webpay_plus.transaction import Transaction
 from transbank.common.options import WebpayOptions
@@ -32,10 +34,7 @@ def listar_productosVenta(request):
             Q(descripcion__icontains = busqueda)
         ).distinct()
     return render(request, 'web/productos.html', {'entity':productos})
-
-
-
-    
+  
 
 def ConfirmacionCompra(request):
     return render(request, 'carro/confirmacion.html')
@@ -45,7 +44,12 @@ class CarritoView(View):
 
     def get(self,request,*args,**kwargs): 
         
-        return render(request, 'carro/carrito.html')
+        carrito = get_or_create_carrito(request)
+
+        return render(request, 'carro/carrito.html',{
+            'carrito':carrito
+        })
+
 
     def post(self,request,*args,**kwargs):
         buy_order="1"
