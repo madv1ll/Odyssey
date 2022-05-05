@@ -4,6 +4,11 @@ from django.views.generic import CreateView
 from django.db.models import Q
 from django.contrib import messages
 
+from django.conf import settings
+from django.views import View
+from django.template.loader import get_template
+from django.core.mail import EmailMultiAlternatives
+
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout
 from .models import  Usuario
@@ -82,3 +87,39 @@ def eliminar(request, id):
 #         else:
 #             data["form"] = formulario
 #     return render(request, 'user/modificar_usuario.html', data)
+class PasswordResetView(View):
+    def get(self, request):
+        return render(request, 'recuperarcontra/password_reset.html')
+    
+    def post(self, request):
+        email = request.POST.get('email')
+        print(email)
+
+        template = get_template('recuperarcontra/password_reset_done.html')
+
+        # Se renderiza el template y se envias parametros
+        content = template.render({'email': email})
+
+        # Se crea el correo (titulo, mensaje, emisor, destinatario)
+        msg = EmailMultiAlternatives(
+            'Hola, te enviamos un correo con las instrucciones',
+            settings.EMAIL_HOST_USER,
+            [email]
+        )
+
+        msg.attach_alternative(content, 'text/html')
+        msg.send()
+
+        return render(request, 'recuperarcontra/password_reset.html')
+
+class PasswordResetDoneView(View):
+    def get(self, request):
+        return render(request, 'recuperarcontra/password_reset_done.html')
+
+class PasswordResetConfirmView(View):
+    def get(self, request):
+        return render(request, 'recuperarcontra/password_reset_confirm.html')
+
+class PasswordResetCompleteView(View):
+    def get(self, request):
+        return render(request, 'recuperarcontra/password_reset_complete.html')
