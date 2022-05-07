@@ -64,7 +64,7 @@ class CarritoView(View):
         IntegrationApiKeys.WEBPAY,
         IntegrationType.TEST))
         resp = tx.create(buy_order, session_id, amount, return_url)
-        print(resp)
+        # print(resp)
         return render(request,"carro/confirmacion.html",{"resp":resp})
 
  
@@ -73,9 +73,19 @@ class DetalleCompra(View):
         token = request.GET.get("token_ws")
         tx = Transaction(WebpayOptions(IntegrationCommerceCodes.WEBPAY_PLUS, IntegrationApiKeys.WEBPAY, IntegrationType.TEST))
         success = tx.commit(token)
-        print(success)
+        # print(success)
+        if success.get("status") == "AUTHORIZED":
+            # print("autorizado")
+            # aqui se creara el registro q se enviara a la BD el modelo se llama Carrito
+            registro = "registro"
+            Carro.limpiar_carro(request)
+        else:
+            # print("rechazado")
+            registro = "no crear registro"
         return render(request,"carro/confirmacion.html",{"success":success})
-	
+	# DEBITO = 4051 8842 3993 7763
+    # 11 111 111 1
+    # 123
 
 # {'vci': 'TSY',
 #  'amount': 99000, 
