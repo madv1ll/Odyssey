@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from .carro import Carro
 from producto.models import Producto
-from .models import Detalle_compra
+from user.models import Usuario
+from .models import Carrito, Detalle_compra
 from django.shortcuts import  redirect
 from django.views.generic.edit import CreateView
 from django.views.generic import View
@@ -45,9 +46,7 @@ def ConfirmacionCompra(request):
     return render(request, 'carro/confirmacion.html')
 
 class CarritoView(View):
-
-    def get(self,request,*args,**kwargs): 
-        
+    def get(self,request,*args,**kwargs):
         return render(request, 'carro/carrito.html')
 
     def post(self,request,*args,**kwargs):
@@ -75,9 +74,16 @@ class DetalleCompra(View):
         success = tx.commit(token)
         # print(success)
         if success.get("status") == "AUTHORIZED":
-            # print("autorizado")
+            if request.user.is_active:
+                request.user.rut
             # aqui se creara el registro q se enviara a la BD el modelo se llama Carrito
-            registro = "registro"
+            # registro = {
+            #         rut_cliente =  
+            #         producto = models.ManyToManyField(Producto)
+            #         subtotal = models.DecimalField(default=0, max_digits = 8, decimal_places=0)
+            #         total = models.DecimalField(default=0, max_digits = 8, decimal_places=0)
+            #         fecha = models.DateTimeField(auto_now_add=True)
+            # }
             Carro.limpiar_carro(request)
         else:
             # print("rechazado")
