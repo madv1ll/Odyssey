@@ -23,6 +23,8 @@ class UsuarioForm(forms.ModelForm):
     def save(self,commit = True):
         user = super().save(commit=False)
         user.set_password(self.cleaned_data['password'])
+        correo = self.cleaned_data['correo']
+        user.username = correo
         if commit:
             user.save()
             return user
