@@ -81,10 +81,11 @@ class DetalleCompra(View):
                 cliente = "99.999.999-K"
             total = 0
             obj_cliente = Usuario.objects.only('rut').get(rut=cliente)
+            tpo_pago = Tipo_Pago.objects.only('id_tipo_pago').get(id_tipo_pago=success.get('payment_type_code'))
             direc=get_object_or_404(Direccion, id_usuario=request.user.rut, id_direccion = True)
             compra = Compra(
                     rut_usuario =  obj_cliente,
-                    id_pago_pago = success.get('payment_type_code'),
+                    id_tipo_pago = tpo_pago,
                     id_direccion = direc.id_direccion,
                     total = success.get('amount')
             )
