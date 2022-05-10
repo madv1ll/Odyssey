@@ -81,6 +81,16 @@ class DetalleCompra(View):
                 cliente = "99.999.999-K"
             total = 0
             obj_cliente = Usuario.objects.only('rut').get(rut=cliente)
+            direc=get_object_or_404(Direccion, id_usuario=request.user.rut, id_direccion = True)
+            compra = Compra(
+                    rut_usuario =  obj_cliente,
+                    id_pago_pago = success.get('payment_type_code'),
+                    id_direccion = direc.id_direccion,
+                    total = success.get('amount')
+            )
+            compra.save()
+            print("latest",Compra.objects.latest("fecha"))
+            print("only:", Compra.objects.only("id_compra").latest("fecha"))
             for key, value in request.session["carro"].items():
                 total=total+(float(value["precio"]))
                 # creacion del registro del producto
@@ -89,17 +99,10 @@ class DetalleCompra(View):
                     id_producto     = value["producto_id"],
                     rut_cliente     = obj_cliente,
                     precio_producto = value["precio"],
-                    cantidad        = value["cantidad"]
+                    cantidad        = value["cantidad"],
+                    id_compra       = Compra.objects.latest("fecha")
                 )
                 registro.save()
-
-            compra = Compra(
-                    rut_usuario =  obj_cliente,
-                    id_pago_pago = success.get('payment_type_code'),
-                    id_direccion = Direccion.objects.filter(id_usuario=cliente).filter(principal=True),
-                    total = success.get('amount')
-            )
-            compra.save()
             Carro.limpiar_carro(request)
         else:
             # print("rechazado")
