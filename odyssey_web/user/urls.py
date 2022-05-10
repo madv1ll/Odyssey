@@ -1,6 +1,6 @@
 from django.urls import path
-from django.contrib.auth.views import LogoutView
-from .views import LoginView, RegistroView, modificar_usuario, users, eliminar, PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
+from django.contrib.auth.views import LogoutView, PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
+from .views import LoginView, RegistroView, modificar_usuario, users, eliminar, password_reset
 
 urlpatterns = [
     path('registro/', RegistroView.as_view(template_name = 'register/user_form.html'), name="registro"),
@@ -10,10 +10,12 @@ urlpatterns = [
     path('users/', users, name="users"),
     path('eliminar_usuario/<id>/', eliminar, name="eliminar_user"),
     # path('modificar_usuario/<id>/', modificar_usuario, name="modificar_usuario"),
-    path('password_reset', PasswordResetView.as_view(), name="password_reset"),
-    path('password_reset_done', PasswordResetDoneView.as_view(), name="password_reset_done"),
-    path('password_reset/<uidb64>/<token>/', PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
-    path('password_reset/done', PasswordResetCompleteView.as_view(), name='password_reset_complete'),
     #recuperar contraseña
+    path('password_reset/', PasswordResetView.as_view(template_name = 'recuperarcontra/password_reset.html'), name='password_reset'),
+    path('password_reset_done/', PasswordResetDoneView.as_view(template_name = 'recuperarcontra/password_reset_done.html'), name='password_reset_done'),
+    path('password_reset_confirm/', PasswordResetConfirmView.as_view(template_name = 'recuperarcontra/password_reset_confirm.html'), name='password_reset_confirm'),
+    path('password_reset_complete/', PasswordResetCompleteView.as_view(template_name = 'recuperarcontra/password_reset_complete.html'), name='password_reset'),
+    
+
     path('modificar_usuario/<id>/', modificar_usuario, name="modificar_usuario"),
 ]

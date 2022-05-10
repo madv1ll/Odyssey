@@ -1,11 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
+from django.views import View
 from django.views.generic import CreateView
 from django.db.models import Q
 from django.contrib import messages
 
 from django.conf import settings
-from django.views import View
 from django.template.loader import get_template
 from django.core.mail import EmailMultiAlternatives
 
@@ -71,43 +71,6 @@ def eliminar(request, id):
     messages.success(request, "eliminado correctamente")
     return redirect(to="users")
 
-class PasswordResetView(View):
-    def get(self, request):
-        return render(request, 'recuperarcontra/password_reset.html')
-    
-    def post(self, request):
-        email = request.POST.get('email')
-        print(email)
-
-        template = get_template('recuperarcontra/password_reset_done.html')
-
-        # Se renderiza el template y se envias parametros
-        content = template.render({'email': email})
-
-        # Se crea el correo (titulo, mensaje, emisor, destinatario)
-        msg = EmailMultiAlternatives(
-            'Hola, te enviamos un correo con las instrucciones',
-            settings.EMAIL_HOST_USER,
-            [email]
-        )
-
-        msg.attach_alternative(content, 'text/html')
-        msg.send()
-
-        return render(request, 'recuperarcontra/password_reset.html')
-
-class PasswordResetDoneView(View):
-    def get(self, request):
-        return render(request, 'recuperarcontra/password_reset_done.html')
-
-class PasswordResetConfirmView(View):
-    def get(self, request):
-        return render(request, 'recuperarcontra/password_reset_confirm.html')
-
-class PasswordResetCompleteView(View):
-    def get(self, request):
-        return render(request, 'recuperarcontra/password_reset_complete.html')
-
 def modificar_usuario(request, id):
     user = get_object_or_404(Usuario, rut=id)
     data = {
@@ -122,3 +85,34 @@ def modificar_usuario(request, id):
         else:
             data["form"] = formulario
     return render(request, 'user/modificar_usuario.html', data)
+
+
+def send_email(mail):
+    print ('se envio el correo')
+    context = {'mail': mail}
+
+    template = get_template('password_reset_email.html')
+    content = template.render(context)
+
+    email = EmailMultiAlternatives(
+        'Un correo de prueba',
+        settings.EMAIL_HOST_USER,
+        [mail]
+    )
+
+    email.attach_alternative(content, 'text/html')
+    email.send()
+
+
+
+
+# class RecuperarContra(View):
+#     def password_reset(request):
+#     print ('se recibe correo')
+#     if request.method == 'POST':
+        
+#         mail = request.POST.get('mail')
+
+#         send_email(mail)
+
+#     return render(request, 'recuperarcontra/password_reset.html', {})
