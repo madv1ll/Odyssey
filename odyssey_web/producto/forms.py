@@ -46,8 +46,7 @@ class CategoriaForm(forms.ModelForm):
 
 class ProductoForm(forms.ModelForm):
     # geeks_field = forms.RegexField(regex = "G.*s") 
-    # nombre = forms.CharField(min_length=3, max_length=50)
-    nombre = forms.RegexField(regex = "G.*s")
+    nombre = forms.CharField(min_length=3, max_length=50)
     precio = forms.IntegerField(min_value=1, max_value= 999999999)
     stock = forms.IntegerField(min_value=0, max_value= 999)
 

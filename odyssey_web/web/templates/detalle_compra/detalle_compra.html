@@ -1,0 +1,21 @@
+{% if request.session.carro.items %}
+{% for key, value in request.session.carro.items %}
+
+<div class="row">
+
+    <form action="#" method="post">
+        {% csrf_token %}
+        <label for="">Nombre</label>
+        <input type="text" name="nombre" value="{{value.nombre}}">
+        <label for="">Precio</label>
+        <input type="text" name="nombre" value="{{value.precio}}">
+        <label for="">cantidad</label>
+        <input type="text" name="nombre" value="{{value.cantidad}}">
+
+        
+        <button class="btn btn-primary" type="submit">Comprar</button>
+        {% endfor %}
+    </form>
+</div>
+
+{% endif %}

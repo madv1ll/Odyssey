@@ -1,0 +1,30 @@
+{% extends 'web/base.html' %}
+{% load static %}
+{% block titulo %}Odyssey | Carrito{% endblock %}
+{% block body %}
+<div class="d-flex justify-content-center mt-4">
+        <h4>Productos:</h4>
+</div>
+<div class="row mt-4">
+    {% if success and success.response_code == 0 %}
+    <div class="alert alert-success" role="alert">
+        Pago realizado con exito
+    </div>
+    {% endif %}
+
+    {% if success and success.response_code != 0 %}
+    <div class="alert alert-danger" role="alert">
+        Error en el pago
+    </div>
+    {% endif %}
+    <div class="d-flex justify-content-center mt-4">
+        <div class="card-body">
+            <h5 class="card-title">${{importe_total_carro}}</h5>
+            <form method="post" action="{{resp.url}}">
+                <input type="hidden" name="token_ws" value="{{resp.token}}" />
+                <input class="btn btn-primary" type="submit" value="Ir a pagar" />
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

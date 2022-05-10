@@ -3,6 +3,7 @@ from producto.models import Producto
 from django.core.paginator import Page, Paginator
 from django.db.models import Q
 
+
 def home(request):
     return render(request, 'web/home.html')
 
@@ -16,9 +17,3 @@ def listar_productosVenta(request):
             Q(descripcion__icontains = busqueda)
         ).distinct()
     return render(request, 'web/productos.html', {'entity':productos})
-
-
-def carrito(request):
-    return render(request, 'carro/carrito.html')     
-
-
