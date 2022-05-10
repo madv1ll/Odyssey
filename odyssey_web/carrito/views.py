@@ -1,8 +1,10 @@
 from django.shortcuts import get_object_or_404, render
+
+from user.models import Direccion
 from .carro import Carro
 from producto.models import Producto
 from user.models import Usuario
-from .models import  Detalle_compra
+from .models import  Compra, Detalle_compra, Tipo_Pago
 from django.shortcuts import  redirect
 from django.views.generic.edit import CreateView
 from django.views.generic import View
@@ -91,6 +93,13 @@ class DetalleCompra(View):
                 )
                 registro.save()
 
+            compra = Compra(
+                    rut_usuario =  obj_cliente,
+                    id_pago_pago = success.get('payment_type_code'),
+                    id_direccion = Direccion.objects.filter(id_usuario=cliente).filter(principal=True),
+                    total = success.get('amount')
+            )
+            compra.save()
             Carro.limpiar_carro(request)
         else:
             # print("rechazado")
