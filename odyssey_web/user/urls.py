@@ -1,7 +1,7 @@
 from django.urls import path
 from django.contrib.auth.views import LogoutView
 from .views import LoginView, RegistroView, modificar_usuario, users, eliminar, modificar_perfil, listar_perfil
-from django.contrib.auth import views as auth_views
+
 
 urlpatterns = [
     path('registro/', RegistroView.as_view(template_name = 'register/user_form.html'), name="registro"),

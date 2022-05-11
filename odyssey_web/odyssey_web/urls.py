@@ -3,6 +3,7 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('web.urls')),
@@ -14,6 +15,7 @@ urlpatterns = [
     path('user/',include('user.urls')),
     #carrito
     path('carrito/',include('carrito.urls')),
+
 ]
 
 if settings.DEBUG:
