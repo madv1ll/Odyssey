@@ -82,16 +82,14 @@ class DetalleCompra(View):
             total = 0
             obj_cliente = Usuario.objects.only('rut').get(rut=cliente)
             tpo_pago = Tipo_Pago.objects.only('id_tipo_pago').get(id_tipo_pago=success.get('payment_type_code'))
-            direc=get_object_or_404(Direccion, id_usuario=request.user.rut, id_direccion = True)
+            direc= Direccion.objects.only("id_direccion").filter(principal="SI").get(id_usuario=cliente)
             compra = Compra(
                     rut_usuario =  obj_cliente,
                     id_tipo_pago = tpo_pago,
-                    id_direccion = direc.id_direccion,
+                    id_direccion = direc,
                     total = success.get('amount')
             )
             compra.save()
-            print("latest",Compra.objects.latest("fecha"))
-            print("only:", Compra.objects.only("id_compra").latest("fecha"))
             for key, value in request.session["carro"].items():
                 total=total+(float(value["precio"]))
                 # creacion del registro del producto

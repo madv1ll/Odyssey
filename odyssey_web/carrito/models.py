@@ -9,7 +9,7 @@ class Compra(models.Model):
     id_compra = models.AutoField(primary_key=True)
     rut_usuario =  models.ForeignKey(Usuario, on_delete=models.CASCADE)
     id_tipo_pago = models.ForeignKey(Tipo_Pago,on_delete=models.CASCADE)
-    id_direccion = models.IntegerField()
+    id_direccion = models.ForeignKey(Direccion,on_delete=models.CASCADE)
     total = models.IntegerField()
     fecha = models.DateTimeField(auto_now_add=True)
     cant_cuotas  = models.IntegerField(null=True)

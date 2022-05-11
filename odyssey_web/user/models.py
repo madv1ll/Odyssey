@@ -60,4 +60,4 @@ class Direccion(models.Model):
     numero       = models.CharField(max_length=20, null=False)
     id_comuna    = models.ForeignKey(Comuna, on_delete=models.CASCADE)
     id_usuario   = models.ForeignKey(Usuario, on_delete=models.CASCADE)
-    principal    = models.BooleanField(null=False)
+    principal    = models.CharField(max_length=2,default="SI")
