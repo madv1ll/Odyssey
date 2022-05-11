@@ -11,9 +11,11 @@ class UsuarioManager(UserManager):
             rut          = rut,
             nombre       = nombre,
             apellido     = apellido,
-            correo       = correo
+            correo       = correo,
+            username     = correo
         )
         usuario.set_password(password)
+        usuario.username(correo)
         usuario.save()
         return usuario
 
@@ -22,9 +24,11 @@ class UsuarioManager(UserManager):
             rut          = rut,
             nombre       = nombre,
             apellido     = apellido,
-            correo       = correo
+            correo       = correo,
+            username     = correo
         )
         usuario.usuario_administrador = True
+        usuario.username(correo)
         usuario.save()
         return usuario
 
@@ -36,12 +40,10 @@ class Usuario(AbstractUser):
     correo             = models.CharField('Correo',max_length=60, null=False, blank=False, unique=True)
     creacion_fec       = models.DateTimeField('Fecha de ingreso', auto_now_add=True)
     actualizacion_fec  = models.DateTimeField('Fecha actualizacion', auto_now=True)
-    
     USERNAME_FIELD = 'correo'
-
     class meta:
         verbose_name = 'Usuario'
-        verbose_name_plural = 'Usuario'
+        verbose_name_plural = 'Usuarios'
 
     def __str__(self):
         return self.rut

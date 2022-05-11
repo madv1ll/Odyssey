@@ -19,4 +19,4 @@ odyssey_web/web/migrations/__pycache__
 #ambiente virtual
 venv
 #Base de datos
-db.sqlite3
+odyssey_web/db.sqlite3
