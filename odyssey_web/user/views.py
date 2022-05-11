@@ -80,3 +80,26 @@ def modificar_usuario(request, id):
         else:
             data["form"] = formulario
     return render(request, 'user/modificar_usuario.html', data)
+
+
+def listar_perfil(request, id):
+    usuario = Usuario.objects.all()
+    data = {
+        'usuario':usuario
+    }
+    return render(request,'user/listarPerfil.html',data)
+
+
+def modificar_perfil(request, id):
+    user = get_object_or_404(Usuario, rut=id)
+    data = {
+        'form': UsuarioForm(instance=user)
+    }
+    if request.method == 'POST':
+        formulario = UsuarioForm(data=request.POST, instance=user, files=request.FILES)
+        if formulario.is_valid():
+            formulario.save()
+            messages.success(request, "modificado correctamente")
+        else:
+            data["form"] = formulario
+    return render(request, 'user/perfilUser.html', data)
