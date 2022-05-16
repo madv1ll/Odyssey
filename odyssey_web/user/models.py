@@ -61,3 +61,10 @@ class Direccion(models.Model):
     id_comuna    = models.ForeignKey(Comuna, on_delete=models.CASCADE)
     id_usuario   = models.ForeignKey(Usuario, on_delete=models.CASCADE)
     principal    = models.CharField(max_length=2,default="SI")
+
+    def direccion_registro(self):
+        return "{}{}, {}". format(self.calle, self.numero, self.id_comuna)
+    
+    
+    def __str__(self):
+        return self.direccion_registro()

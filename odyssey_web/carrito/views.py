@@ -31,13 +31,13 @@ def sumar_producto(request, producto_id):
     carro=Carro(request)
     producto=Producto.objects.get(id_producto = producto_id)
     carro.agregar(producto = producto)
-    return redirect("carrito")    
+    return redirect("/carrito")    
 
 def restar_producto(request, producto_id):
     carro=Carro(request)
     producto=Producto.objects.get(id_producto =producto_id)
     carro.restar_producto(producto= producto)
-    return redirect("carrito")
+    return redirect("/carrito")
 
 def limpiar_carro(request):
     carro=Carro(request)
@@ -46,6 +46,7 @@ def limpiar_carro(request):
 
 def ConfirmacionCompra(request):
     return render(request, 'carro/confirmacion.html')
+
 
 class CarritoView(View):
     def get(self,request,*args,**kwargs):
@@ -125,3 +126,8 @@ class DetalleCompra(View):
 #  'payment_type_code': 'VD', 
 #  'response_code': 0, 
 #  'installments_number': 0}
+
+
+
+
+
