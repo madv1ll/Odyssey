@@ -94,8 +94,9 @@ class DetalleCompra(View):
                 total=total+(float(value["precio"]))
                 # creacion del registro del producto
                 registro = ""
+                prod = Producto.objects.only('id_producto').get(id_producto=value["producto_id"])
                 registro = Detalle_compra(
-                    id_producto     = value["producto_id"],
+                    id_producto     = prod,
                     rut_cliente     = obj_cliente,
                     precio_producto = value["precio"],
                     cantidad        = value["cantidad"],
