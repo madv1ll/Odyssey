@@ -117,5 +117,41 @@ header {
 }
 
 
+/* Nosotros */
+#presentacion{
+    padding-top: 50px;
+}
+
+#presentacion img{
+    width: 400px;
+}
+
+#presentacion_2{
+    padding-top: 62px;
+    padding-bottom: 62px;
+    background-color: black;
+    color: white;
+}
 
 
+#presentacion_3{
+    padding-top: 10px;
+}
+
+/* registro */
+
+#registro{
+    padding-top: 90px;
+}
+
+
+/*Detalle de compra*/
+
+#widget h1{
+    text-align: center;
+}
+
+
+#graciasCompra img{
+    width: 200px;
+}

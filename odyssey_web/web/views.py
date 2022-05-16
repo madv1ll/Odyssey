@@ -7,6 +7,10 @@ from django.db.models import Q
 def home(request):
     return render(request, 'web/home.html')
 
+def nosotros(request):
+    return render(request, 'web/nosotros.html')
+    
+
 def listar_productosVenta(request):
     busqueda = request.GET.get("buscar")
     productos = Producto.objects.filter(stock__gt=0)
