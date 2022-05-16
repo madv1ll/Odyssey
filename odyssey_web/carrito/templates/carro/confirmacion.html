@@ -2,14 +2,72 @@
 {% load static %}
 {% block titulo %}Odyssey | Carrito{% endblock %}
 {% block body %}
-<div class="d-flex justify-content-center mt-4">
+<!-- <div class="d-flex justify-content-center mt-4">
         <h4>Productos:</h4>
-</div>
-<div class="row mt-4">
+</div>-->
+
+
+<div class="container-sm" id="widget" style="padding-top: 90px;">
+  <h1>Resumen de compra</h1>
+    {% for key, value in request.session.carro.items %}
+    <div class="card" id="carrito_lista">
+      <div class="card-body">
+        <div class="row">
+          <div class="col">
+            <div id="img_lista">
+              <img src="{{ value.imagen }}" class="card-img-top" alt="..." style="width: 43%;">
+            </div>
+          </div>
+          <div class="col-sm">
+            <h5 class="card-title">{{value.nombre}}</h5>
+          </div>
+          <div class="col-sm">
+            <h6>Precio</h6>
+            <p class="card-text">$ {{value.precio}}</p>
+          </div>
+          <div class="col-sm">
+            <h6>Cantidad</h6>
+            {{value.cantidad}}
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+    <div class="container-sm">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+        <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+      </svg>
+      <a href="/carrito">Volver al carrito</a>
+    </div>
+  </div>
+
+  <div class="row mt-4">
     {% if success and success.response_code == 0 %}
     <div class="alert alert-success" role="alert">
         Pago realizado con exito
     </div>
+
+
+    <style>
+      #pagar{
+        display: none;
+      }
+    </style>
+
+    <div class="container-sm" id="graciasCompra">
+      <div class="row">
+        <div class="col">
+          <img src="{% static 'imagenes/spartano.png' %}" class="img-fluid float-end" alt="...">
+        </div>
+        <div class="col align-self-center">
+              <h4>Gracias por su compra <br>
+                 Esto es Odyssey!!!
+              </h4>
+        </div>
+      </div>
+    </div>
+
     {% endif %}
 
     {% if success and success.response_code != 0 %}
@@ -17,14 +75,16 @@
         Error en el pago
     </div>
     {% endif %}
-    <div class="d-flex justify-content-center mt-4">
-        <div class="card-body">
-            <h5 class="card-title">${{importe_total_carro}}</h5>
-            <form method="post" action="{{resp.url}}">
-                <input type="hidden" name="token_ws" value="{{resp.token}}" />
-                <input class="btn btn-primary" type="submit" value="Ir a pagar" />
-            </form>
-        </div>
+</div> 
+
+
+<div class="container-sm" style="padding-top: 90px;" id="pagar">
+    <div class="card-body">
+        <h5 class="card-title">Total: ${{importe_total_carro}}</h5>
+        <form method="post" action="{{resp.url}}">
+            <input type="hidden" name="token_ws" value="{{resp.token}}" />
+            <input class="btn btn-primary" type="submit" value="Ir a pagar" />
+        </form>
     </div>
 </div>
 {% endblock %}
