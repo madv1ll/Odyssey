@@ -16,8 +16,8 @@ def listar_productosVenta(request):
     productos = Producto.objects.filter(stock__gt=0)
     if busqueda:
         productos = Producto.objects.filter(
-             stock__gt=0 and
-            Q(nombre__icontains = busqueda) |
-            Q(descripcion__icontains = busqueda)
+            Q(stock__gt = 0) &
+            ~Q(nombre__icontains = busqueda) |
+            ~Q(descripcion__icontains = busqueda)
         ).distinct()
     return render(request, 'web/productos.html', {'entity':productos})

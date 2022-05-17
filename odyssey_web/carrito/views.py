@@ -50,6 +50,10 @@ def ConfirmacionCompra(request):
 
 class CarritoView(View):
     def get(self,request,*args,**kwargs):
+        cliente = request.user.rut
+        print("el cliente es: " + cliente)
+        direccion_clie = Direccion.objects.filter(id_usuario = cliente)
+        print(direccion_clie)
         return render(request, 'carro/carrito.html')
 
     def post(self,request,*args,**kwargs):
