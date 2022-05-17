@@ -29,6 +29,9 @@ class Producto(models.Model):
     id_categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
     id_proveedor = models.ForeignKey(Proveedor, on_delete=models.CASCADE)
     stock = models.IntegerField(null = True)
+
+    def nombre_producto(self):
+        return "{}, {}, {}". format(self.nombre, self.id_categoria, self.id_proveedor)
     
     def __str__(self):
-        return self.nombre
+        return self.nombre_producto()
