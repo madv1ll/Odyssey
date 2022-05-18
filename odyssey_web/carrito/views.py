@@ -50,10 +50,7 @@ def ConfirmacionCompra(request):
 
 class CarritoView(View):
     def get(self,request,*args,**kwargs):
-        cliente = request.user.rut
-        print("el cliente es: " + cliente)
-        direccion_clie = Direccion.objects.filter(id_usuario = cliente)
-        print(direccion_clie)
+
         return render(request, 'carro/carrito.html')
 
     def post(self,request,*args,**kwargs):
@@ -64,13 +61,18 @@ class CarritoView(View):
         buy_order="1"
         session_id="1"
         return_url= 'http://localhost:8000/carrito/confirmacion/'
+        
+        cliente = request.user.rut
+        print("el cliente es: " + cliente)
+        direccion_clie = Direccion.objects.filter(id_usuario = cliente)
+        print(direccion_clie)
 
         tx = Transaction(WebpayOptions(IntegrationCommerceCodes.WEBPAY_PLUS,
         IntegrationApiKeys.WEBPAY,
         IntegrationType.TEST))
         resp = tx.create(buy_order, session_id, amount, return_url)
         # print(resp)
-        return render(request,"carro/confirmacion.html",{"resp":resp})
+        return render(request,"carro/confirmacion.html",{"resp":resp, "direccion":direccion_clie})
 
  
 class DetalleCompra(View):
