@@ -4,8 +4,8 @@ from django.views.generic import CreateView
 from django.db.models import Q
 from django.contrib import messages
 from django.contrib.auth import login, logout
-from .models import  Usuario
-from .forms import UsuarioForm
+from .models import  Direccion, Usuario
+from .forms import UsuarioForm, DireccionForm
 from django.views.generic.edit import FormView
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.cache import never_cache
@@ -83,7 +83,7 @@ def modificar_usuario(request, id):
 
 
 def listar_perfil(request, id):
-    usuario = Usuario.objects.all()
+    usuario = Usuario.objects.filter(rut=id)
     data = {
         'usuario':usuario
     }
@@ -100,6 +100,49 @@ def modificar_perfil(request, id):
         if formulario.is_valid():
             formulario.save()
             messages.success(request, "modificado correctamente")
+            return redirect(to="home")
         else:
             data["form"] = formulario
     return render(request, 'user/perfilUser.html', data)
+
+def nueva_direccion(request, id):
+    if request.method == "POST":
+        form = DireccionForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit = False)
+            post.id = id
+            post.save()
+            return redirect (to="home")
+    else:
+        form = DireccionForm
+    return render(request, 'user/crear_direccion.html', {'form':form})
+
+
+def listar_direccion(request, id):
+    direccion = Direccion.objects.filter(id_usuario=id)
+    data = {
+        'direccion':direccion
+    }
+    return render(request,'user/listar_direccion.html',data)
+
+def modificar_direccion(request, id):
+    user = get_object_or_404(Direccion, id_usuario=id)
+    data = {
+        'form': DireccionForm(instance=user)
+    }
+    if request.method == 'POST':
+        formulario = DireccionForm(data=request.POST, instance=user, files=request.FILES)
+        if formulario.is_valid():
+            formulario.save()
+            messages.success(request, "modificado correctamente")
+            return redirect(to="home")
+        else:
+            data["form"] = formulario
+    return render(request, 'user/editar_direccion.html', data)
+
+def eliminar_direccion(request, id):
+    user = Direccion.objects.filter(id_usuario=id)
+    user.delete()
+    messages.success(request, "eliminado correctamente")
+    return redirect(to="home")
+
