@@ -2,6 +2,7 @@
 {% load static %}
 {% block titulo %}Odyssey | Carrito{% endblock %}
 {% block body %}
+{% if user.is_active %}
 <div class="container-sm" id="carrito">
   <div class="row">
     <div class="col-sm-8">
@@ -32,4 +33,14 @@
 </div>
 <div>
 </div>
+
+  
+  {% else %}
+  <div class="container-sm" id="registrateCompra">
+    <h1>Inicia sesion para poder realizar compras</h1>
+    <img src="{% static 'imagenes/spartano.png' %}" class="img-fluid rounded mx-auto d-block" alt="..." style="width: 150px">
+  </div>
+{% endif %}
+
+
 {% endblock %}

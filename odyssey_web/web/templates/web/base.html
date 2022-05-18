@@ -80,10 +80,11 @@
             <li class="nav-item">
               <a class="nav-link " href="/carrito">Carrito ${{importe_total_carro}}</a>
             </li>
+            {% if user.is_active %}
             <li class="nav-item">
               <a class="nav-link " href="#">Hola!! {{ user.nombre }}</a>
-
             </li>
+            {% endif %}
           </ul>
         </div>
       </div>
