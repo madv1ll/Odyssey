@@ -1,8 +1,8 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-# from django.contrib.auth.models import User
 
-from .models import Usuario
+from web.models import Comuna
+from .models import Usuario, Direccion
 
 class UsuarioForm(forms.ModelForm):
     password = forms.CharField(label= 'Contraseña', widget=forms.PasswordInput(
@@ -38,19 +38,24 @@ class LoginForm(AuthenticationForm):
         self.fields['username'].widget.attrs['placeholder'] = 'Correo'
         self.fields['password'].widget.attrs['class'] = 'form-control'
         self.fields['password'].widget.attrs['placeholder'] = 'Contraseña'
-#-------------------------------
-# class SignUpForm(UserCreationForm):
-#     first_name = forms.CharField(max_length=140, required=True)
-#     last_name = forms.CharField(max_length=140, required=False)
-#     email = forms.EmailField(required=True)
 
-#     class Meta:
-#         model = User
-#         fields = (
-#             'username',
-#             'email',
-#             'first_name',
-#             'last_name',
-#             'password1',
-#             'password2',
-#         )
+FAVORITE_COLORS_CHOICES = [
+    ('SI', 'Si'),
+    ('NO', 'No'),
+]
+
+class DireccionForm(forms.ModelForm):
+    principal = forms.ChoiceField(
+    required=True,
+    widget=forms.RadioSelect,
+    choices=FAVORITE_COLORS_CHOICES,
+    label='Direccion Principal',
+    )
+    class Meta:
+        model = Direccion
+        fields = ('id_direccion','calle', 'numero','id_comuna', 'principal')
+
+    def __init__(self, *args, **kwargs): 
+        super(DireccionForm, self).__init__(*args, **kwargs) 
+        self.fields['id_comuna'].label = 'Comuna'
+        self.fields['id_comuna'].empty_label = 'Seleccione Comuna'
