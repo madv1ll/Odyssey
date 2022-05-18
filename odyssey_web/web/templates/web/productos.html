@@ -19,13 +19,13 @@
         <div class="row row-cols-2 row-cols-md-6 g-4">
             {% for p in entity %}
             <div class="col">
-                <div class="card">
+                <div class="card" style="min-height: 452px;">
                     <img src="{{ p.imagen.url }}" class="card-img-top" alt="..." >
                     <div class="card-body">
                         <h5 class="card-title">{{ p.nombre | title }}</h5>
                         <h6 class="card-text"> {{ p.Proveedor | title }}</h6>
-                        <p class="card-text"> {{ p.categoria | title }}</p>
-                        <p class="card-text"> {{ p.id_producto | title }}</p>
+                        <p class="card-text"> {{ p.id_proveedor | title }}</p>
+                        <p class="card-text">Stock: {{ p.stock | title }}</p>
                         <p class="card-text">$ {{ p.precio | title }}</p>
                         <p><button type="button" class="btn btn-primary"><a href="#" onclick="AlertAgregarCarrito({{ p.id_producto }});">Comprar</a></button></p>              
                     </div>

@@ -31,13 +31,13 @@ def sumar_producto(request, producto_id):
     carro=Carro(request)
     producto=Producto.objects.get(id_producto = producto_id)
     carro.agregar(producto = producto)
-    return redirect("carrito")    
+    return redirect("/carrito")    
 
 def restar_producto(request, producto_id):
     carro=Carro(request)
     producto=Producto.objects.get(id_producto =producto_id)
     carro.restar_producto(producto= producto)
-    return redirect("carrito")
+    return redirect("/carrito")
 
 def limpiar_carro(request):
     carro=Carro(request)
@@ -47,8 +47,10 @@ def limpiar_carro(request):
 def ConfirmacionCompra(request):
     return render(request, 'carro/confirmacion.html')
 
+
 class CarritoView(View):
     def get(self,request,*args,**kwargs):
+
         return render(request, 'carro/carrito.html')
 
     def post(self,request,*args,**kwargs):
@@ -59,13 +61,18 @@ class CarritoView(View):
         buy_order="1"
         session_id="1"
         return_url= 'http://localhost:8000/carrito/confirmacion/'
+        
+        cliente = request.user.rut
+        print("el cliente es: " + cliente)
+        direccion_clie = Direccion.objects.filter(id_usuario = cliente)
+        print(direccion_clie)
 
         tx = Transaction(WebpayOptions(IntegrationCommerceCodes.WEBPAY_PLUS,
         IntegrationApiKeys.WEBPAY,
         IntegrationType.TEST))
         resp = tx.create(buy_order, session_id, amount, return_url)
         # print(resp)
-        return render(request,"carro/confirmacion.html",{"resp":resp})
+        return render(request,"carro/confirmacion.html",{"resp":resp, "direccion":direccion_clie})
 
  
 class DetalleCompra(View):
@@ -94,8 +101,9 @@ class DetalleCompra(View):
                 total=total+(float(value["precio"]))
                 # creacion del registro del producto
                 registro = ""
+                prod = Producto.objects.only('id_producto').get(id_producto=value["producto_id"])
                 registro = Detalle_compra(
-                    id_producto     = value["producto_id"],
+                    id_producto     = prod,
                     rut_cliente     = obj_cliente,
                     precio_producto = value["precio"],
                     cantidad        = value["cantidad"],
@@ -124,3 +132,8 @@ class DetalleCompra(View):
 #  'payment_type_code': 'VD', 
 #  'response_code': 0, 
 #  'installments_number': 0}
+
+
+
+
+

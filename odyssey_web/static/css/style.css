@@ -46,18 +46,6 @@ header {
     background-color: red;
 }
 
-/* home */
-/* #titleNosotros{
-    text-align: center;
-}
-
-#titleNosotros h1{
-    font-size: 50px;
-}
-
-#cuNostros{
-    margin-top: 20px;
-} */
 
 #nosotros{
     margin-top: 40px;
@@ -76,12 +64,7 @@ header {
     text-align: center;
 }
 
-/* #parrafoNosotros p{
-    margin-top: 30px;
-} */
 
-
-/* productos cliente */
 #barraBusqueda{
     width: 300px;
 }
@@ -116,6 +99,71 @@ header {
     margin-top: 20px;
 }
 
+#registrateCompra{
+    padding-top: 90px ;
+}
+
+#registrateCompra h1{
+    text-align: center;
+}
+
+
+/* Nosotros */
+#presentacion{
+    padding-top: 50px;
+}
+
+#presentacion img{
+    width: 400px;
+}
+
+#presentacion_2{
+    padding-top: 62px;
+    padding-bottom: 62px;
+    background-color: black;
+    color: white;
+}
+
+
+#presentacion_3{
+    padding-top: 10px;
+}
+
+/*contacto*/
+.contacto{
+    background-color: #EB6604;
+    margin-top: 50px;
+}
+
+#infoContacto h1{
+    padding-top: 10px;
+}
+
+#infoContacto h1{
+    text-align: center;
+}
+
+#infoContacto img{
+    padding-top: 50px;
+    width: 60px;
+}
+
+/* registro */
+
+#registro{
+    padding-top: 90px;
+}
 
 
 
+
+/*Detalle de compra*/
+
+#widget h1{
+    text-align: center;
+}
+
+
+#graciasCompra img{
+    width: 200px;
+}

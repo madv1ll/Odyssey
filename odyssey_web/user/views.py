@@ -110,7 +110,7 @@ def nueva_direccion(request, id):
         form = DireccionForm(request.POST)
         if form.is_valid():
             post = form.save(commit = False)
-            post.id = id
+            post.id_usuario = Usuario.objects.only('rut').get(rut=id)
             post.save()
             return redirect (to="home")
     else:

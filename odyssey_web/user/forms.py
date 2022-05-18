@@ -1,5 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+
+from web.models import Comuna
 from .models import Usuario, Direccion
 
 class UsuarioForm(forms.ModelForm):
@@ -37,9 +39,23 @@ class LoginForm(AuthenticationForm):
         self.fields['password'].widget.attrs['class'] = 'form-control'
         self.fields['password'].widget.attrs['placeholder'] = 'Contraseña'
 
+FAVORITE_COLORS_CHOICES = [
+    ('SI', 'Si'),
+    ('NO', 'No'),
+]
+
 class DireccionForm(forms.ModelForm):
+    principal = forms.ChoiceField(
+    required=True,
+    widget=forms.RadioSelect,
+    choices=FAVORITE_COLORS_CHOICES,
+    label='Direccion Principal',
+    )
     class Meta:
         model = Direccion
-        fields = ('id_direccion','calle', 'numero', 'principal','id_comuna', 'id_usuario')
+        fields = ('id_direccion','calle', 'numero','id_comuna', 'principal')
 
-
+    def __init__(self, *args, **kwargs): 
+        super(DireccionForm, self).__init__(*args, **kwargs) 
+        self.fields['id_comuna'].label = 'Comuna'
+        self.fields['id_comuna'].empty_label = 'Seleccione Comuna'

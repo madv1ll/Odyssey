@@ -17,7 +17,25 @@
         <h1>ODYSSEY</h1>
         <p>Un poco de nuestra Historia</p>
         <div class="trans text-center">
-            <button type="button" class="btn btn-primary">Ver mas</button>
+            <button type="button" class="btn btn-primary"><a href="{% url 'nosotros' %}">Ver mas</a></button>
+        </div>
+    </div>
+</section>
+<section>
+    <div class="contacto">
+        <div class="container-sm" id="infoContacto">
+            <div class="row" >
+                <h1>Contacto</h1>
+                <div class="col-sm ">
+                    <img src="{% static 'imagenes/facebook.png' %}" class="img-fluid rounded mx-auto d-block" alt="...">                   
+                </div>
+                <div class="col-sm">
+                    <img src="{% static 'imagenes/gmail.png' %}" class="img-fluid rounded mx-auto d-block" alt="...">
+                </div>
+                <div class="col-sm">
+                    <img src="{% static 'imagenes/twitter.png' %}" class="img-fluid rounded mx-auto d-block" alt="...">
+                </div>
+            </div> 
         </div>
     </div>
 </section>

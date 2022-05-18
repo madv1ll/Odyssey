@@ -17,7 +17,7 @@ class Compra(models.Model):
 
 class Detalle_compra(models.Model):
     id_detalle = models.AutoField(primary_key=True)
-    id_producto = models.CharField(max_length=50)
+    id_producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
     rut_cliente = models.ForeignKey(Usuario, on_delete=models.CASCADE)
     precio_producto = models.IntegerField()
     cantidad = models.IntegerField(null = True)
