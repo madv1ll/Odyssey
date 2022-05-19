@@ -64,7 +64,7 @@ class CarritoView(View):
         
         cliente = request.user.rut
         print("el cliente es: " + cliente)
-        direccion_clie = Direccion.objects.filter(id_usuario = cliente)
+        direccion_clie = Direccion.objects.filter(id_usuario = cliente).filter(principal="SI")
         print(direccion_clie)
 
         tx = Transaction(WebpayOptions(IntegrationCommerceCodes.WEBPAY_PLUS,
@@ -81,6 +81,10 @@ class DetalleCompra(View):
         tx = Transaction(WebpayOptions(IntegrationCommerceCodes.WEBPAY_PLUS, IntegrationApiKeys.WEBPAY, IntegrationType.TEST))
         success = tx.commit(token)
         # print(success)
+        cliente = request.user.rut
+        print("el cliente es: " + cliente)
+        direccion_clie = Direccion.objects.filter(id_usuario = cliente)
+
         if success.get("status") == "AUTHORIZED":
             if request.user.is_active:
                 cliente = request.user.rut
@@ -114,7 +118,7 @@ class DetalleCompra(View):
         else:
             # print("rechazado")
             registro = "no crear registro"
-        return render(request,"carro/confirmacion.html",{"success":success})
+        return render(request,"carro/confirmacion.html",{"success":success, "direccion":direccion_clie})
 
 	# DEBITO = 4051 8842 3993 7763
     # 11 111 111 1

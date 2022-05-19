@@ -167,3 +167,35 @@ header {
 #graciasCompra img{
     width: 200px;
 }
+
+/*Perfil*/
+#perfil{
+    padding-top: 90px;
+    
+}
+#usuario{
+    border: 1px solid black;
+}
+#infoPerfil{
+    margin-top: 40px;
+}
+
+#editarPerfil{
+    padding-top: 90px;
+}
+
+#crearDireccion{
+    padding-top: 90px;
+}
+
+#modificarDireccion{
+    padding-top: 90px;
+}
+
+#detalle_compra{
+    padding-top: 90px;
+}
+
+#productosComprados{
+    padding-top: 90px;
+}

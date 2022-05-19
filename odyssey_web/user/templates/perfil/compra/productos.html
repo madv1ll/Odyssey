@@ -1,0 +1,36 @@
+{% extends 'web/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block titulo %}Odyssey | Perfil{% endblock %}
+{% block body %}
+<div class="container-sm" id="productosComprados">
+    <!-- <form class="d-flex" id="barraBusqueda" method="GET">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="buscar"
+            value="{{request.GET.buscar}}">
+        <button class="btn btn-outline-success" type="submit">Buscar</button>
+    </form> -->
+</div>
+
+
+<div class="container-sm" id="producto">
+    <button type="button" class="btn btn-warning"><a
+        href="{% url 'lista_detalleCompra' user.rut %}">Atras</a>
+    </button>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Nombre Producto</th>
+                <th scope="col">cantidad</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for p in entity %}
+            <tr>
+                <td>{{ p.id_producto | title }}</td>
+                <td>{{ p.cantidad | title }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
