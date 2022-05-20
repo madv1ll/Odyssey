@@ -14,6 +14,7 @@ class Compra(models.Model):
     fecha = models.DateTimeField(auto_now_add=True)
     cant_cuotas  = models.IntegerField(null=True)
     monto_cuotas = models.IntegerField(null=True)
+    estado = models.CharField(max_length= 21,default="Pedido en preparacion")
 
 class Detalle_compra(models.Model):
     id_detalle = models.AutoField(primary_key=True)

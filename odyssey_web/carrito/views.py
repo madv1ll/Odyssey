@@ -83,7 +83,7 @@ class DetalleCompra(View):
         # print(success)
         cliente = request.user.rut
         print("el cliente es: " + cliente)
-        direccion_clie = Direccion.objects.filter(id_usuario = cliente)
+        direccion_clie = Direccion.objects.filter(id_usuario = cliente).filter(principal="SI")
 
         if success.get("status") == "AUTHORIZED":
             if request.user.is_active:

@@ -21,13 +21,14 @@
             {% for d in direccion %}
                 
                 <tr>
+                    <td>{{   d.id_direccion | title }}</td>
                     <td>{{   d.calle | title }}</td>
                     <td>{{   d.numero  }}</td>
                     <td>{{   d.principal    }}</td>
                     <td>{{   d.id_comuna    }}</td>
                     <td>
-                        <button type="button" class="btn btn-danger"><a href="{% url 'eliminar_direccion' user.rut %}">Eliminar direccion</a></button>
-                        <button type="button" class="btn btn-warning"><a href="{% url 'modificar_direccion' user.rut %}">Editar Direccion</a></button>
+                        <button type="button" class="btn btn-danger"><a href="{% url 'eliminar_direccion' d.id_direccion %}">Eliminar direccion</a></button>
+                        <button type="button" class="btn btn-warning"><a href="{% url 'modificar_direccion' d.id_direccion %}">Editar Direccion</a></button>
                     </td>
                 </tr>
             {% endfor %}

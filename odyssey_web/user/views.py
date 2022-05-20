@@ -133,13 +133,12 @@ def listar_direccion(request, id):
     return render(request,'perfil/direccion/listar_direccion.html',data)
 
 def modificar_direccion(request, id):
-    user = get_object_or_404(Direccion, id_usuario=id)
-    id_user = request.user.rut
+    direccion = get_object_or_404(Direccion, id_direccion=id)
     data = {
-        'form': DireccionForm(instance=user)
+        'form': DireccionForm(instance=direccion)
     }
     if request.method == 'POST':
-        formulario = DireccionForm(data=request.POST, instance=user, files=request.FILES)
+        formulario = DireccionForm(data=request.POST, instance=direccion, files=request.FILES)
         if formulario.is_valid():
             formulario.save()
             messages.success(request, "modificado correctamente")
@@ -149,19 +148,10 @@ def modificar_direccion(request, id):
     return render(request, 'perfil/direccion/editar_direccion.html', data)
 
 def eliminar_direccion(request, id):
-    user = Direccion.objects.filter(id_usuario=id)
-    user.delete()
+    direccion = get_object_or_404(Direccion, id_direccion=id)
+    direccion.delete()
     messages.success(request, "eliminado correctamente")
     return redirect(to="home")
-
-# def eliminar_producto(request, id): 
-#     if request.user.is_staff:
-#         producto = get_object_or_404(Producto, id_producto=id)
-#         producto.delete()
-#         messages.success(request, "Eliminado correctamente")
-#         return redirect(to="listar_productos")
-#     else:
-#         return render(request,'acceso-denegado.html')       
 
 
 def lista_detalleCompra(request, id):
