@@ -169,19 +169,51 @@ header {
 }
 
 /*Perfil*/
+
+
 #perfil{
     padding-top: 90px;
-    
+
 }
+
+#cardPerfil{
+    border-radius: 15px;
+}
+
 #usuario{
-    border: 1px solid black;
+    max-width: 540px;
 }
 #infoPerfil{
-    margin-top: 40px;
+    margin-top: 50px;
+}
+
+#datosPersonales{
+    border: 1px solid #dfdfdf;
+    border-radius: 15px;
+    margin: 5px;
+   
+}
+
+#HistorialCompra{
+    border: 1px solid #dfdfdf;
+    border-radius: 15px;
+    margin: 5px;
+   
 }
 
 #editarPerfil{
     padding-top: 90px;
+}
+
+/*Direcciones*/
+
+#direcciones{
+    padding-top: 90px;
+    
+}
+
+#cardDirecciones{
+    margin: 15px;
 }
 
 #crearDireccion{
@@ -192,9 +224,17 @@ header {
     padding-top: 90px;
 }
 
+/*Detalles de compra*/
+
 #detalle_compra{
     padding-top: 90px;
 }
+
+#CardRegistroCompra{
+    margin: 15px;
+}
+
+
 
 #productosComprados{
     padding-top: 90px;

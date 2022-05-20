@@ -3,38 +3,26 @@
 {% load static %}
 {% block titulo %}Odyssey | Direcciones{% endblock %}
 {% block body %}
-<div class="card">
-    <div class="card-body">
-    <h2>Direccion del usuario</h2>
-    <hr>
-    <table class="table table-striped table-hover table-responsive-sm">
-        <thead>
-            <tr>
-                <th scope="col">Calle</th>
-                <th scope="col">Numero</th>
-                <th scope="col">Principal</th>
-                <th scope="col">Comuna</th>
-                <th scope="col">Opciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for d in direccion %}
-                
-                <tr>
-                    <td>{{   d.id_direccion | title }}</td>
-                    <td>{{   d.calle | title }}</td>
-                    <td>{{   d.numero  }}</td>
-                    <td>{{   d.principal    }}</td>
-                    <td>{{   d.id_comuna    }}</td>
-                    <td>
-                        <button type="button" class="btn btn-danger"><a href="{% url 'eliminar_direccion' d.id_direccion %}">Eliminar direccion</a></button>
-                        <button type="button" class="btn btn-warning"><a href="{% url 'modificar_direccion' d.id_direccion %}">Editar Direccion</a></button>
-                    </td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+<div class="container-sm" id="direcciones">
+    <button type="button" class="btn btn-warning"><a
+        href="{% url 'listar_perfil' user.rut %}">Atras</a>
+    </button>
+    <h2>Tus direcciones</h2>
+    {% for d in direccion %}
+    <div class="card" id="cardDirecciones">
+        <div class="card-body">
+          <h5 class="card-title">Calle: {{ d.calle | title }} </h5>
+          <p class="card-text">N° de casa: {{ d.numero | title }}</p>
+          <p class="card-text">Comuna: {{ d.id_comuna | title }}</p>
+          <p class="card-text">Direccion principal: {{ d.principal }}</p>
+          <a href="{% url 'modificar_direccion' d.id_direccion %}" class="btn btn-warning">Editar</a>
+          <a href="{% url 'eliminar_direccion' d.id_direccion %}" class="btn btn-danger">Eliminar</a>
+        </div>
+      </div>
+    {% endfor %}  
+
+    
     <button type="button" class="btn btn-success"><a href="{% url 'nueva_direccion' user.rut %}">Crear direccion</a></button>
 </div>
-</div>
+
 {% endblock %}

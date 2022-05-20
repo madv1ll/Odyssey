@@ -141,7 +141,7 @@ def modificar_direccion(request, id):
         formulario = DireccionForm(data=request.POST, instance=direccion, files=request.FILES)
         if formulario.is_valid():
             formulario.save()
-            messages.success(request, "modificado correctamente")
+            # messages.success(request, "modificado correctamente")
             return redirect(to="home")
         else:
             data["form"] = formulario

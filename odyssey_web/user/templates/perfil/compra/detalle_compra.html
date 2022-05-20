@@ -4,43 +4,36 @@
 {% block titulo %}Odyssey | Perfil{% endblock %}
 {% block body %}
 <div class="container-sm" id="detalle_compra">
-    <div class="container-sm">
-        <!-- <form class="d-flex" id="barraBusqueda" method="GET">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="buscar"
-                value="{{request.GET.buscar}}">
-            <button class="btn btn-outline-success" type="submit">Buscar</button>
-        </form> -->
-    </div>
+    <button type="button" class="btn btn-warning"><a href="{% url 'listar_perfil' user.rut %}">Atras</a>
+    </button>
     <div class="container-sm" id="producto">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">N° identificador</th>
-                    <th scope="col">rut usuario</th>
-                    <th scope="col">Direccion de envio</th>
-                    <th scope="col">total</th>
-                    <th scope="col">fecha</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for p in compra %}
-                <tr>
-                    <td>{{ p.id_compra | title }}</td>
-                    <td>{{ p.rut_usuario | title }}</td>
-                    <td>{{ p.id_direccion | title }}</td>
-                    <td>$ {{ p.total | title }}</td>
-                    <td>{{ p.fecha | date:'d-m-Y'  }}</td>
+        {% for p in compra %}
+        <div class="card" id="CardRegistroCompra">
+            <div class="card-header">
+                N° de pedido: {{ p.id_compra | title }}
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Direccion: {{ p.id_direccion | title }}</h5>
+                <p class="card-text">
 
-                    <td>
-                        <button type="button" class="btn btn-warning"><a
-                                href="{% url 'producto_compra' p.id_compra %}">Ver Productos</a>
-                        </button>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-calendar3" viewBox="0 0 16 16">
+                        <path
+                            d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z" />
+                        <path
+                            d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
+                    </svg> <!--  icono -->
+                    
+                    Estado: {{ p.estado | title }}
+                </p>
+                <p class="card-text">${{ p.total | title }}</p>
+                <p class="card-text">Fecha:{{ p.fecha | date:'d-m-y' }}</p>
+
+                <a href="{% url 'producto_compra' p.id_compra %}"
+                    style="background-color: #EB6604; border-color: #EB6604;" class="btn btn-primary">Productos</a>
+            </div>
+        </div>
+        {% endfor %}
     </div>
-</div>
 
-{% endblock %}
+    {% endblock %}

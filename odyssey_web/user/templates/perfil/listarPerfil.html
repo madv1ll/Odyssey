@@ -39,46 +39,58 @@
   </div>
 </div> -->
 <div class="container-sm" id="perfil">
-    <div class="container" id="usuario">
-
-        
+    <div class="container-sm" id="usuario">
         {% for u in usuario %}
-            <h3>Hola!! {{u.nombre | title}}</h3>
+        <div class="card mb-3" id="cardPerfil">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img src="{% static 'imagenes/icono3.1.png' %}" class="img-fluid rounded-start" alt="...">
+                </div>
+                <div class="col-md-8 align-self-center">
+                    <div class="card-body">
+                        <h3>Hola!! {{u.nombre | title}}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
         {% endfor %}
-        
     </div>
 
     <div class="row" id="infoPerfil">
-        <div class="col-8">
+        <div class="col-sm" id="datosPersonales">
             <h2>Datos personales</h2>
             <div class="row">
                 <div class="col">
-                        <p>Nombre:</p>
-                        <p>Apellido:</p>
-                        <p>Carrito:</p>
-                        <p>Fecha:</p>   
+                    <p>Nombre:</p>
+                    <p>Apellido:</p>
+                    <p>Carrito:</p>
+                    <p>Fecha registro:</p>
                 </div>
                 <div class="col">
                     {% for u in usuario %}
-                        <p>{{   u.nombre | title }}</p>
-                        <p>{{   u.apellido  }}</p>
-                        <p>{{   u.correo    }}</p>
-                        <p>{{   u.creacion_fec | date:'d-m-Y'   }}</p>                
+                    <p>{{ u.nombre | title }}</p>
+                    <p>{{ u.apellido }}</p>
+                    <p>{{ u.correo }}</p>
+                    <p>{{ u.creacion_fec | date:'d-m-Y' }}</p>
                     {% endfor %}
                 </div>
-                <div class="container-sm">
-                    <button type="button" class="btn btn-warning"><a href="{% url 'modificar_perfil' user.rut %}">Editar</a></button>
-                    <button type="button" class="btn btn-primary"><a href="{% url 'listar_direccion' user.rut %}">Ver direcciones</a></button>
+                <div class="container-md">
+                    <button type="button" class="btn btn-warning"><a
+                            href="{% url 'modificar_perfil' user.rut %}">Editar</a></button>
+                    <button type="button" class="btn btn-primary"><a href="{% url 'listar_direccion' user.rut %}">Ver
+                            direcciones</a></button>
                 </div>
-                
+
             </div>
 
         </div>
-        <div class="col-4">
+        <div class="col-sm" id="HistorialCompra">
             <h2>Historial de Compras</h2>
-            <button type="button" class="btn btn-primary"> <a href="{% url 'lista_detalleCompra' user.rut %}"> Ver historial </a></button>
+            <button type="button" class="btn btn-primary"> <a href="{% url 'lista_detalleCompra' user.rut %}"> Ver
+                    historial </a></button>
 
         </div>
     </div>
 </div>
+
 {% endblock %}
