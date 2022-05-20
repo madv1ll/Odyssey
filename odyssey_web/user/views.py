@@ -4,8 +4,11 @@ from django.views.generic import CreateView
 from django.db.models import Q
 from django.contrib import messages
 from django.contrib.auth import login, logout
+
+
 from .models import  Direccion, Usuario
 from .forms import UsuarioForm, DireccionForm
+from carrito.models import Compra, Detalle_compra
 from django.views.generic.edit import FormView
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.cache import never_cache
@@ -82,12 +85,16 @@ def modificar_usuario(request, id):
     return render(request, 'user/modificar_usuario.html', data)
 
 
+
+
+#-------------Perfil de cliente--------------------------------------------
+
 def listar_perfil(request, id):
     usuario = Usuario.objects.filter(rut=id)
     data = {
         'usuario':usuario
     }
-    return render(request,'user/listarPerfil.html',data)
+    return render(request,'perfil/listarPerfil.html',data)
 
 
 def modificar_perfil(request, id):
@@ -103,7 +110,7 @@ def modificar_perfil(request, id):
             return redirect(to="home")
         else:
             data["form"] = formulario
-    return render(request, 'user/perfilUser.html', data)
+    return render(request, 'perfil/editarInfo.html', data)
 
 def nueva_direccion(request, id):
     if request.method == "POST":
@@ -115,7 +122,7 @@ def nueva_direccion(request, id):
             return redirect (to="home")
     else:
         form = DireccionForm
-    return render(request, 'user/crear_direccion.html', {'form':form})
+    return render(request, 'perfil/direccion/crear_direccion.html', {'form':form})
 
 
 def listar_direccion(request, id):
@@ -123,26 +130,35 @@ def listar_direccion(request, id):
     data = {
         'direccion':direccion
     }
-    return render(request,'user/listar_direccion.html',data)
+    return render(request,'perfil/direccion/listar_direccion.html',data)
 
 def modificar_direccion(request, id):
-    user = get_object_or_404(Direccion, id_usuario=id)
+    direccion = get_object_or_404(Direccion, id_direccion=id)
     data = {
-        'form': DireccionForm(instance=user)
+        'form': DireccionForm(instance=direccion)
     }
     if request.method == 'POST':
-        formulario = DireccionForm(data=request.POST, instance=user, files=request.FILES)
+        formulario = DireccionForm(data=request.POST, instance=direccion, files=request.FILES)
         if formulario.is_valid():
             formulario.save()
-            messages.success(request, "modificado correctamente")
+            # messages.success(request, "modificado correctamente")
             return redirect(to="home")
         else:
             data["form"] = formulario
-    return render(request, 'user/editar_direccion.html', data)
+    return render(request, 'perfil/direccion/editar_direccion.html', data)
 
 def eliminar_direccion(request, id):
-    user = Direccion.objects.filter(id_usuario=id)
-    user.delete()
+    direccion = get_object_or_404(Direccion, id_direccion=id)
+    direccion.delete()
     messages.success(request, "eliminado correctamente")
     return redirect(to="home")
+
+
+def lista_detalleCompra(request, id):
+    compra = Compra.objects.filter(rut_usuario=id)
+    return render(request,'perfil/compra/detalle_compra.html', {'compra':compra})
+
+def listar_productosCompraCLi(request, id):
+    productosCompra = Detalle_compra.objects.filter( id_compra=id)
+    return render(request, 'perfil/compra/productos.html', {'entity':productosCompra})
 

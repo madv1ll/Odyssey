@@ -1,15 +1,15 @@
 {% extends 'web/base.html' %}
 {% load crispy_forms_tags %}
 {% load static %}
-{% block titulo %}Odyssey | Editar perfil{% endblock %}
+{% block titulo %}Odyssey | Editar Direccion{% endblock %}
 
 {% block body %}
-<div class="container mt-4" id="editarPerfil">
+<div class="container-sm" id="modificarDireccion">
   <div class="row">
       <div class="col-12 col-md-6 offset-md-3">
           <div class="card">
               <div class="card-body">
-                  <h3>Editar datos</h3>
+                  <h3>Editar Direccion</h3>
                   <hr>
                   <form action="" method="post">
                       {% csrf_token %}
@@ -22,5 +22,6 @@
       </div>
   </div>
 </div>
+
 
 {% endblock %}

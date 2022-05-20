@@ -1,5 +1,8 @@
-from django.shortcuts import render
+
+from django.shortcuts import get_object_or_404, redirect, render
 from carrito.models import Compra, Detalle_compra
+from .forms import CompraEditForm
+from django.contrib import messages
 
 
 def administrador(request):
@@ -24,3 +27,23 @@ def listar_productosCompra(request, id):
         return render(request, 'registrosCompra/lista_productosCompra.html', {'entity':productosCompra})
     else:    
         return render(request, 'acceso-denegado.html')    
+
+
+def modificar_compra(request, id):
+    if request.user.is_staff:
+        producto = get_object_or_404(Compra, id_compra=id)
+        data = {
+            'form': CompraEditForm(instance=producto)
+        }
+        if request.method == 'POST':
+            formulario = CompraEditForm(data=request.POST, instance=producto, files=request.FILES)
+            if formulario.is_valid():
+                formulario.save()
+                messages.success(request, "modificado correctamente")
+                return redirect(to="lista_compra")
+            else:
+                data["form"] = formulario
+        return render(request, 'registrosCompra/modificar_compra.html', data)
+    else:
+        return render(request,'acceso-denegado.html')    
+

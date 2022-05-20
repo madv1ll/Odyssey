@@ -19,6 +19,7 @@
                 <th scope="col">Direccion</th>
                 <th scope="col">total</th>
                 <th scope="col">fecha</th>
+                <th scope="col">Estado</th>
             </tr>
         </thead>
         <tbody>
@@ -29,8 +30,12 @@
                 <td>{{ p.id_direccion | title }}</td>
                 <td>$ {{ p.total | title }}</td>
                 <td>{{ p.fecha | title }}</td>
+                <td>{{ p.estado | title }}</td>
                 
                 <td>
+                    <button type="button" class="btn btn-primary"><a
+                        href="{% url 'modificar_compra' p.id_compra %}">Cambiar estado</a>
+                </button>
                     <button type="button" class="btn btn-warning"><a
                             href="{% url 'listar_productosCompra' p.id_compra %}">Ver Productos</a>
                     </button>

@@ -1,6 +1,8 @@
 from django.urls import path
 from django.contrib.auth.views import LogoutView
-from .views import LoginView, RegistroView, modificar_usuario, users, eliminar, modificar_perfil, listar_perfil, listar_direccion, nueva_direccion, modificar_direccion, eliminar_direccion
+from .views import LoginView, RegistroView, modificar_usuario, users, eliminar, \
+ modificar_perfil, listar_perfil, listar_direccion, nueva_direccion, \
+modificar_direccion, eliminar_direccion, lista_detalleCompra, listar_productosCompraCLi
 
 
 urlpatterns = [
@@ -18,5 +20,8 @@ urlpatterns = [
     path('listar_direccion/<id>/',listar_direccion, name='listar_direccion'),
     path('modificar_direccion/<id>/',modificar_direccion, name='modificar_direccion'),
     path('eliminar_direccion/<id>/',eliminar_direccion, name='eliminar_direccion'),
+    #detalle_compras
+    path('detalle_compra/<id>/',lista_detalleCompra, name='lista_detalleCompra'),
+    path('producto_compra/<id>/',listar_productosCompraCLi, name='producto_compra')
 
 ]

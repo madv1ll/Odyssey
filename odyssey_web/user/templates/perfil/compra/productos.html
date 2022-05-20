@@ -1,0 +1,42 @@
+{% extends 'web/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block titulo %}Odyssey | Perfil{% endblock %}
+{% block body %}
+<div class="container-sm" id="productosComprados">
+    <button type="button" class="btn btn-warning"><a
+        href="{% url 'lista_detalleCompra' user.rut %}">Atras</a>
+    </button>
+    {% for p in entity %}
+    <div class="card" id="CardRegistroCompra">
+        <div class="card-header">
+            {{ p.id_producto | title }}
+        </div>
+        <div class="card-body">
+            <!-- <h5 class="card-title">{{ p.id_producto | title }}</h5> -->
+            <p class="card-text">Cantidad: {{ p.cantidad | title }}</p>
+            <p class="card-text">Precio: ${{p.precio_producto | title}}</p>
+        </div>
+    </div>
+    {% endfor %}
+    <!-- <button type="button" class="btn btn-warning"><a
+        href="{% url 'lista_detalleCompra' user.rut %}">Atras</a>
+    </button>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Nombre Producto</th>
+                <th scope="col">cantidad</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for p in entity %}
+            <tr>
+                <td>{{ p.id_producto | title }}</td>
+                <td>{{ p.cantidad | title }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table> -->
+</div>
+{% endblock %}

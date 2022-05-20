@@ -38,9 +38,6 @@
             <li class="nav-item">
               <a class="nav-link" href="{% url 'logout' %}">Cerrar Sesion</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'listar_perfil' user.rut %}">Perfil</a>
-
             {% else %}
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
@@ -61,30 +58,12 @@
               <a class="nav-link " href="{% url 'administrador' %}">Administrador</a>
             </li>
             {% endif %}
-
-            <!-- {% if user.is_staff %}
-          <li class="nav-item">
-            <a class="nav-link " href="{% url 'administrador' %}">Administrador</a>
-          </li>
-          {% endif %}
-          {% if user.is_active %}
-          <li class="nav-item">
-            <a class="nav-link " href="{% url 'logout' %}">Cerrar Sesion</a>
-          </li>
-          {% else %}
-          <li class="nav-item">
-            <a class="nav-link " href="{% url 'registro' %}">Registrarse</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link " href="{% url 'login' %}">Iniciar Sesion</a>
-          </li>
-          {% endif %} -->
             <li class="nav-item">
               <a class="nav-link " href="/carrito">Carrito ${{importe_total_carro}}</a>
             </li>
             {% if user.is_active %}
             <li class="nav-item">
-              <a class="nav-link " href="#">Hola!! {{ user.nombre }}</a>
+              <a class="nav-link " href="{% url 'listar_perfil' user.rut %}">Hola!! {{ user.nombre }}</a>
             </li>
             {% endif %}
           </ul>

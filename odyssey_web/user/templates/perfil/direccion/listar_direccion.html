@@ -1,0 +1,28 @@
+{% extends 'web/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block titulo %}Odyssey | Direcciones{% endblock %}
+{% block body %}
+<div class="container-sm" id="direcciones">
+    <button type="button" class="btn btn-warning"><a
+        href="{% url 'listar_perfil' user.rut %}">Atras</a>
+    </button>
+    <h2>Tus direcciones</h2>
+    {% for d in direccion %}
+    <div class="card" id="cardDirecciones">
+        <div class="card-body">
+          <h5 class="card-title">Calle: {{ d.calle | title }} </h5>
+          <p class="card-text">N° de casa: {{ d.numero | title }}</p>
+          <p class="card-text">Comuna: {{ d.id_comuna | title }}</p>
+          <p class="card-text">Direccion principal: {{ d.principal }}</p>
+          <a href="{% url 'modificar_direccion' d.id_direccion %}" class="btn btn-warning">Editar</a>
+          <a href="{% url 'eliminar_direccion' d.id_direccion %}" class="btn btn-danger">Eliminar</a>
+        </div>
+      </div>
+    {% endfor %}  
+
+    
+    <button type="button" class="btn btn-success"><a href="{% url 'nueva_direccion' user.rut %}">Crear direccion</a></button>
+</div>
+
+{% endblock %}

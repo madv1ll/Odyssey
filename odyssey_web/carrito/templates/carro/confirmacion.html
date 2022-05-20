@@ -77,14 +77,24 @@
     <div class="alert alert-danger" role="alert">
         Error en el pago
     </div>
+
+    <style>
+      #pagar{
+        display: none;
+      }
+    </style>
     {% endif %}
 </div> 
 
 <div class="container-sm">
-  {% if direccion %}
+  {% if direccion and direccion.principal == SI %}
+    
+  
+
   <h5>Direccion</h5>
-    {% for p in direccion %}
-     {{ p.calle | title }} #{{ p.numero | title }}, {{ p.id_comuna | title }}
+    {% for p in direccion%}
+           
+        {{ p.calle | title }} #{{ p.numero | title }}, {{ p.id_comuna | title }}, {{ p.principal | title }}
     {% endfor %}
   {% endif %}
 </div>
@@ -98,7 +108,7 @@
               <input class="btn btn-primary" type="submit" value="Ir a pagar" />
           </form>
         {% else %} 
-          <p>Para poder continuar con tu pago debes agregar tu direccion <br>
+          <p>Para poder continuar con tu pago debes agregar tu direccion principal <br>
           <a href="#">Aqui!!</a>
         </p>
         {% endif %}
