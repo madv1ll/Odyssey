@@ -10,3 +10,4 @@ virtualenv==20.14.1
 django-crispy-forms
 pillow
 transbank-sdk
+cx_oracle
