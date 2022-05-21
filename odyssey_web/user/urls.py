@@ -1,8 +1,9 @@
 from django.urls import path
-from django.contrib.auth.views import LogoutView
+from django.contrib.auth.views import LogoutView, PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, \
+    PasswordResetCompleteView
 from .views import LoginView, RegistroView, modificar_usuario, users, eliminar, \
  modificar_perfil, listar_perfil, listar_direccion, nueva_direccion, \
-modificar_direccion, eliminar_direccion, lista_detalleCompra, listar_productosCompraCLi
+modificar_direccion, eliminar_direccion, lista_detalleCompra, listar_productosCompraCLi, password_reset_request
 
 
 urlpatterns = [
@@ -22,6 +23,12 @@ urlpatterns = [
     path('eliminar_direccion/<id>/',eliminar_direccion, name='eliminar_direccion'),
     #detalle_compras
     path('detalle_compra/<id>/',lista_detalleCompra, name='lista_detalleCompra'),
-    path('producto_compra/<id>/',listar_productosCompraCLi, name='producto_compra')
+    path('producto_compra/<id>/',listar_productosCompraCLi, name='producto_compra'),
+    #recuperar contraseña
+    path("password_reset", password_reset_request, name="password_reset"),
+    #path('reset_password/', PasswordResetView.as_view(template_name = 'resetPassword/password_reset_form.html'), name ="password_reset"), 
+    path('password_reset/done/', PasswordResetDoneView.as_view(template_name='resetPassword/password_reset_done.html'), name='password_reset_done'),
+    path('reset/<uidb64>/<token>/', PasswordResetConfirmView.as_view(template_name="resetPassword/password_reset_confirm.html"), name='password_reset_confirm'),
+    path('reset/done/', PasswordResetCompleteView.as_view(template_name='resetPassword/password_reset_complete.html'), name='password_reset_complete'),  
 
 ]
