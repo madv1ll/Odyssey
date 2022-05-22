@@ -162,7 +162,7 @@ def eliminar_direccion(request, id):
 
 
 def lista_detalleCompra(request, id):
-    compra = Compra.objects.filter(rut_usuario=id)
+    compra = Compra.objects.filter(rut_usuario=id).order_by('fecha').reverse()
     return render(request,'perfil/compra/detalle_compra.html', {'compra':compra})
 
 def listar_productosCompraCLi(request, id):

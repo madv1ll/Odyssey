@@ -7,6 +7,7 @@ from django.forms import  ValidationError, widgets
 from carrito.models import Compra
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from .models import PrecioEnvio
 
 FAVORITE_COLORS_CHOICES = [
     ('Pedido en preparacion', 'Pedido en preparacion'),
@@ -27,4 +28,10 @@ class CompraEditForm(forms.ModelForm):
         model = Compra
         fields = ('estado',)
 
+
+
+class PrecioEnvioEditForm(forms.ModelForm):
+    class Meta:
+        model = PrecioEnvio
+        fields = '__all__'  
 

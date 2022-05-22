@@ -9,9 +9,11 @@ from django.shortcuts import  redirect
 from django.views.generic.edit import CreateView
 from django.views.generic import View
 from carrito.models import Detalle_compra
+from administrador.models import PrecioEnvio
 from django.views.generic.edit import CreateView
 from django.urls import reverse
 from django.views.generic import View
+
 #transbank
 from transbank.webpay.webpay_plus.transaction import Transaction
 from transbank.common.options import WebpayOptions
@@ -55,8 +57,11 @@ class CarritoView(View):
 
     def post(self,request,*args,**kwargs):
         total = 0
+        envio = PrecioEnvio.objects.all()
+        precio_envio = PrecioEnvio.objects.only('precio').get(id_envio=1)
         for key, value in request.session["carro"].items():
-            total=total+(float(value["precio"]))
+            total=total+(float(value["precio"])+ precio_envio.precio) 
+            print(total)
         amount = total
         buy_order="1"
         session_id="1"
@@ -72,7 +77,7 @@ class CarritoView(View):
         IntegrationType.TEST))
         resp = tx.create(buy_order, session_id, amount, return_url)
         # print(resp)
-        return render(request,"carro/confirmacion.html",{"resp":resp, "direccion":direccion_clie})
+        return render(request,"carro/confirmacion.html",{"resp":resp, "direccion":direccion_clie, "precio_envio":envio})
 
  
 class DetalleCompra(View):
