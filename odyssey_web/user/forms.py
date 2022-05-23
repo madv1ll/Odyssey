@@ -29,6 +29,32 @@ class UsuarioForm(forms.ModelForm):
             user.save()
             return user
 
+
+class UsuarioAdminForm(forms.ModelForm):
+    password = forms.CharField(label= 'Contraseña', widget=forms.PasswordInput(
+        attrs={
+            'class': 'form-control',
+            'placeholder':'Ingrese Contraseña',
+            'id': 'password'
+        }
+    ))
+    class Meta:
+        model = Usuario
+        fields = ('rut', 'nombre', 'apellido', 'correo', 'is_staff')
+
+    def clean_password2(self):
+        password = self.cleaned_data.get('password')
+        return password
+ 
+    def save(self,commit = True):
+        user = super().save(commit=False)
+        user.set_password(self.cleaned_data['password'])
+        correo = self.cleaned_data['correo']
+        user.username = correo
+        if commit:
+            user.save()
+            return user            
+
 from django.contrib.auth.forms import AuthenticationForm
 
 class LoginForm(AuthenticationForm):

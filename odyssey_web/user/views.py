@@ -7,7 +7,7 @@ from django.contrib.auth import login, logout
 
 
 from .models import  Direccion, Usuario
-from .forms import UsuarioForm, DireccionForm
+from .forms import UsuarioForm, DireccionForm, UsuarioAdminForm
 from carrito.models import Compra, Detalle_compra
 from django.views.generic.edit import FormView
 from django.views.decorators.csrf import csrf_protect
@@ -27,6 +27,11 @@ class RegistroView(CreateView):
     model = Usuario
     form_class = UsuarioForm
     success_url = reverse_lazy('home')
+
+class RegistroAdminView(CreateView):
+    model = Usuario
+    form_class = UsuarioAdminForm
+    success_url = reverse_lazy('users')    
 
 class LoginView(FormView):
     template_name = 'login.html'

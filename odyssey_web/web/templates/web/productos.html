@@ -5,7 +5,7 @@
 <section id="productos">
     <div class="container-sm">
         <form class="d-flex" id="barraBusqueda" method="GET">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="buscar"
+            <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search" name="buscar"
                 value="{{request.GET.buscar}}">
             <button class="btn btn-outline-success" type="submit">Buscar</button>
         </form>
@@ -26,8 +26,15 @@
                         <h6 class="card-text"> {{ p.Proveedor | title }}</h6>
                         <p class="card-text"> {{ p.id_proveedor | title }}</p>
                         <p class="card-text">Stock: {{ p.stock | title }}</p>
-                        <p class="card-text">$ {{ p.precio | title }}</p>
-                        <p><button type="button" class="btn btn-primary"><a href="#" onclick="AlertAgregarCarrito({{ p.id_producto }});">Comprar</a></button></p>              
+                        {% if p.stock == 0 %}
+                        <div id="sinStock">
+                            <p>Lo sentimos</p>
+                            <p>pronto llegara  :)</p>
+                        </div>
+                            {% else %}
+                            <p class="card-text">$ {{ p.precio | title }}</p>
+                            <p><button type="button" class="btn btn-primary"><a href="#" onclick="AlertAgregarCarrito({{ p.id_producto }});">Comprar</a></button></p>              
+                        {% endif%}
                     </div>
                 </div>
             </div>   

@@ -7,18 +7,27 @@
     <div class="nosotros_1" style="background-color: white;">
         <div class="container-sm">
             <div class="row">
-                <div class="col-sm">
-                    <img src="{% static 'imagenes/icono3.1.png' %}" class="img-fluid rounded mx-auto d-block" alt="...">
-                </div>
-                <div class="col-sm  align-self-center">
-                    <h1>Odyssey Gaming</h1>
-                    <p>
-                        Odyssey Gaming es una pequeña empresa que se dedica a la venta de periféricos y hardware,
-                        durante años hemos tenido un local físico en San Diego #213 el cual era nuestra única sucursal 
-                        y único punto de ventas, pero debido a los acontecimientos generados por el covid-19 tuvimos que 
-                        cerrar nuestras puertas. 
-                    </p>
-                </div>
+                {% for p in img_logo %}
+                    <div class="col-sm">
+                        <!-- <img src="{% static 'imagenes/icono3.1.png' %}" class="img-fluid rounded mx-auto d-block" alt="..."> -->
+                        <img src="{{ p.imagen.url }}" class="img-fluid rounded mx-auto d-block" alt="...">
+                    </div>
+                    <div class="col-sm  align-self-center">
+                        <h1>Odyssey Gaming</h1>
+                        <!-- <p>
+                            Odyssey Gaming es una pequeña empresa que se dedica a la venta de periféricos y hardware,
+                            durante años hemos tenido un local físico en San Diego #213 el cual era nuestra única sucursal 
+                            y único punto de ventas, pero debido a los acontecimientos generados por el covid-19 tuvimos que 
+                            cerrar nuestras puertas. 
+                        </p> -->
+                        <p>{{p.descripcion}}</p>
+                        {% if user.is_staff%}
+                        <div class="trans text-center">
+                            <button type="button" class="btn btn-primary"><a href="{% url 'modificar_logo' p.id_imagen %}">Modificar presentacion 1</a></button>         
+                        </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
             </div>
         </div>
     </div>
@@ -48,8 +57,7 @@
 
             <div class="row" id="presentacion_3">
                 <div class="col-sm ">
-                    <img src="{% static 'imagenes/spartano.png' %}" class="img-fluid rounded mx-auto d-block" alt="..." style="width: 150px">
-                    
+                    <img src="{% static 'imagenes/spartano.png' %}" class="img-fluid rounded mx-auto d-block" alt="..." style="width: 150px">                  
                 </div>
                 <div class="col-sm  align-self-center">
                     <h1>Esto es Odyssey!!!!</h1>

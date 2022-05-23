@@ -56,11 +56,11 @@ class CarritoView(View):
         return render(request, 'carro/carrito.html')
 
     def post(self,request,*args,**kwargs):
-        total = 0
         envio = PrecioEnvio.objects.all()
         precio_envio = PrecioEnvio.objects.only('precio').get(id_envio=1)
+        total = 0 + precio_envio.precio
         for key, value in request.session["carro"].items():
-            total=total+(float(value["precio"])+ precio_envio.precio) 
+            total=total+(float(value["precio"])) 
             print(total)
         amount = total
         buy_order="1"

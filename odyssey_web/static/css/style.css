@@ -55,6 +55,7 @@ header {
 
 #nosotros img{
     width: 450px;
+    height: 450px;
 }
 
 #nosotros h1{
@@ -71,6 +72,10 @@ header {
 #productos{
     padding-top: 100px;
    
+}
+
+#sinStock p{
+    color: red;
 }
 
 #hola{
