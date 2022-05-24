@@ -20,11 +20,13 @@
               <h5 class="card-title">${{importe_total_carro}}</h5>
             </div>
           </div>
+          {% if request.session.carro.items %}
           <form action="#" method="post">
             {% csrf_token %}
             <input type="hidden" name="id_producto" value="">
             <button class="btn btn-primary" type="submit"> Continuar compra</button>
           </form>
+          {% endif %}
         </div>
       </div>
     </div>

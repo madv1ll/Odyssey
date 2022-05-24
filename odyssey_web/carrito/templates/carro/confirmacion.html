@@ -101,7 +101,13 @@
 
 <div class="container-sm" style="padding-top: 90px;" id="pagar">
     <div class="card-body">
-        <h5 class="card-title">Total: ${{importe_total_carro}}</h5>
+        <h6 class="card-title">Total productos: ${{importe_total_carro}}</h6>
+
+        {% for p in precio_envio %}
+          <h6>Precio envio: ${{ p.precio | title }} </h6>
+        {% endfor %}
+
+        <h5 class="card-title"> Total a pagar: $ {{precio_totalMasEnvio}}<h5>
         {% if direccion %}
           <form method="post" action="{{resp.url}}">
               <input type="hidden" name="token_ws" value="{{resp.token}}" />
@@ -109,10 +115,12 @@
           </form>
         {% else %} 
           <p>Para poder continuar con tu pago debes agregar tu direccion principal <br>
-          <a href="#">Aqui!!</a>
+          <!-- <a href="#">Aqui!!</a> -->
         </p>
         {% endif %}
     </div>
+    
 </div>
+
 
 {% endblock %}

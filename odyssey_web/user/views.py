@@ -7,7 +7,7 @@ from django.contrib.auth import login, logout
 
 
 from .models import  Direccion, Usuario
-from .forms import UsuarioForm, DireccionForm
+from .forms import UsuarioForm, DireccionForm, UsuarioAdminForm
 from carrito.models import Compra, Detalle_compra
 from django.views.generic.edit import FormView
 from django.views.decorators.csrf import csrf_protect
@@ -27,6 +27,11 @@ class RegistroView(CreateView):
     model = Usuario
     form_class = UsuarioForm
     success_url = reverse_lazy('home')
+
+class RegistroAdminView(CreateView):
+    model = Usuario
+    form_class = UsuarioAdminForm
+    success_url = reverse_lazy('users')    
 
 class LoginView(FormView):
     template_name = 'login.html'
@@ -162,7 +167,7 @@ def eliminar_direccion(request, id):
 
 
 def lista_detalleCompra(request, id):
-    compra = Compra.objects.filter(rut_usuario=id)
+    compra = Compra.objects.filter(rut_usuario=id).order_by('fecha').reverse()
     return render(request,'perfil/compra/detalle_compra.html', {'compra':compra})
 
 def listar_productosCompraCLi(request, id):

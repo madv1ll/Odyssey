@@ -27,7 +27,7 @@
                     Estado: {{ p.estado | title }}
                 </p>
                 <p class="card-text">${{ p.total | title }}</p>
-                <p class="card-text">Fecha:{{ p.fecha | date:'d-m-y' }}</p>
+                <p class="card-text">Fecha: {{ p.fecha | date:'d-m-y' }}</p>
 
                 <a href="{% url 'producto_compra' p.id_compra %}"
                     style="background-color: #EB6604; border-color: #EB6604;" class="btn btn-primary">Productos</a>

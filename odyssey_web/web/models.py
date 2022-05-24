@@ -1,3 +1,6 @@
+from tkinter import Widget
+from unittest.util import _MAX_LENGTH
+from django import forms
 from django.db import models
 
 class Pais(models.Model):
@@ -24,3 +27,37 @@ class Comuna(models.Model):
 
     def __str__(self):
         return self.nombre
+
+
+class Presentacion1(models.Model):
+    id_presentacion = models.AutoField(primary_key=True)
+    titulo = models.CharField(max_length=20)
+    descripcion = models.TextField(max_length=410 )
+    ubicacion_img = models.CharField(max_length=20, default="Derecha")
+    imagen = models.ImageField(upload_to="logo", null=True)
+
+    def __str__(self):
+        return self.nombre
+
+class Presentacion2(models.Model):
+    id_presentacion = models.AutoField(primary_key=True)
+    titulo = models.CharField(max_length=20)
+    descripcion = models.TextField(max_length=410 )
+    ubicacion_img = models.CharField(max_length=20, default="Derecha")
+    imagen = models.ImageField(upload_to="logo", null=True)
+
+    def __str__(self):
+        return self.nombre 
+
+class Presentacion3(models.Model):
+    id_presentacion = models.AutoField(primary_key=True)
+    titulo = models.CharField(max_length=20)
+    descripcion = models.TextField(max_length=410)
+    ubicacion_img = models.CharField(max_length=20, default="Derecha")
+    imagen = models.ImageField(upload_to="logo", null=True)
+
+    def __str__(self):
+        return self.nombre        
+
+
+      

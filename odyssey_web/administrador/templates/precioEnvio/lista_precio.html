@@ -1,0 +1,41 @@
+{% extends 'baseadmin.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block titulo %}Administrador | Productos{% endblock %}
+{% block body %}
+
+<div class="container-sm">
+    <!-- <form class="d-flex" id="barraBusqueda" method="GET">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="buscar"
+            value="{{request.GET.buscar}}">
+        <button class="btn btn-outline-success" type="submit">Buscar</button>
+    </form> -->
+</div>
+<div class="container-sm" id="producto">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">N° identificador</th>
+                <th scope="col">Precio</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for p in entity %}
+            <tr>
+                <td>${{ p.precio | title }}</td>
+                
+                <td>
+                    <button type="button" class="btn btn-primary"><a
+                        href="{% url 'modificar_precioEnvio' p.id_envio %}">Cambiar precio</a>
+                </button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+
+
+{% endblock %}

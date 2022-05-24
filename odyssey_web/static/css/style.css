@@ -55,6 +55,7 @@ header {
 
 #nosotros img{
     width: 450px;
+    height: 450px;
 }
 
 #nosotros h1{
@@ -62,6 +63,17 @@ header {
 }
 #nosotros p{
     text-align: center;
+}
+#presentacion1_L{
+    display: none;
+}
+
+#btnPresentacion{
+    padding: 30px;
+}
+
+#invertir{
+    padding: 30px;
 }
 
 
@@ -71,6 +83,10 @@ header {
 #productos{
     padding-top: 100px;
    
+}
+
+#sinStock p{
+    color: red;
 }
 
 #hola{
