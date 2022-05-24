@@ -1,19 +1,20 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from producto.models import Producto
-from .forms import LogoForm
+from .forms import Presentacion1Form, Presentacion2Form, Presentacion3, Presentacion3Form
 from django.core.paginator import Page, Paginator
 from django.db.models import Q
 from django.contrib import messages
-from .models import ImagenLogo
+from .models import Presentacion1, Presentacion2, Presentacion3
 
 
 def home(request):
-    img_logo = ImagenLogo.objects.all()
     return render(request, 'web/home.html')
 
 def nosotros(request):
-    img_logo = ImagenLogo.objects.all()
-    return render(request, 'web/nosotros.html',{'img_logo': img_logo}
+    presentacion1 = Presentacion1.objects.all()
+    presentacion2 = Presentacion2.objects.all() 
+    presentacion3 = Presentacion3.objects.all()
+    return render(request, 'web/nosotros.html',{'presentacion1': presentacion1, 'presentacion2':presentacion2, 'presentacion3':presentacion3}
     )
     
 
@@ -30,36 +31,109 @@ def listar_productosVenta(request):
 
 
 
-def agregar_logo(request):
-    if request.user.is_staff: 
-        data = {
-            'form' : LogoForm()
-        }
-        if request.method == 'POST':
-            formulario = LogoForm(data=request.POST,  files=request.FILES)
-            if formulario.is_valid():
-                formulario.save()
-                messages.success(request, "Proveedor Creado correctamente")
-                return redirect(to="home")
-            data["form"] = formulario   
-        return render(request, 'logo/agregar_logo.html', data)
+def agregar_presentacion1(request):
+    presentacion1 = Presentacion1.objects.all()
+    if presentacion1:
+         return render(request,'acceso-denegado.html')
     else:
-        return render(request,'acceso-denegado.html')        
 
-def modificar_logo(request, id):
+        if request.user.is_staff: 
+            data = {
+                'form' : Presentacion1Form()
+            }
+            if request.method == 'POST':
+                formulario = Presentacion1Form(data=request.POST,  files=request.FILES)
+                if formulario.is_valid():
+                    formulario.save()
+                    return redirect(to="nosotros")
+                data["form"] = formulario   
+            return render(request, 'presentacion/agregar_presentacion1.html', data)
+        else:
+            return render(request,'acceso-denegado.html')        
+
+def modificar_presentacion1(request, id):
     if request.user.is_staff:
-        producto = get_object_or_404(ImagenLogo, id_imagen=id)
+        producto = get_object_or_404(Presentacion1, id_presentacion=id)
         data = {
-            'form': LogoForm(instance=producto)
+            'form': Presentacion1Form(instance=producto)
         }
         if request.method == 'POST':
-            formulario = LogoForm(data=request.POST, instance=producto, files=request.FILES)
+            formulario = Presentacion1Form(data=request.POST, instance=producto, files=request.FILES)
             if formulario.is_valid():
                 formulario.save()
                 
                 return redirect(to="nosotros")
             else:
                 data["form"] = formulario
-        return render(request, 'logo/modificar_logo.html', data)
+        return render(request, 'presentacion/modificar_presentacion1.html', data)
     else:
         return render(request,'acceso-denegado.html') 
+
+
+
+def agregar_presentacion2(request):
+    if request.user.is_staff: 
+        data = {
+            'form' : Presentacion2Form()
+        }
+        if request.method == 'POST':
+            formulario = Presentacion2Form(data=request.POST,  files=request.FILES)
+            if formulario.is_valid():
+                formulario.save()
+                return redirect(to="nosotros")
+            data["form"] = formulario   
+        return render(request, 'presentacion/agregar_presentacion2.html', data)
+    else:
+        return render(request,'acceso-denegado.html')
+
+def modificar_presentacion2(request, id):
+    if request.user.is_staff:
+        producto = get_object_or_404(Presentacion2, id_presentacion=id)
+        data = {
+            'form': Presentacion2Form(instance=producto)
+        }
+        if request.method == 'POST':
+            formulario = Presentacion2Form(data=request.POST, instance=producto, files=request.FILES)
+            if formulario.is_valid():
+                formulario.save()
+                
+                return redirect(to="nosotros")
+            else:
+                data["form"] = formulario
+        return render(request, 'presentacion/modificar_presentacion2.html', data)
+    else:
+        return render(request,'acceso-denegado.html')           
+
+
+def agregar_presentacion3(request):
+    if request.user.is_staff: 
+        data = {
+            'form' : Presentacion3Form()
+        }
+        if request.method == 'POST':
+            formulario = Presentacion3Form(data=request.POST,  files=request.FILES)
+            if formulario.is_valid():
+                formulario.save()
+                return redirect(to="nosotros")
+            data["form"] = formulario   
+        return render(request, 'presentacion/agregar_presentacion3.html', data)
+    else:
+        return render(request,'acceso-denegado.html')
+
+def modificar_presentacion3(request, id):
+    if request.user.is_staff:
+        producto = get_object_or_404(Presentacion3, id_presentacion=id)
+        data = {
+            'form': Presentacion3Form(instance=producto)
+        }
+        if request.method == 'POST':
+            formulario = Presentacion3Form(data=request.POST, instance=producto, files=request.FILES)
+            if formulario.is_valid():
+                formulario.save()
+                
+                return redirect(to="nosotros")
+            else:
+                data["form"] = formulario
+        return render(request, 'presentacion/modificar_presentacion3.html', data)
+    else:
+        return render(request,'acceso-denegado.html')           

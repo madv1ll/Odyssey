@@ -1,33 +1,49 @@
 {% extends 'web/base.html' %}
 {% load static %}
 {% block titulo %}Odyssey | Home{% endblock %}
+<!-- jquery js -->
+
+
 {% block body %}
 
 <div class="presentacion" id="presentacion">
     <div class="nosotros_1" style="background-color: white;">
-        <div class="container-sm">
+        <div class="container-sm" id="presentacion1_R">
             <div class="row">
-                {% for p in img_logo %}
-                    <div class="col-sm">
-                        <!-- <img src="{% static 'imagenes/icono3.1.png' %}" class="img-fluid rounded mx-auto d-block" alt="..."> -->
-                        <img src="{{ p.imagen.url }}" class="img-fluid rounded mx-auto d-block" alt="...">
-                    </div>
-                    <div class="col-sm  align-self-center">
-                        <h1>Odyssey Gaming</h1>
-                        <!-- <p>
-                            Odyssey Gaming es una pequeña empresa que se dedica a la venta de periféricos y hardware,
-                            durante años hemos tenido un local físico en San Diego #213 el cual era nuestra única sucursal 
-                            y único punto de ventas, pero debido a los acontecimientos generados por el covid-19 tuvimos que 
-                            cerrar nuestras puertas. 
-                        </p> -->
-                        <p>{{p.descripcion}}</p>
-                        {% if user.is_staff%}
-                        <div class="trans text-center">
-                            <button type="button" class="btn btn-primary"><a href="{% url 'modificar_logo' p.id_imagen %}">Modificar presentacion 1</a></button>         
-                        </div>
+                {% if presentacion1 %}
+                        
+                    {% for p in presentacion1 %}
+                        {% if p.ubicacion_img == "Izquierda" %}
+                        
+                            <div class="col-sm"> 
+                                <img src="{{ p.imagen.url }}" class="img-fluid rounded mx-auto d-block" alt="...">
+                            </div>
+                            <div class="col-sm  align-self-center">
+                                <h1>{{ p.titulo }}</h1>
+                                <p>{{p.descripcion}}</p>
+                            </div> 
+                        {% else %} 
+                            <div class="col-sm  align-self-center">
+                                <h1>{{ p.titulo }}</h1>
+                                <p>{{p.descripcion}}</p>
+                            </div> 
+                            <div class="col-sm"> 
+                                <img src="{{ p.imagen.url }}" class="img-fluid rounded mx-auto d-block" alt="...">
+                            </div>              
                         {% endif %}
-                    </div>
-                {% endfor %}
+                        {% if user.is_staff%}
+                                <div class="trans text-center">
+                                    <button type="button" class="btn btn-primary"><a href="{% url 'modificar_presentacion1' p.id_presentacion %}">Modificar presentacion 1</a></button>               
+                                </div>
+                        {% endif %}
+                    {% endfor %}
+                {% else  %}
+                    {% if user.is_staff%}
+                        <div class="trans text-center" id="btnPresentacion">
+                            <button type="button" class="btn btn-primary"><a href="{% url 'agregar_presentacion1' %}">Agrega tu presentacion 1</a></button>
+                        </div>
+                    {% endif %}    
+                {% endif %}        
             </div>
         </div>
     </div>
@@ -35,19 +51,30 @@
      <div class="nosotros_2" style="background-color: black;">
         <div class="container-sm"  id="presentacion_2" style="background-color: black;">
             <div class="row">
-                <div class="col-sm  align-self-center">
-                    <h1>Odyssey Gaming</h1>
-                    <p>
-                        Pero eso no nos detuvo, y entramos al negocio digital, dejamos la venta tradicional de lado convirtiéndonos 
-                        en una tienda 100% digital, en la cual encontraras los mejores productos, al mejor precio y de gran calidad,
-                        actualmente nos dedicamos solo a la venta por detalle ya que estamos comenzando con la apertura y decidimos 
-                        tomarnos las cosas con calma, para entregarle un gran servicio a nuestros clientes. 
-                    </p>
-                </div>
-                <div class="col-sm">
-                    <img src="{% static 'imagenes/tiendadigital.jpg' %}" class="img-fluid rounded mx-auto d-block" alt="...">
-                    
-                </div>
+                {% for presentacion2 in presentacion2 %}
+                    {% if presentacion2.ubicacion_img == "Izquierda" %}
+                        <div class="col-sm  align-self-center">
+                            <img src="{{ presentacion2.imagen.url }}" class="img-fluid rounded mx-auto d-block" alt="...">
+                        </div>
+                        <div class="col-sm">
+                            <h1>{{ presentacion2.titulo  }}</h1>
+                            <p>{{ presentacion2.descripcion }}</p>                      
+                        </div>
+                    {% else %}
+                    <div class="col-sm  align-self-center">
+                        <h1>{{ presentacion2.titulo  }}</h1>
+                        <p>{{ presentacion2.descripcion }}</p>
+                    </div>
+                    <div class="col-sm">
+                        <img src="{{ presentacion2.imagen.url }}" class="img-fluid rounded mx-auto d-block" alt="...">                        
+                    </div>
+                    {% endif %}
+                    {% if user.is_staff%}
+                            <div class="trans text-center">
+                                <button type="button" class="btn btn-primary"><a href="{% url 'modificar_presentacion2' presentacion2.id_presentacion %}">Modificar presentacion 2</a></button>         
+                            </div>
+                    {% endif %}
+                {% endfor %}    
             </div>
         </div>
     </div>
@@ -56,12 +83,40 @@
         <div class="container-sm">
 
             <div class="row" id="presentacion_3">
-                <div class="col-sm ">
-                    <img src="{% static 'imagenes/spartano.png' %}" class="img-fluid rounded mx-auto d-block" alt="..." style="width: 150px">                  
-                </div>
-                <div class="col-sm  align-self-center">
-                    <h1>Esto es Odyssey!!!!</h1>
-                </div>
+                {% if presentacion3 %}
+                    {% for presentacion3 in presentacion3  %}
+                        {% if presentacion3.ubicacion_img == "Izquierda" %}
+                            <div class="col-sm ">
+                                <img src="{{ presentacion3.imagen.url }}" class="img-fluid rounded mx-auto d-block" alt="...">                  
+                            </div>
+                            <div class="col-sm  align-self-center">
+                                <h1>{{ presentacion3.titulo }}</h1>
+                                <p>{{ presentacion3.descripcion }}</p>
+                            </div>
+                        {% else %}
+                            <div class="col-sm  align-self-center">
+                                <h1>{{ presentacion3.titulo }}</h1>
+                                <p>{{ presentacion3.descripcion }}</p>
+                            </div>
+                            <div class="col-sm ">
+                                <img src="{{ presentacion3.imagen.url }}" class="img-fluid rounded mx-auto d-block" alt="...">                  
+                            </div>
+
+                        {% endif %}
+                        {% if user.is_staff%}
+                            <div class="trans text-center">
+                                <button type="button" class="btn btn-primary"><a href="{% url 'modificar_presentacion3' presentacion3.id_presentacion  %}">Modificar presentacion 3</a></button>         
+                            </div>
+                        {% endif %}  
+                    {% endfor %}      
+                {% else %}
+                        {% if user.is_staff %}
+                            <div class="trans text-center">
+                                <button type="button" class="btn btn-primary"><a href="{% url 'agregar_presentacion3' %}">agregar presentacion 3</a></button>         
+                            </div> 
+                        {% endif %}          
+                {% endif %}
+                
             </div> 
         </div>
     </div>

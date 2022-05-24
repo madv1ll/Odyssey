@@ -29,10 +29,35 @@ class Comuna(models.Model):
         return self.nombre
 
 
-class ImagenLogo(models.Model):
-    id_imagen = models.AutoField(primary_key=True)
-    descripcion = models.TextField(forms.Textarea(attrs={"rows":5, "cols":20}), max_length=310 )
+class Presentacion1(models.Model):
+    id_presentacion = models.AutoField(primary_key=True)
+    titulo = models.CharField(max_length=20)
+    descripcion = models.TextField(max_length=410 )
+    ubicacion_img = models.CharField(max_length=20, default="Derecha")
     imagen = models.ImageField(upload_to="logo", null=True)
 
     def __str__(self):
         return self.nombre
+
+class Presentacion2(models.Model):
+    id_presentacion = models.AutoField(primary_key=True)
+    titulo = models.CharField(max_length=20)
+    descripcion = models.TextField(max_length=410 )
+    ubicacion_img = models.CharField(max_length=20, default="Derecha")
+    imagen = models.ImageField(upload_to="logo", null=True)
+
+    def __str__(self):
+        return self.nombre 
+
+class Presentacion3(models.Model):
+    id_presentacion = models.AutoField(primary_key=True)
+    titulo = models.CharField(max_length=20)
+    descripcion = models.TextField(max_length=410)
+    ubicacion_img = models.CharField(max_length=20, default="Derecha")
+    imagen = models.ImageField(upload_to="logo", null=True)
+
+    def __str__(self):
+        return self.nombre        
+
+
+      
