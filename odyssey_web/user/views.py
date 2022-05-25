@@ -135,10 +135,10 @@ def nueva_direccion(request, id):
                 return JsonResponse(data, safe=False)
         except:
             form = DireccionForm(request.POST)
-            print(form)
             if form.is_valid():
                 post = form.save(commit = False)
                 post.id_usuario = Usuario.objects.only('rut').get(rut=id)
+                post.id_comuna = Comuna.objects.get(id_comuna=request.POST['id_comuna'])
                 post.save()
                 return redirect (to="home")
     else:

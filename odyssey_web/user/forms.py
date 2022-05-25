@@ -71,7 +71,7 @@ FAVORITE_COLORS_CHOICES = [
 
 class DireccionForm(forms.ModelForm):
     region = forms.ModelChoiceField(queryset=Region.objects.all(), widget=forms.Select(attrs={'class': 'form-control' }))
-    comuna = forms.ModelChoiceField(queryset=Comuna.objects.all(), widget=forms.Select(attrs={'class': 'form-control' }))
+    id_comuna = forms.ModelChoiceField(queryset=Comuna.objects.all(), widget=forms.Select(attrs={'class': 'form-control' }))
     principal = forms.ChoiceField(
     required=True,
     widget=forms.RadioSelect,

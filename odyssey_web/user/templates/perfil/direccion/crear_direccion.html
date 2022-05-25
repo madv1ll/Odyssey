@@ -39,7 +39,7 @@
         $('select[name="region"]').on('change', function (){
             var id = $(this).val()
             var csrftoken = getCookie('csrftoken');
-            var select_comunas = $('select[name="comuna"]');
+            var select_comunas = $('select[name="id_comuna"]');
             var options = '<option value = "0">Seleccione Comuna</option>'
             if (id === ''){
                 select_comunas.html(options);
