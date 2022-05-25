@@ -130,15 +130,19 @@ def nueva_direccion(request, id):
             action = request.POST['action']
             if action == 'buscar_comuna':
                 data = []
-                for i in  Comuna.objects.filter(id_comuna = request.POST['id']):
-                    data.append({'id_comuna': i.id_comuna ,'nombre': i.nombre})
+                for i in  Comuna.objects.filter(id_region= request.POST['id']):
+                    data.append({'comuna': i.id_comuna ,'nombre': i.nombre})
                 return JsonResponse(data, safe=False)
         except:
             form = DireccionForm(request.POST)
+            print(request.POST)
             if form.is_valid():
+                print('valido')
                 post = form.save(commit = False)
                 post.id_usuario = Usuario.objects.only('rut').get(rut=id)
                 post.id_comuna = Comuna.objects.get(id_comuna=request.POST['id_comuna'])
+                post.calle = request.POST['calle']
+                post.numero = request.POST['numero']
                 post.save()
                 return redirect (to="home")
     else:

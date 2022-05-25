@@ -70,8 +70,10 @@ FAVORITE_COLORS_CHOICES = [
 ]
 
 class DireccionForm(forms.ModelForm):
+    calle = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control' }))
+    numero = forms.IntegerField(widget=forms.NumberInput(attrs={'class': 'form-control' }))
     region = forms.ModelChoiceField(queryset=Region.objects.all(), widget=forms.Select(attrs={'class': 'form-control' }))
-    id_comuna = forms.ModelChoiceField(queryset=Comuna.objects.all(), widget=forms.Select(attrs={'class': 'form-control' }))
+    id_comuna = forms.ModelChoiceField(queryset=Comuna.objects.all(), widget=forms.Select(attrs={'class': 'form-control' , 'hidden' : 'true'}),label='Comuna')
     principal = forms.ChoiceField(
     required=True,
     widget=forms.RadioSelect,
@@ -80,5 +82,5 @@ class DireccionForm(forms.ModelForm):
     )
     class Meta:
         model = Direccion
-        fields = ('id_direccion','calle', 'numero','principal')
+        fields = ('id_direccion',)
         
