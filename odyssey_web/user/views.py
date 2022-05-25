@@ -5,7 +5,7 @@ from django.db.models import Q
 from django.contrib import messages
 from django.contrib.auth import login, logout
 
-
+from web.models import Comuna
 from .models import  Direccion, Usuario
 from .forms import UsuarioForm, DireccionForm, UsuarioAdminForm
 from carrito.models import Compra, Detalle_compra
@@ -13,7 +13,7 @@ from django.views.generic.edit import FormView
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.cache import never_cache
 from django.utils.decorators import method_decorator
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 from .forms import LoginForm
 from django.contrib.auth.forms import PasswordResetForm
 from django.utils.http import urlsafe_base64_encode
@@ -126,12 +126,21 @@ def modificar_perfil(request, id):
 
 def nueva_direccion(request, id):
     if request.method == "POST":
-        form = DireccionForm(request.POST)
-        if form.is_valid():
-            post = form.save(commit = False)
-            post.id_usuario = Usuario.objects.only('rut').get(rut=id)
-            post.save()
-            return redirect (to="home")
+        try:
+            action = request.POST['action']
+            if action == 'buscar_comuna':
+                data = []
+                for i in  Comuna.objects.filter(id_comuna = request.POST['id']):
+                    data.append({'id_comuna': i.id_comuna ,'nombre': i.nombre})
+                return JsonResponse(data, safe=False)
+        except:
+            form = DireccionForm(request.POST)
+            print(form)
+            if form.is_valid():
+                post = form.save(commit = False)
+                post.id_usuario = Usuario.objects.only('rut').get(rut=id)
+                post.save()
+                return redirect (to="home")
     else:
         form = DireccionForm
     return render(request, 'perfil/direccion/crear_direccion.html', {'form':form})
