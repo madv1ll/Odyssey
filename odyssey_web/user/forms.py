@@ -82,5 +82,5 @@ class DireccionForm(forms.ModelForm):
     )
     class Meta:
         model = Direccion
-        fields = ('id_direccion',)
+        fields = ('id_direccion','calle','numero','region','id_comuna','principal')
         

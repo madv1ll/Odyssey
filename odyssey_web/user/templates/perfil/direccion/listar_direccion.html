@@ -4,9 +4,7 @@
 {% block titulo %}Odyssey | Direcciones{% endblock %}
 {% block body %}
 <div class="container-sm" id="direcciones">
-    <button type="button" class="btn btn-warning"><a
-        href="{% url 'listar_perfil' user.rut %}">Atras</a>
-    </button>
+  <a href="{% url 'listar_perfil' user.rut %}"><button type="button" class="btn btn-warning">Atras</button></a>
     <h2>Tus direcciones</h2>
     {% for d in direccion %}
     <div class="card" id="cardDirecciones">
@@ -19,10 +17,8 @@
           <a href="{% url 'eliminar_direccion' d.id_direccion %}" class="btn btn-danger">Eliminar</a>
         </div>
       </div>
-    {% endfor %}  
-
-    
-    <button type="button" class="btn btn-success"><a href="{% url 'nueva_direccion' user.rut %}">Crear direccion</a></button>
+    {% endfor %}
+<a href="{% url 'nueva_direccion' user.rut %}" class="btn btn-success">Crear direccion</a>
+<br>
 </div>
-
 {% endblock %}
