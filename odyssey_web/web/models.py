@@ -1,6 +1,3 @@
-from tkinter import Widget
-from unittest.util import _MAX_LENGTH
-from django import forms
 from django.db import models
 
 class Pais(models.Model):
