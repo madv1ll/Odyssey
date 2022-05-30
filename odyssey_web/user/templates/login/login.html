@@ -21,9 +21,9 @@
 	<link rel="stylesheet" type="text/css" href="{% static path %}login/css/main.css">
 </head>
 {% block body %}
-<div class="limiter">
+<div class="limiter p-t-10">
     <div class="container-login100">
-        <div class="wrap-login100 p-t-50 p-b-90">
+        <div class="wrap-login100 p-t-20 p-b-15 p-l-10 p-r-10 border border-warning">
             <form  method="POST" class="login100-form validate-form flex-sb flex-w">
                 {% csrf_token %}
                 {% if request.method == 'POST' %} 
