@@ -8,6 +8,14 @@ header {
     position: fixed;
     z-index: 100;
 }
+#navbarNav a:hover{
+    color: #b70609 !important;
+}
+.btn-success:hover {
+    color: #dfdfdf !important;
+    background-color: #b70609 !important;
+    border-color: #b70609 !important;
+}
 
 .btn-primary {
     background-color: #EB6604 !important;
