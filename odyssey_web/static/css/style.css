@@ -8,12 +8,34 @@ header {
     position: fixed;
     z-index: 100;
 }
+#navbarNav a:hover{
+    color: #b70609 !important;
+}
+.btn-success:hover {
+    color: #dfdfdf !important;
+    background-color: #b70609 !important;
+    border-color: #b70609 !important;
+}
+
+.btn-primary {
+    background-color: #EB6604 !important;
+    border-color: #EB6604 !important;
+}
+.btn-primary:hover {
+    color: #dfdfdf !important;
+    background-color: #b70609 !important;
+    border-color: #b70609 !important;
+}
+.btn:hover{
+    color: #dfdfdf !important;
+}
+.btn a:hover{
+    color: white !important;
+}
 .btn a{
     text-decoration: none;
     color: white;
-
 }
-
 #mama{
     background-color: blue;
     
