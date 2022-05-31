@@ -1,7 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-
-from web.models import Comuna
+from web.models import Comuna, Region
 from .models import Usuario, Direccion
 
 class UsuarioForm(forms.ModelForm):
@@ -71,6 +70,10 @@ FAVORITE_COLORS_CHOICES = [
 ]
 
 class DireccionForm(forms.ModelForm):
+    calle = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control' }))
+    numero = forms.IntegerField(widget=forms.NumberInput(attrs={'class': 'form-control' }))
+    region = forms.ModelChoiceField(queryset=Region.objects.all(), widget=forms.Select(attrs={'class': 'form-control' }))
+    id_comuna = forms.ModelChoiceField(queryset=Comuna.objects.all(), widget=forms.Select(attrs={'class': 'form-control' , 'hidden' : 'true'}),label='Comuna')
     principal = forms.ChoiceField(
     required=True,
     widget=forms.RadioSelect,
@@ -79,9 +82,5 @@ class DireccionForm(forms.ModelForm):
     )
     class Meta:
         model = Direccion
-        fields = ('id_direccion','calle', 'numero','id_comuna', 'principal')
-
-    def __init__(self, *args, **kwargs): 
-        super(DireccionForm, self).__init__(*args, **kwargs) 
-        self.fields['id_comuna'].label = 'Comuna'
-        self.fields['id_comuna'].empty_label = 'Seleccione Comuna'
+        fields = ('id_direccion','calle','numero','region','id_comuna','principal')
+        
