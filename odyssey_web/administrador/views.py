@@ -4,6 +4,11 @@ from carrito.models import Compra, Detalle_compra
 from .forms import CompraEditForm, PrecioEnvioEditForm
 from django.contrib import messages
 from .models import PrecioEnvio
+from user.models import Usuario
+
+from django.template.loader import render_to_string
+from django.core.mail import send_mail, BadHeaderError
+
 
 def administrador(request):
     if request.user.is_staff:
@@ -31,15 +36,43 @@ def listar_productosCompra(request, id):
 
 def modificar_compra(request, id):
     if request.user.is_staff:
-        producto = get_object_or_404(Compra, id_compra=id)
+        compra = get_object_or_404(Compra, id_compra=id)
         data = {
-            'form': CompraEditForm(instance=producto)
+            'form': CompraEditForm(instance=compra)
         }
         if request.method == 'POST':
-            formulario = CompraEditForm(data=request.POST, instance=producto, files=request.FILES)
+            formulario = CompraEditForm(data=request.POST, instance=compra, files=request.FILES)
             if formulario.is_valid():
                 formulario.save()
                 messages.success(request, "modificado correctamente")
+
+
+                estado = compra.estado
+                cliente = compra.rut_usuario
+                obj_cliente = Usuario.objects.only('rut').get(rut=cliente)
+
+                if estado == 'Pedido en camino':
+                    correoUsuario = obj_cliente.correo
+                    subject = "Cambio de estado de tu compra"
+                    email_template_name =  "estadoCompra/enviado.txt"
+                    c = {
+                        "nombre": obj_cliente.nombre,
+                        "telefono": obj_cliente.telefono
+                    }
+                    message = render_to_string(email_template_name, c)		
+                    send_mail(subject, message, 'odyssseygamming@gmail.com',[correoUsuario], fail_silently=False)
+
+                elif(estado == 'Pedido entregado'):
+                    correoUsuario = obj_cliente.correo
+                    subject = "Cambio de estado de tu compra"
+                    email_template_name =  "estadoCompra/entregado.txt"
+                    c = {
+                        "nombre": obj_cliente.nombre,
+                        "telefono": obj_cliente.telefono
+                    }
+                    message = render_to_string(email_template_name, c)		
+                    send_mail(subject, message, 'odyssseygamming@gmail.com',[correoUsuario], fail_silently=False)   
+
                 return redirect(to="lista_compra")
             else:
                 data["form"] = formulario
@@ -76,3 +109,7 @@ def modificar_precioEnvio(request, id):
     else:
         return render(request,'acceso-denegado.html')    
 
+
+
+
+    

@@ -67,7 +67,8 @@ def users(request):
     u = Usuario.objects.all()
     if busqueda:
         u = Usuario.objects.filter(
-            Q(username__icontains = busqueda) 
+            Q(username__icontains = busqueda) |
+            Q(rut__icontains = busqueda)
         ).distinct()
 
     return render(request, 'user/listaUsuarios.html', {'entity':u})     
