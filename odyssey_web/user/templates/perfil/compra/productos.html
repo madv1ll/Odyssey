@@ -4,9 +4,7 @@
 {% block titulo %}Odyssey | Perfil{% endblock %}
 {% block body %}
 <div class="container-sm" id="productosComprados">
-    <button type="button" class="btn btn-warning"><a
-        href="{% url 'lista_detalleCompra' user.rut %}">Atras</a>
-    </button>
+    <a href="{% url 'lista_detalleCompra' user.rut %}"><button type="button" class="btn btn-warning">Atras</button></a>
     {% for p in entity %}
     <div class="card" id="CardRegistroCompra">
         <div class="card-header">
