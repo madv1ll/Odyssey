@@ -75,10 +75,8 @@
                     {% endfor %}
                 </div>
                 <div class="container-md">
-                    <button type="button" class="btn btn-warning"><a
-                            href="{% url 'modificar_perfil' user.rut %}">Editar</a></button>
-                    <button type="button" class="btn btn-primary"><a href="{% url 'listar_direccion' user.rut %}">Ver
-                            direcciones</a></button>
+                    <a href="{% url 'modificar_perfil' user.rut %}"><button type="button" class="btn btn-warning">Editar</button></a>
+                    <a href="{% url 'listar_direccion' user.rut %}"><button type="button" class="btn btn-primary">Ver Direcciones</button></a>
                 </div>
 
             </div>
@@ -86,8 +84,8 @@
         </div>
         <div class="col-sm" id="HistorialCompra">
             <h2>Historial de Compras</h2>
-            <button type="button" class="btn btn-primary"> <a href="{% url 'lista_detalleCompra' user.rut %}"> Ver
-                    historial </a></button>
+            <a href="{% url 'lista_detalleCompra' user.rut %}"> <button type="button" class="btn btn-primary"> Ver
+                    historial</button> </a>
 
         </div>
     </div>

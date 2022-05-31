@@ -5,7 +5,7 @@ from django.db.models import Q
 from django.contrib import messages
 from django.contrib.auth import login, logout
 
-
+from web.models import Comuna
 from .models import  Direccion, Usuario
 from .forms import UsuarioForm, DireccionForm, UsuarioAdminForm
 from carrito.models import Compra, Detalle_compra
@@ -13,7 +13,7 @@ from django.views.generic.edit import FormView
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.cache import never_cache
 from django.utils.decorators import method_decorator
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 from .forms import LoginForm
 from django.contrib.auth.forms import PasswordResetForm
 from django.utils.http import urlsafe_base64_encode
@@ -126,12 +126,27 @@ def modificar_perfil(request, id):
 
 def nueva_direccion(request, id):
     if request.method == "POST":
-        form = DireccionForm(request.POST)
-        if form.is_valid():
-            post = form.save(commit = False)
-            post.id_usuario = Usuario.objects.only('rut').get(rut=id)
-            post.save()
-            return redirect (to="home")
+        try:
+            action = request.POST['action']
+            if action == 'buscar_comuna':
+                data = []
+                for i in  Comuna.objects.filter(id_region= request.POST['id']):
+                    data.append({'comuna': i.id_comuna ,'nombre': i.nombre})
+                return JsonResponse(data, safe=False)
+        except:
+            form = DireccionForm(request.POST)
+            print(request.POST)
+            if form.is_valid():
+                #update de direccion principal
+                if request.POST['principal'] == 'SI':
+                    Direccion.objects.all().update(principal='NO')
+                post = form.save(commit = False)
+                post.id_usuario = Usuario.objects.only('rut').get(rut=id)
+                post.id_comuna = Comuna.objects.get(id_comuna=request.POST['id_comuna'])
+                post.calle = request.POST['calle']
+                post.numero = request.POST['numero']
+                post.save()
+                return redirect(to="/user/listar_direccion/"+request.user.rut)
     else:
         form = DireccionForm
     return render(request, 'perfil/direccion/crear_direccion.html', {'form':form})
@@ -149,21 +164,33 @@ def modificar_direccion(request, id):
     data = {
         'form': DireccionForm(instance=direccion)
     }
-    if request.method == 'POST':
+    print(data)
+    if request.method == 'POST': 
         formulario = DireccionForm(data=request.POST, instance=direccion, files=request.FILES)
-        if formulario.is_valid():
-            formulario.save()
-            # messages.success(request, "modificado correctamente")
-            return redirect(to="home")
-        else:
-            data["form"] = formulario
+        try:
+            action = request.POST['action']
+            if action == 'buscar_comuna':
+                data = []
+                for i in  Comuna.objects.filter(id_region= request.POST['id']):
+                    data.append({'comuna': i.id_comuna ,'nombre': i.nombre})
+                return JsonResponse(data, safe=False)
+        except:
+            if formulario.is_valid():
+                #update de direccion principal
+                if request.POST['principal'] == 'SI':
+                    Direccion.objects.all().update(principal='NO')
+                formulario.save()
+                # messages.success(request, "modificado correctamente")
+                return redirect(to="/user/listar_direccion/"+request.user.rut)
+            else:
+                data["form"] = formulario
     return render(request, 'perfil/direccion/editar_direccion.html', data)
 
 def eliminar_direccion(request, id):
     direccion = get_object_or_404(Direccion, id_direccion=id)
     direccion.delete()
     messages.success(request, "eliminado correctamente")
-    return redirect(to="home")
+    return redirect(to="/user/listar_direccion/"+request.user.rut)
 
 
 def lista_detalleCompra(request, id):
