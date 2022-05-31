@@ -1,3 +1,6 @@
+from msilib.schema import Media
+from tkinter.ttk import Style
+from django.conf import settings
 from django.shortcuts import get_object_or_404, render
 
 from user.models import Direccion
@@ -21,6 +24,10 @@ from transbank.common.integration_commerce_codes import IntegrationCommerceCodes
 from transbank.common.integration_api_keys import IntegrationApiKeys
 from transbank.common.integration_type import IntegrationType
 from carrito.context_processor import importe_total_carro
+
+#send mail
+from django.core.mail import send_mail, BadHeaderError
+from django.template.loader import render_to_string
 
 # Create your views here.
 def agre_producto(request, producto_id):
@@ -120,6 +127,16 @@ class DetalleCompra(View):
                 )
                 registro.save()
             Carro.limpiar_carro(request)
+
+            #send mail
+            correoUsuario = request.user.correo
+            subject = "Compra realizada con exito"
+            email_template_name =  "carro/email/emailConfirm.txt"
+            message = render_to_string(email_template_name)		
+            send_mail(subject, message, 'odyssseygamming@gmail.com',[correoUsuario], fail_silently=False)
+
+
+
         else:
             # print("rechazado")
             registro = "no crear registro"

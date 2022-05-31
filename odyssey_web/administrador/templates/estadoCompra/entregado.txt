@@ -1,0 +1,11 @@
+Hola {{nombre}}
+
+Estamos muy contentos!!
+
+ya has resivido tu producto espero todo haya salido espectacular, si tienes alguna duda o tuviste algun problema no dudes 
+en comunicarte con nosotoros
+
+los profesionales de odyssey estaran comunicandose contigo <3
+
+Para mas informacion visita tu perfil en nuestra pagina web
+Saludos te envia el Tio Odyssey!!!!!!!!!
