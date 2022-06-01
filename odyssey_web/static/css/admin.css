@@ -1,12 +1,41 @@
 body {
     background: white url("../imagenes/fondo.jpg") ;
 }
+.btn-success{
+    background-color: #EB6604 !important;
+    border-color: #EB6604 !important;
+}
+.btn-success:hover {
+    color: #dfdfdf !important;
+    background-color: #b70609 !important;
+    border-color: #b70609 !important;
+}
+
+.btn-primary {
+    background-color: #EB6604 !important;
+    border-color: #EB6604 !important;
+}
+.btn-primary:hover {
+    color: #dfdfdf !important;
+    background-color: #b70609 !important;
+    border-color: #b70609 !important;
+}
+.btn:hover{
+    color: #dfdfdf !important;
+}
+.btn a:hover{
+    color: white !important;
+}
+.btn a{
+    text-decoration: none;
+    color: white;
+}
 #navbarNav a{
     color: white;
 }
 
 #navbarNav a:hover{
-    color: blue;
+    color: #b70609;
 }
 
 .btn a{

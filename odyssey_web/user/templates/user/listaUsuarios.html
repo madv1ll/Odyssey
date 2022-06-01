@@ -11,13 +11,14 @@
     </form>
 </div>
 <div class="container-sm" id="user">
-    <button type="button" class="btn btn-success mt-1"><a href="{% url 'registro' %}">Agregar cliente</a></button>
-    <button type="button" class="btn btn-success mt-1"><a href="{% url 'registro_admin' %}">Agregar administrador</a></button>
+    <button type="button" class="btn btn-success mt-1"><a href="{% url 'registro_admin' %}">Agregar Usuario</a></button>
     <table class="table">
         <thead>
             <tr>
+                <th scope="col">Rut</th>
                 <th scope="col">Nombre</th>
                 <th scope="col">Correo</th>
+                <th scope="col">Telefono</th>
                 <th scope="col">Tipo de usuario</th>
                 <th scope="col">Opciones</th>
             </tr>
@@ -26,8 +27,10 @@
             {% for p in entity %}
                 
                 <tr>
+                    <td>{{ p.rut  | title }}</td>
                     <td>{{ p.nombre | title }}</td>
                     <td>{{ p.correo | title }}</td>
+                    <td>{{ p.telefono | title }}</td>
                     {% if p.is_staff %}
                     <td>Administrador</td>
                     {% else %}

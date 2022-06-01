@@ -1,0 +1,11 @@
+Hola {{nombre}}
+
+te tenemos una gran noticia!!
+
+tu producto ya ha sido enviado nos estaremos comunicando contigo en todo momento a traves de correo electronico 
+o llamando a tu telefono: {{telefono}}
+
+debes estar atento los profesionales de odyssey estaran comunicandose contigo <3
+
+Para mas informacion visita tu perfil en nuestra pagina web
+Saludos te envia el Tio Odyssey!!!!!!!!!
