@@ -85,13 +85,13 @@ WSGI_APPLICATION = 'odyssey_web.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
+    'other': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     },
-    'other': {
+    'default': {
         'ENGINE': 'django.db.backends.oracle',
-        'NAME': '127.0.0.1:1521/xepdb1',
+        'NAME': 'xe',
         'USER': 'ODYSSEY_BD',
         'PASSWORD': 'oraodypass22',
         'TEST': {
