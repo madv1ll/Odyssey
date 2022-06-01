@@ -37,6 +37,7 @@ def listar_productosCompra(request, id):
 def modificar_compra(request, id):
     if request.user.is_staff:
         compra = get_object_or_404(Compra, id_compra=id)
+        
         data = {
             'form': CompraEditForm(instance=compra)
         }
@@ -48,27 +49,28 @@ def modificar_compra(request, id):
 
 
                 estado = compra.estado
-                cliente = compra.rut_usuario
-                obj_cliente = Usuario.objects.only('rut').get(rut=cliente)
+                correoUsuario = compra.rut_usuario.correo
+                nombreUsuario = compra.rut_usuario.nombre
+                telefonoUsuario = compra.rut_usuario.telefono
 
                 if estado == 'Pedido en camino':
-                    correoUsuario = obj_cliente.correo
+                    correoUsuario = correoUsuario
                     subject = "Cambio de estado de tu compra"
                     email_template_name =  "estadoCompra/enviado.txt"
                     c = {
-                        "nombre": obj_cliente.nombre,
-                        "telefono": obj_cliente.telefono
+                        "nombre": nombreUsuario,
+                        "telefono": telefonoUsuario
                     }
                     message = render_to_string(email_template_name, c)		
                     send_mail(subject, message, 'odyssseygamming@gmail.com',[correoUsuario], fail_silently=False)
 
                 elif(estado == 'Pedido entregado'):
-                    correoUsuario = obj_cliente.correo
+                    correoUsuario = correoUsuario
                     subject = "Cambio de estado de tu compra"
                     email_template_name =  "estadoCompra/entregado.txt"
                     c = {
-                        "nombre": obj_cliente.nombre,
-                        "telefono": obj_cliente.telefono
+                        "nombre": nombreUsuario,
+                        "telefono": telefonoUsuario
                     }
                     message = render_to_string(email_template_name, c)		
                     send_mail(subject, message, 'odyssseygamming@gmail.com',[correoUsuario], fail_silently=False)   

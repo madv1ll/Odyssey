@@ -48,7 +48,7 @@ class Usuario(AbstractUser):
         verbose_name_plural = 'Usuarios'
 
     def __str__(self):
-        return self.rut
+        return str(self.rut)
     
     def has_perm(self,perm,obj = None):
         return True

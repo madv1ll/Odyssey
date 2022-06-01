@@ -75,7 +75,7 @@ class CarritoView(View):
         return_url= 'http://localhost:8000/carrito/confirmacion/'
         
         cliente = request.user.rut
-        print("el cliente es: " + cliente)
+        
         direccion_clie = Direccion.objects.filter(id_usuario = cliente).filter(principal="SI")
         print(direccion_clie)
 
@@ -94,7 +94,6 @@ class DetalleCompra(View):
         success = tx.commit(token)
         # print(success)
         cliente = request.user.rut
-        print("el cliente es: " + cliente)
         direccion_clie = Direccion.objects.filter(id_usuario = cliente).filter(principal="SI")
 
         if success.get("status") == "AUTHORIZED":
