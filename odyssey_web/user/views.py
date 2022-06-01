@@ -128,15 +128,16 @@ def modificar_perfil(request, id):
 def nueva_direccion(request, id):
     if request.method == "POST":
         try:
-            action = request.POST['action']
-            if action == 'buscar_comuna':
+            
+            action = str(request.POST['action'])
+            if str(action) == 'buscar_comuna':
                 data = []
                 for i in  Comuna.objects.filter(id_region= request.POST['id']):
                     data.append({'comuna': i.id_comuna ,'nombre': i.nombre})
                 return JsonResponse(data, safe=False)
         except:
             form = DireccionForm(request.POST)
-            print(request.POST)
+            
             if form.is_valid():
                 #update de direccion principal
                 if request.POST['principal'] == 'SI':
@@ -147,7 +148,7 @@ def nueva_direccion(request, id):
                 post.calle = request.POST['calle']
                 post.numero = request.POST['numero']
                 post.save()
-                return redirect(to="/user/listar_direccion/"+request.user.rut)
+                return redirect(to="/user/listar_direccion/"+str(request.user.rut))
     else:
         form = DireccionForm
     return render(request, 'perfil/direccion/crear_direccion.html', {'form':form})
@@ -182,7 +183,7 @@ def modificar_direccion(request, id):
                     Direccion.objects.all().update(principal='NO')
                 formulario.save()
                 # messages.success(request, "modificado correctamente")
-                return redirect(to="/user/listar_direccion/"+request.user.rut)
+                return redirect(to="/user/listar_direccion/"+str(request.user.rut))
             else:
                 data["form"] = formulario
     return render(request, 'perfil/direccion/editar_direccion.html', data)
@@ -191,7 +192,7 @@ def eliminar_direccion(request, id):
     direccion = get_object_or_404(Direccion, id_direccion=id)
     direccion.delete()
     messages.success(request, "eliminado correctamente")
-    return redirect(to="/user/listar_direccion/"+request.user.rut)
+    return redirect(to="/user/listar_direccion/"+str(request.user.rut))
 
 
 def lista_detalleCompra(request, id):

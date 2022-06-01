@@ -4,7 +4,8 @@ from web.models import Pais, Region, Comuna
 
 class Proveedor(models.Model):
     id_proveedor = models.AutoField(primary_key=True)
-    rut          = models.CharField(max_length=12, null=True) 
+    rut          = models.IntegerField(null=True) 
+    dv           = models.CharField(max_length=1, null=True)
     nombre       = models.CharField(max_length=50, null=False)
     id_pais      = models.ForeignKey(Pais, on_delete=models.CASCADE)
     

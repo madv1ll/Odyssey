@@ -4,6 +4,7 @@ from web.models import Comuna, Region
 from .models import Usuario, Direccion
 
 class UsuarioForm(forms.ModelForm):
+    rut = forms.IntegerField(min_value=10000000, max_value= 99999999)
     telefono =  forms.IntegerField(min_value=111111111, max_value= 999999999)
     password = forms.CharField(label= 'Contraseña', widget=forms.PasswordInput(
         attrs={
@@ -14,7 +15,9 @@ class UsuarioForm(forms.ModelForm):
     ))
     class Meta:
         model = Usuario
-        fields = ('rut', 'nombre', 'apellido', 'correo', 'telefono')
+
+        fields = ('rut', 'dv', 'nombre', 'apellido', 'correo', 'telefono')
+
 
     def clean_password2(self):
         password = self.cleaned_data.get('password')

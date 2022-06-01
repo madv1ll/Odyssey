@@ -34,7 +34,8 @@ class UsuarioManager(UserManager):
 
 
 class Usuario(AbstractUser):
-    rut                = models.CharField(primary_key=True, max_length=12)
+    rut                = models.IntegerField(primary_key=True)
+    dv                 = models.CharField(max_length=1, null=False)
     nombre             = models.CharField('Nombre',max_length=70, null=False, blank=False)
     apellido           = models.CharField('Apellido',max_length=70, null=False, blank=False)
     correo             = models.CharField('Correo',max_length=60, null=False, blank=False, unique=True)
@@ -47,7 +48,7 @@ class Usuario(AbstractUser):
         verbose_name_plural = 'Usuarios'
 
     def __str__(self):
-        return self.rut
+        return str(self.rut)
     
     def has_perm(self,perm,obj = None):
         return True

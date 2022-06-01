@@ -11,7 +11,7 @@ from django.contrib.auth.models import User
 
 class ProveedorForm(forms.ModelForm):
     nombre = forms.CharField(min_length=3, max_length=50)
-    rut = forms.CharField(min_length=8, max_length=8)
+    rut = forms.IntegerField(min_value=10000000, max_value= 99999999)
 
     def clean_nombre(self):
         nombreR = self.cleaned_data["nombre"]
