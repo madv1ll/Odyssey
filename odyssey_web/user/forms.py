@@ -1,3 +1,4 @@
+from distutils.core import run_setup
 from unicodedata import numeric
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm
@@ -50,8 +51,8 @@ class UsuarioForm(forms.ModelForm):
 
     def clean_rut(self):
         rut_cleaned = self.cleaned_data.get('rut')
-        if len(str(rut_cleaned)) < 8:
-            raise forms.ValidationError('El rut debe tener mínimo 8 caracteres.')
+        if len(str(rut_cleaned)) < 7 or len(str(rut_cleaned)) > 8:
+            raise forms.ValidationError('Ingrese un RUT válido')
         return rut_cleaned
     def clean_password(self):
         password = self.cleaned_data.get('password')
