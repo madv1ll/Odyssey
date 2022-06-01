@@ -38,7 +38,7 @@ class Usuario(AbstractUser):
     dv                 = models.CharField(max_length=1, null=False)
     nombre             = models.CharField('Nombre',max_length=70, null=False, blank=False)
     apellido           = models.CharField('Apellido',max_length=70, null=False, blank=False)
-    correo             = models.CharField('Correo',max_length=60, null=False, blank=False, unique=True)
+    correo             = models.EmailField('Correo',max_length=60, null=False, blank=False, unique=True)
     telefono           = models.IntegerField(null=False)
     creacion_fec       = models.DateTimeField('Fecha de ingreso', auto_now_add=True)
     actualizacion_fec  = models.DateTimeField('Fecha actualizacion', auto_now=True)

@@ -1,33 +1,69 @@
+from unicodedata import numeric
 from django import forms
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm
 from web.models import Comuna, Region
 from .models import Usuario, Direccion
 
 class UsuarioForm(forms.ModelForm):
-    rut = forms.IntegerField(min_value=10000000, max_value= 99999999)
-    telefono =  forms.IntegerField(min_value=111111111, max_value= 999999999)
+    rut = forms.IntegerField(label= 'RUT', widget=forms.NumberInput(
+        attrs={
+            'class': 'form-control mb-2',
+            'placeholder':'Ingrese RUT',
+            'max_length': '8'
+        }))
+    dv = forms.CharField(label= 'DV', max_length=1, widget=forms.TextInput(
+        attrs={
+            'class': 'form-control mb-2',
+            'placeholder':'Ingrese digito verificador',
+        }))
+    nombre = forms.CharField(label='Nombre',widget=forms.TextInput(
+        attrs={
+            'class': 'form-control md-3',
+            'placeholder':'Ingrese Nombre'
+        }))
+    apellido = forms.CharField(label='Apellido', widget=forms.TextInput(
+        attrs={
+            'class': 'form-control md-3',
+            'placeholder':'Ingrese Apellido'
+        }))
+    telefono =  forms.CharField(max_length=8, widget=forms.NumberInput(
+        attrs={
+            'class': 'form-control md-3',
+            'placeholder':'Ingrese Telefono'
+        }))
+    correo =forms.EmailField(required=True, widget=forms.EmailInput(
+        attrs={
+            'class': 'form-control md-3',
+            'placeholder':'Ingrese Correo'
+        }))
+
     password = forms.CharField(label= 'Contraseña', widget=forms.PasswordInput(
         attrs={
-            'class': 'form-control',
+            'class': 'form-control md-3',
             'placeholder':'Ingrese Contraseña',
             'id': 'password'
-        }
-    ))
+        }))
+
     class Meta:
         model = Usuario
+        fields = ('rut','dv','nombre','apellido','telefono','correo','password')
 
-        fields = ('rut', 'dv', 'nombre', 'apellido', 'correo', 'telefono')
-
-
-    def clean_password2(self):
+    def clean_rut(self):
+        rut_cleaned = self.cleaned_data.get('rut')
+        if len(str(rut_cleaned)) < 8:
+            raise forms.ValidationError('El rut debe tener mínimo 8 caracteres.')
+        return rut_cleaned
+    def clean_password(self):
         password = self.cleaned_data.get('password')
+        if len(password) < 8:
+            raise forms.ValidationError('La contraseña debe tener mínimo 8 caracteres.')
         return password
  
     def save(self,commit = True):
         user = super().save(commit=False)
         user.set_password(self.cleaned_data['password'])
-        correo = self.cleaned_data['correo']
-        user.username = correo
+        usern = self.cleaned_data['correo']
+        user.username = usern
         if commit:
             user.save()
             return user
@@ -45,8 +81,10 @@ class UsuarioAdminForm(forms.ModelForm):
         model = Usuario
         fields = ('rut', 'nombre', 'apellido', 'correo', 'is_staff')
 
-    def clean_password2(self):
+    def clean_password1(self):
         password = self.cleaned_data.get('password')
+        if len(password) < 8:
+            raise forms.ValidationError('La contraseña debe tener mínimo 8 caracteres.')
         return password
  
     def save(self,commit = True):
