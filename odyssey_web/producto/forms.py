@@ -21,14 +21,6 @@ class ProveedorForm(forms.ModelForm):
             raise ValidationError("Este nombre ya existe")
         return nombreR.upper()
 
-    # def clean_rut(self):
-    #     rutR = self.cleaned_data["rut"]
-    #     existe = Proveedor.objects.filter(rut__iexact=rutR).exists() 
-    #     if existe:
-    #         raise ValidationError("Este Rut ya existe")
-    #     return rutR
-
-
     class Meta:
         model = Proveedor
         fields = '__all__'
@@ -59,9 +51,11 @@ class CategoriaForm(forms.ModelForm):
 
 class ProductoForm(forms.ModelForm):
     # geeks_field = forms.RegexField(regex = "G.*s") 
-    nombre = forms.CharField(min_length=3, max_length=22)
+    nombre = forms.CharField(min_length=3, max_length=50)
     precio = forms.IntegerField(min_value=1, max_value= 999999999)
     stock = forms.IntegerField(min_value=0, max_value= 999)
+    id_categoria = forms.ModelChoiceField(queryset=Categoria.objects.all(), widget=forms.Select(attrs={'class': 'form-control'}),label='Categoría')
+    id_proveedor = forms.ModelChoiceField(queryset=Proveedor.objects.all(), widget=forms.Select(attrs={'class': 'form-control'}),label='Proveedor')
 
     def clean_nombre(self):
         nombreR = self.cleaned_data["nombre"]
@@ -69,12 +63,15 @@ class ProductoForm(forms.ModelForm):
         
         if existe:
             raise ValidationError("Este nombre ya existe")
-        return nombreR  
+        return nombreR.upper()
 
     def caracteresRegulares(self):
         nombre = self.cleaned_data["nombre"]
-        print(re.search("milo",nombre))    
+        print(re.search("milo",nombre))
 
+    def clean_descripcion(self):
+        desc_cleaned = self.cleaned_data["descripcion"]
+        return desc_cleaned.upper()
     class Meta:
         model = Producto
         fields = '__all__'
