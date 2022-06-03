@@ -85,21 +85,21 @@ WSGI_APPLICATION = 'odyssey_web.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    },
     # 'default': {
-    #     'ENGINE': 'django.db.backends.oracle',
-    #     'NAME': 'xe',
-    #     'USER': 'ODYSSEY_BD',
-    #     'PASSWORD': 'oraodypass22',
-    #     'TEST': {
-    #         'USER': 'default_test',
-    #         'TBLSPACE': 'default_test_tbls',
-    #         'TBLSPACE_TMP': 'default_test_tbls_tmp',
-    #     },
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': BASE_DIR / 'db.sqlite3',
     # },
+    'default': {
+        'ENGINE': 'django.db.backends.oracle',
+        'NAME': 'xe',
+        'USER': 'ODYSSEY_BD',
+        'PASSWORD': 'oraodypass22',
+        'TEST': {
+            'USER': 'default_test',
+            'TBLSPACE': 'default_test_tbls',
+            'TBLSPACE_TMP': 'default_test_tbls_tmp',
+        },
+    },
 }
 
 
