@@ -4,28 +4,29 @@ from django import forms
 from django.db import models
 from django.db.models import fields
 from django.forms import  ValidationError, widgets
+
+from web.models import Pais
 from .models import  Proveedor, Categoria, Producto
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
 
 
 class ProveedorForm(forms.ModelForm):
     nombre = forms.CharField(min_length=3, max_length=50)
     rut = forms.IntegerField(min_value=10000000, max_value= 99999999)
+    id_pais = forms.ModelChoiceField(queryset=Pais.objects.all(), widget=forms.Select(attrs={'class': 'form-control'}),label='Pais')
 
     def clean_nombre(self):
         nombreR = self.cleaned_data["nombre"]
-        existe = Proveedor.objects.filter(nombre__iexact=nombreR).exists() 
+        existe = Proveedor.objects.filter(nombre__iexact=nombreR).exists()
         if existe:
             raise ValidationError("Este nombre ya existe")
-        return nombreR
+        return nombreR.upper()
 
-    def clean_rut(self):
-        rutR = self.cleaned_data["rut"]
-        existe = Proveedor.objects.filter(rut__iexact=rutR).exists() 
-        if existe:
-            raise ValidationError("Este Rut ya existe")
-        return rutR
+    # def clean_rut(self):
+    #     rutR = self.cleaned_data["rut"]
+    #     existe = Proveedor.objects.filter(rut__iexact=rutR).exists() 
+    #     if existe:
+    #         raise ValidationError("Este Rut ya existe")
+    #     return rutR
 
 
     class Meta:
@@ -35,11 +36,23 @@ class ProveedorForm(forms.ModelForm):
 class ProveedorEditForm(forms.ModelForm):
     nombre = forms.CharField(min_length=3, max_length=50)
     rut = forms.CharField(min_length=8, max_length=8)
+    
+    def clean_nombre(self):
+        nombreR = self.cleaned_data["nombre"]
+        existe = Proveedor.objects.filter(nombre__iexact=nombreR).exists()
+        if existe:
+            raise ValidationError("Este nombre ya existe")
+        return nombreR.upper()
     class Meta:
         model = Proveedor
         fields = '__all__'   
 
 class CategoriaForm(forms.ModelForm):
+    descripcion = forms.CharField(min_length=3, max_length=30)
+    def clean_descripcion(self):
+        descrip_cleaned = self.cleaned_data["descripcion"]
+        return descrip_cleaned.upper()
+
     class Meta:
         model = Categoria
         fields = '__all__'

@@ -14,7 +14,7 @@
                         {% csrf_token %} {{ form | crispy}}
 
                         <div class="d-flex justify-content-end mt-2">
-                            <a href="{% url 'categorias' %}" class="btn btn-secondary">Cancelar</a>
+                            <a href="{% url 'categorias' %}" class="btn btn-danger">Cancelar</a>
                             &nbsp;
                             <input type="submit" value="Editar" class="btn btn-primary" />
                         </div>

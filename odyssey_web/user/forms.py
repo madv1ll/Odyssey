@@ -59,11 +59,16 @@ class UsuarioForm(forms.ModelForm):
         if len(password) < 8:
             raise forms.ValidationError('La contraseña debe tener mínimo 8 caracteres.')
         return password
+    def clean_dv(self):
+        dv_cleaned = self.cleaned_data.get('dv')
+        return str(dv_cleaned).upper()
  
     def save(self,commit = True):
         user = super().save(commit=False)
         user.set_password(self.cleaned_data['password'])
         usern = self.cleaned_data['correo']
+        user.nombre = self.cleaned_data['nombre'].upper()
+        user.apellido = self.cleaned_data['apellido'].upper()
         user.username = usern
         if commit:
             user.save()
@@ -80,7 +85,7 @@ class UsuarioAdminForm(forms.ModelForm):
     ))
     class Meta:
         model = Usuario
-        fields = ('rut', 'nombre', 'apellido', 'correo', 'is_staff')
+        fields = ('rut', 'nombre', 'apellido', 'correo', 'telefono', 'is_staff')
 
     def clean_password1(self):
         password = self.cleaned_data.get('password')
@@ -91,8 +96,10 @@ class UsuarioAdminForm(forms.ModelForm):
     def save(self,commit = True):
         user = super().save(commit=False)
         user.set_password(self.cleaned_data['password'])
-        correo = self.cleaned_data['correo']
-        user.username = correo
+        user.correo = self.cleaned_data['correo']
+        user.nombre = self.cleaned_data['nombre'].upper()
+        user.apellido = self.cleaned_data['apellido'].upper()
+        user.username = self.cleaned_data['correo']
         if commit:
             user.save()
             return user            
@@ -123,6 +130,10 @@ class DireccionForm(forms.ModelForm):
     choices=FAVORITE_COLORS_CHOICES,
     label='Direccion Principal',
     )
+
+    def clean_calle(self):
+        calle_cleaned = self.cleaned_data.get('calle')
+        return calle_cleaned.upper()
     class Meta:
         model = Direccion
         fields = ('id_direccion','calle','numero','region','id_comuna','principal')

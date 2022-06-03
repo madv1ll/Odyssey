@@ -11,7 +11,7 @@
     </form>
 </div>
 <div class="container-sm" id="user">
-    <button type="button" class="btn btn-success mt-1"><a href="{% url 'registro_admin' %}">Agregar Usuario</a></button>
+    <a href="{% url 'registro_admin' %}" class="btn btn-success mt-1">Agregar Usuario</a>
     <table class="table">
         <thead>
             <tr>
@@ -37,13 +37,14 @@
                     <td>Cliente</td>
                     {% endif %}
                     <td>
-                        <button type="button" class="btn btn-danger"><a href="{% url 'eliminar_user' p.rut %}">Eliminar</a></button>
-                        <button type="button" class="btn btn-warning"><a href="{% url 'modificar_usuario' p.rut %}">Editar</a></button>
+                        <a href="{% url 'eliminar_user' p.rut %}" class="btn btn-danger">Eliminar</a>
+                        <a href="{% url 'modificar_usuario' p.rut %}" class="btn btn-warning">Editar</a>
                     </td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
+    <a class="btn btn-danger mb-2" href="{% url 'administrador' %}">Volver</a>
 </div>
 <script src="{% static 'js/alert.js' %}"></script>
 {% endblock%}

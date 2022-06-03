@@ -10,7 +10,7 @@
     </form>
 </div>
 <div class="container-sm" id="categorias">
-    <button type="button" class="btn btn-success mt-1"><a href="{% url 'agregar_categoria' %}">Agregar Categoria</a></button>
+    <a href="{% url 'agregar_categoria' %}" class="btn btn-success mt-1">Agregar Categoria</a>
     <table class="table">
         <thead>
             <tr>
@@ -23,13 +23,14 @@
             <tr>
                 <td>{{ p.descripcion | title }}</td>
                 <td>
-                    <button type="button" class="btn btn-danger"><a href="#" onclick="AlertEliminarCategoria({{ p.id_categoria }});">Eliminar</a></button>
-                    <button type="button" class="btn btn-warning"><a href="{% url 'modificar_categoria' p.id_categoria %}">Editar</a></button>
+                    <a href="#" class="btn btn-danger" onclick="AlertEliminarCategoria({{ p.id_categoria }});">Eliminar</a>
+                    <a href="{% url 'modificar_categoria' p.id_categoria %}" class="btn btn-warning">Editar</a>
                 </td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
+    <a class="btn btn-danger mb-2" href="{% url 'administrador' %}">Volver</a>
 </div>
 <script src="{% static 'js/alert.js' %}"></script>
 {% endblock %}

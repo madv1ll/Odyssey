@@ -12,7 +12,7 @@
 </div>
 <div class="container" id="cajaProveedores">
   <div class="container-sm" id="proveedores">
-    <button type="button" class="btn btn-success mt-1"><a href="{% url 'agregar_proveedor' %}">Agregar Proveedor</a></button>
+    <a href="{% url 'agregar_proveedor' %}" class="btn btn-success mt-1">Agregar Proveedor</a>
     <table class="table">
       <thead>
         <tr>
@@ -28,15 +28,14 @@
           <td>{{ p.rut | title }}</td>
 
           <td>
-            <button type="button" class="btn btn-danger"><a
-                href="#" onclick="AlertEliminarProveedor({{ p.id_proveedor }});">Eliminar</a></button>
-            <button type="button" class="btn btn-warning"><a
-                href="{% url 'modificar_proveedor' p.id_proveedor %}">Editar</a></button>
+            <a href="#" class="btn btn-danger" onclick="AlertEliminarProveedor({{ p.id_proveedor }});">Eliminar</a>
+                <a href="{% url 'modificar_proveedor' p.id_proveedor %}" class="btn btn-warning">Editar</a>
           </td>
         </tr>
         {% endfor %}
       </tbody>
     </table>
+    <a class="btn btn-danger mb-2" href="{% url 'administrador' %}">Volver</a>
   </div>
 </div>
 <script src="{% static 'js/alert.js' %}"></script>

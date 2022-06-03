@@ -11,7 +11,7 @@
     </form>
 </div>
 <div class="container-sm" id="producto">
-    <button type="button" class="btn btn-success mt-1"><a href="{% url 'agregar_producto' %}">Agregar Producto</a></button>
+    <a href="{% url 'agregar_producto' %}" class="btn btn-success mt-1">Agregar Producto</a>
     <table class="table">
         <thead>
             <tr>
@@ -34,17 +34,14 @@
                 <td>{{ p.descripcion | title }}</td>
                 <td>{{ p.stock | title }}</td>
                 <td>
-                    <button type="button" class="btn btn-danger"><a
-                            href="#" id="clickMe" onclick="AlertEliminarProducto({{ p.id_producto }});">Eliminar</a>
-                    </button>
-                    <button type="button" class="btn btn-warning"><a
-                            href="{% url 'modificar_producto' p.id_producto %}">Editar</a>
-                    </button>
+                    <a href="#" class="btn btn-danger" id="clickMe" onclick="AlertEliminarProducto({{ p.id_producto }});">Eliminar</a>
+                    <a href="{% url 'modificar_producto' p.id_producto %}" class="btn btn-warning">Editar</a>
                 </td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
+    <a class="btn btn-danger mb-2" href="{% url 'administrador' %}">Volver</a>
 </div>
 <script src="{% static 'js/alert.js' %}"></script>
 {% endblock %}
