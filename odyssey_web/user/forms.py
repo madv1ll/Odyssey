@@ -4,6 +4,9 @@ from django import forms
 from django.contrib.auth.forms import AuthenticationForm
 from web.models import Comuna, Region
 from .models import Usuario, Direccion
+#Importaciones para validacion correo
+import datetime, random, hashlib
+from django.core.mail import send_mail
 
 class UsuarioForm(forms.ModelForm):
     rut = forms.IntegerField(label= 'RUT', widget=forms.NumberInput(
@@ -62,7 +65,14 @@ class UsuarioForm(forms.ModelForm):
     def clean_dv(self):
         dv_cleaned = self.cleaned_data.get('dv')
         return str(dv_cleaned).upper()
- 
+    def clean_correo(self):
+        correo_cleaned = self.cleaned_data.get('correo')
+        try:
+            Usuario._default_manager.get(email=correo_cleaned)
+        except Usuario.DoesNotExist:
+            return correo_cleaned
+        raise forms.ValidationError('email duplicado')
+
     def save(self,commit = True):
         user = super().save(commit=False)
         user.set_password(self.cleaned_data['password'])
@@ -70,9 +80,20 @@ class UsuarioForm(forms.ModelForm):
         user.nombre = self.cleaned_data['nombre'].upper()
         user.apellido = self.cleaned_data['apellido'].upper()
         user.username = usern
+        salt = hashlib.sha1(str(random.random()).encode("utf-8")).hexdigest()[:5]          
+        key = hashlib.sha1(str(salt+usern).encode("utf-8")).hexdigest()            
+        user.activation_key = key
+        user.key_expires = datetime.datetime.today() + datetime.timedelta(2)
+        
         if commit:
+            user.is_active = False
             user.save()
-            return user
+             # Enviar un email de confirmación
+            email_subject = 'Account confirmation'
+            email_body = "Hola %s, Gracias por registrarte. Para activar tu cuenta da clíck en este link en menos de 48 horas: http://127.0.0.1:8000/accounts/confirm/%s" % (user.nombre, key)
+
+            send_mail(email_subject, email_body, 'odyssseygamming@gmail.com', [usern], fail_silently=False)
+        return user
 
 
 class UsuarioAdminForm(forms.ModelForm):

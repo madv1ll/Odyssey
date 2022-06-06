@@ -1,3 +1,4 @@
+import datetime
 from django.db import models
 # from django.contrib.auth.models import User
 # from django.db.models.signals import post_save
@@ -42,6 +43,9 @@ class Usuario(AbstractUser):
     telefono           = models.IntegerField(null=False)
     creacion_fec       = models.DateTimeField('Fecha de ingreso', auto_now_add=True)
     actualizacion_fec  = models.DateTimeField('Fecha actualizacion', auto_now=True)
+    #token para activar cuenta
+    activation_key     = models.CharField(max_length=40, blank=True)
+    key_expires        = models.DateTimeField(default=datetime.date.today())
     USERNAME_FIELD = 'correo'
     class meta:
         verbose_name = 'Usuario'

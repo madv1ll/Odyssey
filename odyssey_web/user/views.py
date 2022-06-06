@@ -1,3 +1,4 @@
+from datetime import timezone
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
@@ -38,7 +39,6 @@ class LoginView(FormView):
     form_class = LoginForm
     success_url = reverse_lazy('home')
 
-
     @method_decorator(csrf_protect)
     @method_decorator(never_cache)
     def dispatch(self, request, *args, **kwargs):
@@ -54,8 +54,6 @@ class LoginView(FormView):
 def logoutUser(request):
     logout(request)
     return HttpResponseRedirect('/accounts/login/')
-
-
 
 def my_view(request):
     if not request.user.is_authenticated:
@@ -96,9 +94,6 @@ def modificar_usuario(request, id):
         else:
             data["form"] = formulario
     return render(request, 'user/modificar_usuario.html', data)
-
-
-
 
 #-------------Perfil de cliente--------------------------------------------
 
@@ -232,3 +227,20 @@ def password_reset_request(request):
 					return redirect ("password_reset/done/")
 	password_reset_form = PasswordResetForm()
 	return render(request=request, template_name="resetPassword/password_reset.html", context={"password_reset_form":password_reset_form})
+###validacion emailll
+def register_confirm(request, activation_key):
+    # Verifica que el usuario ya está logeado
+    if request.user.is_authenticated():
+        HttpResponseRedirect('/home')
+
+    # Verifica que el token de activación sea válido y sino retorna un 404
+    user_profile = get_object_or_404(Usuario, activation_key=activation_key)
+
+    # verifica si el token de activación ha expirado y si es así renderiza el html de registro expirado
+    if user_profile.key_expires < timezone.now():
+        return render_to_response('user_profile/confirm_expired.html')
+    # Si el token no ha expirado, se activa el usuario y se muestra el html de confirmación
+    user = user_profile.nombre
+    user.is_active = True
+    user.save()
+    return render_to_response('user_profile/confirm.html')
