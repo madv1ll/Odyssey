@@ -1,4 +1,4 @@
-from datetime import timezone
+from django.utils import timezone
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
@@ -46,7 +46,16 @@ class LoginView(FormView):
             return HttpResponseRedirect(self.get_success_url())
         else:
             return super(LoginView, self).dispatch(request, *args, **kwargs)
-    
+    def form_invalid(self,form):
+        correo = form.cleaned_data['username']
+        print(correo)
+        try: 
+            user = Usuario.objects.get(username=correo)
+        except:
+            return super(LoginView, self).form_invalid(form)
+        if  user.is_active == 0 or user.is_active == False:
+            return  HttpResponseRedirect('/user/confirmar/')
+
     def form_valid(self, form):
         login(self.request, form.get_user())
         return super(LoginView, self).form_valid(form)
@@ -221,26 +230,29 @@ def password_reset_request(request):
 					}
 					email = render_to_string(email_template_name, c)
 					try:
-						send_mail(subject, email, 'odyssseygamming@gmail.com' , [user.correo], fail_silently=False)
+						send_mail(subject, email, 'odysseygamming@outlook.com' , [user.correo], fail_silently=False)
 					except BadHeaderError:
 						return HttpResponse('Invalid header found.')
 					return redirect ("password_reset/done/")
 	password_reset_form = PasswordResetForm()
 	return render(request=request, template_name="resetPassword/password_reset.html", context={"password_reset_form":password_reset_form})
 ###validacion emailll
-def register_confirm(request, activation_key):
+def confirmacion_correo(request, token):
     # Verifica que el usuario ya está logeado
-    if request.user.is_authenticated():
-        HttpResponseRedirect('/home')
+    if request.user.is_authenticated:
+        HttpResponseRedirect('home')
 
     # Verifica que el token de activación sea válido y sino retorna un 404
-    user_profile = get_object_or_404(Usuario, activation_key=activation_key)
+    user_profile = get_object_or_404(Usuario, activation_key=token)
 
     # verifica si el token de activación ha expirado y si es así renderiza el html de registro expirado
     if user_profile.key_expires < timezone.now():
-        return render_to_response('user_profile/confirm_expired.html')
+        return render(request, 'user/token_expirado.html')
     # Si el token no ha expirado, se activa el usuario y se muestra el html de confirmación
     user = user_profile.nombre
-    user.is_active = True
-    user.save()
-    return render_to_response('user_profile/confirm.html')
+    user_profile.is_active = True
+    user_profile.save()
+    return render (request, 'user/confirmacion_correo.html')
+
+def confirmar(request):
+    return render(request, 'user/confirmar.html')

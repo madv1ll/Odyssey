@@ -1,0 +1,13 @@
+{% extends 'web/base.html' %}
+{% load static %}
+{% block titulo %}Odyssey | Confirmacion{% endblock %}
+{% block body %}
+
+<div class="container">
+    <br><br><br>
+    Correo Confirmado! 
+    Ahora puedes iniciar sesión <br>
+    <a href="{% url 'login' %}" class="btn btn-success">Iniciar Sesión</a>
+</div>
+
+{% endblock %}

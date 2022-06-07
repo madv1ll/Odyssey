@@ -90,9 +90,9 @@ class UsuarioForm(forms.ModelForm):
             user.save()
              # Enviar un email de confirmación
             email_subject = 'Account confirmation'
-            email_body = "Hola %s, Gracias por registrarte. Para activar tu cuenta da clíck en este link en menos de 48 horas: http://127.0.0.1:8000/accounts/confirm/%s" % (user.nombre, key)
+            email_body = "Hola %s, Gracias por registrarte. Para activar tu cuenta da clíck en este link en menos de 48 horas: http://127.0.0.1:8000/user/confirmacion/%s" % (user.nombre.lower(), key)
 
-            send_mail(email_subject, email_body, 'odyssseygamming@gmail.com', [usern], fail_silently=False)
+            send_mail(email_subject, email_body, 'odysseygamming@outlook.com', [usern], fail_silently=False)
         return user
 
 
