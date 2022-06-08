@@ -41,8 +41,8 @@
                                     </div>
                                     <div class="col">
                                         {{ form.apellido }}
+                                        {{ form.apellido.errors }}
                                     </div>
-                                    {{ form.apellido.errors }}
                                 </div>
                                 <div class="row justify-content-md-center">
                                     <div class="col-3 col-md-3 col-lg-3">
@@ -50,8 +50,8 @@
                                     </div>
                                     <div class="col">
                                         {{ form.telefono }}
+                                        {{ form.telefono.errors }}
                                     </div>
-                                    {{ form.telefono.errors }}
                                 </div>
                                 <div class="row justify-content-md-center">
                                     <div class="col-3 col-md-3 col-lg-3">
@@ -68,8 +68,8 @@
                                     </div>
                                     <div class="col">
                                         {{ form.password }}
+                                        {{ form.password.errors }}
                                     </div>
-                                    {{ form.password.errors }}
                                 </div>
                                 <input type="submit" value="Registrarse" id="registrar" class="btn btn-primary flex-center">
                                 <br><br>

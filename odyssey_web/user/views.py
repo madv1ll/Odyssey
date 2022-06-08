@@ -49,7 +49,6 @@ class LoginView(FormView):
             return super(LoginView, self).dispatch(request, *args, **kwargs)
     def form_invalid(self,form):
         correo = form.cleaned_data['username']
-        print(correo)
         try: 
             user = Usuario.objects.get(username=correo)
         except:

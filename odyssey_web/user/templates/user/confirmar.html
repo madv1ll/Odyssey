@@ -1,9 +1,9 @@
 {% extends 'web/base.html' %}
-
+{% block titulo %}Odyssey | Confirmacion{% endblock %}
 
 {% block body %}
 <br><br><br><br>
 Tu cuenta se encuentra en estado de validación, para poder ingresar a nuestra página debes validar tu correo 
 desde el link que se envió a tu correo.
-<a href="{% url 'login' %}" class="btn btn-success">Volver a Iniciar Sesión</a>
+<a href="{% url 'login' %}" class="btn btn-primary">Volver a Iniciar Sesión</a>
 {% endblock %}
