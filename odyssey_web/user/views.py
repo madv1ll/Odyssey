@@ -4,6 +4,7 @@ from django.views.generic import CreateView
 from django.db.models import Q
 from django.contrib import messages
 from django.contrib.auth import login, logout
+from requests import request
 
 from web.models import Comuna
 from .models import  Direccion, Usuario

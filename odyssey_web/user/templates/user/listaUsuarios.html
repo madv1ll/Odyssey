@@ -37,7 +37,7 @@
                     <td>Cliente</td>
                     {% endif %}
                     <td>
-                        <a href="{% url 'eliminar_user' p.rut %}" class="btn btn-danger">Eliminar</a>
+                        <a href="#"  onclick="AlertEliminarUser({{ p.rut }});" class="btn btn-danger">Eliminar</a>
                         <a href="{% url 'modificar_usuario' p.rut %}" class="btn btn-warning">Editar</a>
                     </td>
                 </tr>
