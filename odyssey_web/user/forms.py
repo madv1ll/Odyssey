@@ -7,43 +7,44 @@ from .models import Usuario, Direccion
 #Importaciones para validacion correo
 import datetime, random, hashlib
 from django.core.mail import send_mail
-
+from django.core.validators import RegexValidator
+# +-[0-9kK]{1}$
 class UsuarioForm(forms.ModelForm):
-    rut = forms.IntegerField(label= 'RUT', widget=forms.NumberInput(
+    rut = forms.CharField(label= 'RUT',validators=[RegexValidator('[0-9]',message='RUT válido')], widget=forms.TextInput(
         attrs={
-            'class': 'form-control mb-2',
+            'class': 'form-control',
             'placeholder':'Ingrese RUT',
-            'max_length': '8'
+            'maxlength': '8',
         }))
-    dv = forms.CharField(label= 'DV', max_length=1, widget=forms.TextInput(
+    dv = forms.CharField(label= 'DV', max_length=1,validators=[RegexValidator('[0-9kK]{1}$')], widget=forms.TextInput(
         attrs={
             'class': 'form-control mb-2',
-            'placeholder':'Ingrese digito verificador',
+            'placeholder':'DV',
         }))
     nombre = forms.CharField(label='Nombre',widget=forms.TextInput(
         attrs={
-            'class': 'form-control md-3',
+            'class': 'form-control mb-2',
             'placeholder':'Ingrese Nombre'
         }))
     apellido = forms.CharField(label='Apellido', widget=forms.TextInput(
         attrs={
-            'class': 'form-control md-3',
+            'class': 'form-control mb-2',
             'placeholder':'Ingrese Apellido'
         }))
     telefono =  forms.CharField(max_length=9, widget=forms.NumberInput(
         attrs={
-            'class': 'form-control md-3',
+            'class': 'form-control mb-2',
             'placeholder':'Ingrese Telefono'
         }))
     correo =forms.EmailField(required=True, widget=forms.EmailInput(
         attrs={
-            'class': 'form-control md-3',
+            'class': 'form-control mb-2',
             'placeholder':'Ingrese Correo'
         }))
 
     password = forms.CharField(label= 'Contraseña', widget=forms.PasswordInput(
         attrs={
-            'class': 'form-control md-3',
+            'class': 'form-control mb-2',
             'placeholder':'Ingrese Contraseña',
             'id': 'password'
         }))
@@ -101,7 +102,7 @@ class UsuarioAdminForm(forms.ModelForm):
         attrs={
             'class': 'form-control mb-2',
             'placeholder':'Ingrese RUT',
-            'max_length': '8'
+            'maxlength': '8'
         }))
     dv = forms.CharField(label= 'DV', max_length=1, widget=forms.TextInput(
         attrs={
