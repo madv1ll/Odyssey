@@ -85,16 +85,16 @@ WSGI_APPLICATION = 'odyssey_web.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': BASE_DIR / 'db.sqlite3',
-    # },
     'default': {
-        'ENGINE': 'django.db.backends.oracle',
-        'NAME': 'xe',
-        'USER': 'ODYSSEY_BD',
-        'PASSWORD': 'oraodypass22',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     },
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.oracle',
+    #     'NAME': 'xe',
+    #     'USER': 'ODYSSEY_BD',
+    #     'PASSWORD': 'oraodypass22',
+    # },
 }
 
 
@@ -147,8 +147,9 @@ AUTH_USER_MODEL =  'user.Usuario'
 
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST    = "smtp.gmail.com"
+EMAIL_HOST    = "smtp.office365.com"
 EMAIL_USE_TLS = True
 EMAIL_PORT    = 587
-EMAIL_HOST_USER = "odyssseygamming@gmail.com"
+# EMAIL_HOST_USER = "odyssseygamming@gmail.com"
+EMAIL_HOST_USER = "odysseygamming@outlook.com"
 EMAIL_HOST_PASSWORD = "portafolio123"

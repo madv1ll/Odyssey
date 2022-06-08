@@ -9,16 +9,116 @@
                 <div class="card-body">
                     <h3>Registrate</h3>
                     <hr>
-                    <form action="" method="post">
+                    <form action="" method="post" id="form">
                         {% csrf_token %}
-                        {{ form.as_p }}
-                        <input type="submit" value="Registrarse" class="btn btn-primary float-right">
-                        <br><br>
-                        <p>Ya tienes una cuenta? <a class="btn btn-warning" href="{% url 'login' %}">iniciar sesion</a></p>
+                        <div class="container">
+                            <div class="row justify-content-md-start">
+                                <div class="col-3 col-md-3 col-lg-3">
+                                    {{ form.rut.label_tag }}
+                                </div>
+                                <div class="col-4 col-md-4 col-lg-4">
+                                    {{ form.rut }}
+                                </div>
+                                <div class="col-1 col-md-1 col-lg-1">&minus;</div>
+                                <div class="col-2 col-md-2 col-lg-2">
+                                    {{ form.dv }}
+                                </div>
+                                {{ form.rut.errors }}
+                                {{ form.dv.errors }}
+                            </div>
+                                <div class="row justify-content-md-center">
+                                    <div class="col-3 col-md-3 col-lg-3">
+                                    {{ form.nombre.label_tag }}
+                                </div>
+                                    <div class="col">
+                                        {{ form.nombre }}
+                                        {{ form.nombre.errors }}
+                                    </div>
+                                </div>
+                                <div class="row justify-content-md-center">
+                                    <div class="col-3 col-md-3 col-lg-3">
+                                        {{ form.apellido.label_tag }}
+                                    </div>
+                                    <div class="col">
+                                        {{ form.apellido }}
+                                    </div>
+                                    {{ form.apellido.errors }}
+                                </div>
+                                <div class="row justify-content-md-center">
+                                    <div class="col-3 col-md-3 col-lg-3">
+                                        {{ form.telefono.label_tag }}
+                                    </div>
+                                    <div class="col">
+                                        {{ form.telefono }}
+                                    </div>
+                                    {{ form.telefono.errors }}
+                                </div>
+                                <div class="row justify-content-md-center">
+                                    <div class="col-3 col-md-3 col-lg-3">
+                                        {{ form.correo.label_tag }}
+                                    </div>
+                                    <div class="col">
+                                        {{ form.correo }}
+                                        {{ form.correo.errors }}
+                                    </div>
+                                </div>
+                                <div class="row justify-content-md-start">
+                                    <div class="col-3 col-md-3 col-lg-3">
+                                        {{ form.password.label_tag }}
+                                    </div>
+                                    <div class="col">
+                                        {{ form.password }}
+                                    </div>
+                                    {{ form.password.errors }}
+                                </div>
+                                <input type="submit" value="Registrarse" id="registrar" class="btn btn-primary flex-center">
+                                <br><br>
+                                <p>Ya tienes una cuenta? <a class="btn btn-warning" href="{% url 'login' %}">iniciar sesion</a></p>
+                        </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script>
+    var Fn = {
+        validaRut: function(rutCompleto) {
+            if (!/^[0-9]+-[0-9kK]{1}$/.test(rutCompleto))
+                return false;
+            var tmp = rutCompleto.split('-');
+            var digv = tmp[1];
+            var rut = tmp[0];
+            if (digv == 'K') digv = 'k';
+            return (Fn.dv(rut) == digv);
+        },
+        dv: function(T) {
+            var M = 0,
+                S = 1;
+            for (; T; T = Math.floor(T / 10))
+                S = (S + T % 10 * (9 - M++ % 6)) % 11;
+            return S ? S - 1 : 'k';
+        }
+    }
+    //1.-  Poner placeholder:
+    // $("#order_shipping_address_taxid").attr("placeholder", "xxxxxxxx-x (sin puntos)")
+    // $("#order_billing_address_taxid").attr("placeholder", "xxxxxxxx-x (sin puntos)")
+    // 2.- Validar on Submit
+    $("#form").submit(function(evt) {
+ 
+        // let sameAsBilling = $("#shipping_same_as_billing").is(":checked");
+        let rut = $("#id_rut").val();
+        let dv  = $("#id_dv").val();
+        let rutDv = rut+'-'+dv
+        console.log(rutDv)
+        // let rutBilling = $("#order_billing_address_taxid").val();
+
+        if (Fn.validaRut(rutDv)) {
+            return;
+        } else {
+            evt.preventDefault();
+            alert("RUT inválido");
+        }
+    });
+    </script>
 {% endblock %}
