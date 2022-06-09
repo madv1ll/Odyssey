@@ -33,7 +33,7 @@
                         </div>
                             {% else %}
                             <p class="card-text">$ {{ p.precio | title }}</p>
-                            <p><button type="button" class="btn btn-primary"><a href="#" onclick="AlertAgregarCarrito({{ p.id_producto }});">Comprar</a></button></p>              
+                            <p><a href="#" class="btn btn-primary" onclick="AlertAgregarCarrito({{ p.id_producto }});">Comprar</a></p>              
                         {% endif%}
                     </div>
                 </div>

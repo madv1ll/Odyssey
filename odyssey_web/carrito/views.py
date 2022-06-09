@@ -72,39 +72,27 @@ class CarritoView(View):
         amount = total
         buy_order="1"
         session_id="1"
-        return_url= 'http://localhost:8000/carrito/confirmacion/'
-        
-        cliente = request.user.rut
-        
+        cliente = request.user.rut   
+        return_url= 'http://127.0.0.1:8000/carrito/confirmacion/'+str(cliente)+'/'
         direccion_clie = Direccion.objects.filter(id_usuario = cliente).filter(principal="SI")
-        print(direccion_clie)
-
         tx = Transaction(WebpayOptions(IntegrationCommerceCodes.WEBPAY_PLUS,
         IntegrationApiKeys.WEBPAY,
         IntegrationType.TEST))
         resp = tx.create(buy_order, session_id, amount, return_url)
-        # print(resp)
         return render(request,"carro/confirmacion.html",{"resp":resp, "direccion":direccion_clie, "precio_envio":envio})
 
  
 class DetalleCompra(View):
-    def get(self,request,*args,**kwargs):
+    def get(self,request,rut,*args,**kwargs):
+        print(request)
         token = request.GET.get("token_ws")
         tx = Transaction(WebpayOptions(IntegrationCommerceCodes.WEBPAY_PLUS, IntegrationApiKeys.WEBPAY, IntegrationType.TEST))
         success = tx.commit(token)
-        # print(success)
-        cliente = request.user.rut
-        direccion_clie = Direccion.objects.filter(id_usuario = cliente).filter(principal="SI")
-
         if success.get("status") == "AUTHORIZED":
-            if request.user.is_active:
-                cliente = request.user.rut
-            else:
-                cliente = "99.999.999-K"
             total = 0
-            obj_cliente = Usuario.objects.only('rut').get(rut=cliente)
+            obj_cliente = Usuario.objects.only('rut').get(rut=rut)
             tpo_pago = Tipo_Pago.objects.only('id_tipo_pago').get(id_tipo_pago=success.get('payment_type_code'))
-            direc= Direccion.objects.only("id_direccion").filter(principal="SI").get(id_usuario=cliente)
+            direc= Direccion.objects.only("id_direccion").filter(principal="SI").get(id_usuario=rut)
             compra = Compra(
                     rut_usuario =  obj_cliente,
                     id_tipo_pago = tpo_pago,
@@ -115,7 +103,6 @@ class DetalleCompra(View):
             for key, value in request.session["carro"].items():
                 total=total+(float(value["precio"]))
                 # creacion del registro del producto
-                registro = ""
                 prod = Producto.objects.only('id_producto').get(id_producto=value["producto_id"])
                 registro = Detalle_compra(
                     id_producto     = prod,
@@ -126,20 +113,16 @@ class DetalleCompra(View):
                 )
                 registro.save()
             Carro.limpiar_carro(request)
-
             #send mail
             correoUsuario = request.user.correo
-            subject = "Compra realizada con exito"
+            subject = "Compra realizada con éxito!"
             email_template_name =  "carro/email/emailConfirm.txt"
             message = render_to_string(email_template_name)		
-            send_mail(subject, message, 'odyssseygamming@gmail.com',[correoUsuario], fail_silently=False)
-
-
-
+            send_mail(subject, message, 'odysseygamming@outlook.com',[correoUsuario], fail_silently=False)
         else:
             # print("rechazado")
             registro = "no crear registro"
-        return render(request,"carro/confirmacion.html",{"success":success, "direccion":direccion_clie})
+        return render(request,"carro/confirmacion.html",{"success":success})
 
 	# DEBITO = 4051 8842 3993 7763
     # 11 111 111 1

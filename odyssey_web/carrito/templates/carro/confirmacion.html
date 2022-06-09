@@ -2,10 +2,6 @@
 {% load static %}
 {% block titulo %}Odyssey | Carrito{% endblock %}
 {% block body %}
-<!-- <div class="d-flex justify-content-center mt-4">
-        <h4>Productos:</h4>
-</div>-->
-
 
 <div class="container-sm" id="widget" style="padding-top: 90px;">
   <h1>Resumen de compra</h1>
@@ -101,23 +97,28 @@
 
 <div class="container-sm" style="padding-top: 90px;" id="pagar">
     <div class="card-body">
-        <h6 class="card-title">Total productos: ${{importe_total_carro}}</h6>
-
-        {% for p in precio_envio %}
-          <h6>Precio envio: ${{ p.precio | title }} </h6>
-        {% endfor %}
-
-        <h5 class="card-title"> Total a pagar: $ {{precio_totalMasEnvio}}<h5>
-        {% if direccion %}
+      <div class="row">
+        <div class="col">
+          <h6 class="card-title"><strong>Total productos:</strong> ${{importe_total_carro}}</h6>
+          {% for p in precio_envio %}
+          <h6><strong>Precio envio:</strong> ${{ p.precio | title }} </h6>
+          {% endfor %}
+          <h4 class="card-title"> Total a pagar: $ {{precio_totalMasEnvio}}<h4>
+          {% if direccion %}
           <form method="post" action="{{resp.url}}">
-              <input type="hidden" name="token_ws" value="{{resp.token}}" />
-              <input class="btn btn-primary" type="submit" value="Ir a pagar" />
+            <input type="hidden" name="token_ws" value="{{resp.token}}" />
+            <input class="btn btn-primary" type="submit" value="Ir a pagar" />
           </form>
-        {% else %} 
-          <p>Para poder continuar con tu pago debes agregar tu direccion principal <br>
-          <!-- <a href="#">Aqui!!</a> -->
-        </p>
-        {% endif %}
+        </div>
+      {% else %}
+      </div>
+      <div class="col">
+        <h4>Para poder continuar con tu pago debes agregar tu direccion principal</h4>
+      </div>
+      <div class="col">
+        <a href="{% url 'nueva_direccion' request.user.rut %}" class="btn btn-primary">Agregar Direccion</a>
+      </div>
+      {% endif %}
     </div>
     
 </div>
