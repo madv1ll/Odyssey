@@ -62,7 +62,7 @@ def modificar_compra(request, id):
                         "telefono": telefonoUsuario
                     }
                     message = render_to_string(email_template_name, c)		
-                    send_mail(subject, message, 'odyssseygamming@gmail.com',[correoUsuario], fail_silently=False)
+                    send_mail(subject, message, 'odysseygamming@outlook.com',[correoUsuario], fail_silently=False)
 
                 elif(estado == 'Pedido entregado'):
                     correoUsuario = correoUsuario
@@ -73,7 +73,7 @@ def modificar_compra(request, id):
                         "telefono": telefonoUsuario
                     }
                     message = render_to_string(email_template_name, c)		
-                    send_mail(subject, message, 'odyssseygamming@gmail.com',[correoUsuario], fail_silently=False)   
+                    send_mail(subject, message, 'odysseygamming@outlook.com',[correoUsuario], fail_silently=False)   
 
                 return redirect(to="lista_compra")
             else:

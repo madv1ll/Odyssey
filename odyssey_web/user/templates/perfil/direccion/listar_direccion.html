@@ -14,11 +14,13 @@
           <p class="card-text">Comuna: {{ d.id_comuna | title }}</p>
           <p class="card-text">Direccion principal: {{ d.principal }}</p>
           <a href="{% url 'modificar_direccion' d.id_direccion %}" class="btn btn-warning">Editar</a>
-          <a href="{% url 'eliminar_direccion' d.id_direccion %}" class="btn btn-danger">Eliminar</a>
+          <!-- <a href="{% url 'eliminar_direccion' d.id_direccion %}" class="btn btn-danger">Eliminar</a> -->
+          <a href="#"  onclick="AlertEliminarDireccion({{ d.id_direccion }});" class="btn btn-danger">Eliminar</a>
         </div>
       </div>
     {% endfor %}
 <a href="{% url 'nueva_direccion' user.rut %}" class="btn btn-success">Crear direccion</a>
 <br>
 </div>
+<script src="{% static 'js/alert.js' %}"></script>
 {% endblock %}

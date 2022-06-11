@@ -277,3 +277,13 @@ header {
 #productosComprados{
     padding-top: 90px;
 }
+
+
+
+#advertencia{
+    text-align: center;
+}
+
+#advertencia p {
+    color: red;
+}

@@ -128,6 +128,7 @@ def modificar_perfil(request, id):
         else:
             data["form"] = formulario
     return render(request, 'perfil/editarInfo.html', data)
+    
 
 def nueva_direccion(request, id):
     if request.method == "POST":

@@ -5,22 +5,26 @@
 
 {% block body %}
 <div class="container-sm" id="editarPerfil">
-  <div class="row">
-      <div class="col-12 col-md-6 offset-md-3">
-          <div class="card">
-              <div class="card-body">
-                  <h3>Editar datos</h3>
-                  <hr>
-                  <form action="" method="post">
-                      {% csrf_token %}
-                      {{ form.as_p }}
-                      <input type="submit" value="Modificar" class="btn btn-success float-right">
-                      <button type="button" class="btn btn-warning"><a href="{% url 'listar_perfil' user.rut %}">Volver</a></button>
-                  </form>
-              </div>
-          </div>
-      </div>
-  </div>
+    <div class="row" id="advertencia">
+        <p>Cuando realices los cambios en tu perfil por seguridad se cerra tu sesion y se solicitara validar tu correo electronico!!!!</p>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-6 offset-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <h3>Editar datos</h3>
+                    <hr>
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <input type="submit" value="Modificar" class="btn btn-success float-right">
+                        <button type="button" class="btn btn-warning"><a
+                                href="{% url 'listar_perfil' user.rut %}">Volver</a></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 {% endblock %}
