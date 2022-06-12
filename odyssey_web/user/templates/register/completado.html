@@ -1,0 +1,19 @@
+{% extends 'web/base.html' %}
+{% load static %}
+{% block titulo %}Registrarse{% endblock %}
+{% block body %}
+<div class="container p-5">
+    <h2 class="font-weight-bold mt-3">Registro completado</h2>
+    <hr>
+    <p>Revisa la bandeja de entrada de tu correo electrónico para validar tu cuenta y poder iniciar sesion</p>
+    <p>Redirigiendo a página principal...</p>
+<script>
+
+    let tID = setTimeout(function () {
+        window.location.href = "{% url 'home' %}";
+        window.clearTimeout(tID);		// clear time out.
+    }, 5000);
+
+</script>
+</div>
+{% endblock%}

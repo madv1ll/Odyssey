@@ -1,7 +1,7 @@
 from django.urls import path
 from django.contrib.auth.views import LogoutView, PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, \
     PasswordResetCompleteView
-from .views import LoginView, RegistroView, RegistroAdminView, confirmacion_correo, confirmar, modificar_usuario, users, eliminar, \
+from .views import LoginView, RegistroView, RegistroAdminView, confirmacion_correo, confirmar, modificar_usuario, registro_compleado, users, eliminar, \
  modificar_perfil, listar_perfil, listar_direccion, nueva_direccion, \
 modificar_direccion, eliminar_direccion, lista_detalleCompra, listar_productosCompraCLi, password_reset_request
 
@@ -11,6 +11,9 @@ urlpatterns = [
     path('registro_admin', RegistroAdminView.as_view(template_name = 'register/user_adminForm.html'), name="registro_admin"),
     path('login/', LoginView.as_view(template_name = 'login/login.html'), name='login'),
     path('logout/', LogoutView.as_view(template_name = 'web/home.html'), name='logout'),
+    # path('registro/completado', RegistroView.as_view(template_name = 'register/completado.html'), name="registro_completado"),
+    path('registro/completado', registro_compleado, name="registro_completado"),
+    
     #administrar usuarios
     path('users/', users, name="users"),
     path('eliminar_usuario/<id>/', eliminar, name="eliminar_user"),
