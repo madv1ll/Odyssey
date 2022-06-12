@@ -78,37 +78,46 @@ def my_view(request):
         return render(request, 'myapp/login_error.html')
 #-----------------------------
 def users(request):
-    busqueda = request.GET.get("buscar")
-    u = Usuario.objects.all()
-    if busqueda:
-        u = Usuario.objects.filter(
-            Q(username__icontains = busqueda) |
-            Q(rut__icontains = busqueda)
-        ).distinct()
+    if request.user.is_staff: 
+        busqueda = request.GET.get("buscar")
+        u = Usuario.objects.all()
+        if busqueda:
+            u = Usuario.objects.filter(
+                Q(username__icontains = busqueda) |
+                Q(rut__icontains = busqueda)
+            ).distinct()
 
-    return render(request, 'user/listaUsuarios.html', {'entity':u})     
+        return render(request, 'user/listaUsuarios.html', {'entity':u})     
+    else:
+        return render(request,'acceso-denegado.html')     
 
 def eliminar(request, id):
-    user = get_object_or_404(Usuario, rut = id)
-    user.delete()
-    messages.success(request, "eliminado correctamente")
-    return redirect(to="users")
+    if request.user.is_staff: 
+        user = get_object_or_404(Usuario, rut = id)
+        user.delete()
+        messages.success(request, "eliminado correctamente")
+        return redirect(to="users")
+    else:
+        return render(request,'acceso-denegado.html')    
 
 
 def modificar_usuario(request, id):
-    user = get_object_or_404(Usuario, rut=id)
-    data = {
-        'form': UsuarioForm(instance=user)
-    }
-    if request.method == 'POST':
-        formulario = UsuarioForm(data=request.POST, instance=user, files=request.FILES)
-        if formulario.is_valid():
-            formulario.save()
-            messages.success(request, "modificado correctamente")
-            return redirect(to="users")
-        else:
-            data["form"] = formulario
-    return render(request, 'user/modificar_usuario.html', data)
+    if request.user.is_staff: 
+        user = get_object_or_404(Usuario, rut=id)
+        data = {
+            'form': UsuarioForm(instance=user)
+        }
+        if request.method == 'POST':
+            formulario = UsuarioForm(data=request.POST, instance=user, files=request.FILES)
+            if formulario.is_valid():
+                formulario.save()
+                messages.success(request, "modificado correctamente")
+                return redirect(to="users")
+            else:
+                data["form"] = formulario
+        return render(request, 'user/modificar_usuario.html', data)
+    else:
+        return render(request,'acceso-denegado.html')    
 
 #-------------Perfil de cliente--------------------------------------------
 
