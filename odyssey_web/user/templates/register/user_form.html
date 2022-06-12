@@ -103,20 +103,20 @@
             return S ? S - 1 : 'k';
         }
     }
-    //1.-  Poner placeholder:
-    // $("#order_shipping_address_taxid").attr("placeholder", "xxxxxxxx-x (sin puntos)")
-    // $("#order_billing_address_taxid").attr("placeholder", "xxxxxxxx-x (sin puntos)")
-    // 2.- Validar on Submit
     $("#form").submit(function(evt) {
- 
-        // let sameAsBilling = $("#shipping_same_as_billing").is(":checked");
+
         let rut = $("#id_rut").val();
         let dv  = $("#id_dv").val();
         let rutDv = rut+'-'+dv
-        console.log(rutDv)
-        // let rutBilling = $("#order_billing_address_taxid").val();
 
         if (Fn.validaRut(rutDv)) {
+            Swal.fire({
+            icon: 'success',
+            title: 'Usuario Registrado',
+            text: 'Revisa la bandeja de tu correo electrónico para poder validar tu correo',
+            showConfirmButton: false,
+            timer: 1500
+            })
             return;
         } else {
             evt.preventDefault();
@@ -127,5 +127,6 @@
             })
         }
     });
+
     </script>
 {% endblock %}

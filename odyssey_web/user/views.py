@@ -28,13 +28,17 @@ from django.http import HttpResponse
 class RegistroView(CreateView):
     model = Usuario
     form_class = UsuarioForm
-    success_url = reverse_lazy('home')
+    success_url = reverse_lazy('registro_completado')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         if len(Usuario.objects.all()) == 0:
             context["primer_usuario"] = True
         return context
+
+def registro_compleado(request):
+    return render(request, 'register/completado.html')
+    
 class RegistroAdminView(CreateView):
     model = Usuario
     form_class = UsuarioAdminForm
