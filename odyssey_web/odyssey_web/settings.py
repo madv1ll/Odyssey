@@ -71,7 +71,7 @@ DATABASES = {
     # },
     'default': {
         'ENGINE': 'django.db.backends.oracle',
-        'NAME': 'xepdb1',
+        'NAME': 'xe',
         'USER': 'ODYSSEY_BD',
         'PASSWORD': 'oraodypass22',
     },
