@@ -11,10 +11,75 @@
                     <hr>
                     <form action="" method="post">
                         {% csrf_token %}
-                        {{ form.as_p }}
-                        <div class="d-flex justify-content-end mt-2">
-                            <a class="btn btn-danger float-left" href="{% url 'users' %}">Volver</a>
-                            &nbsp;
+                        <div class="container">
+                            <div class="row justify-content-md-start">
+                                <div class="col-3 col-md-3 col-lg-3">
+                                    {{ form.rut.label_tag }}
+                                </div>
+                                <div class="col-4 col-md-4 col-lg-4">
+                                    {{ form.rut }}
+                                </div>
+                                <div class="col-1 col-md-1 col-lg-1">&minus;</div>
+                                <div class="col-2 col-md-2 col-lg-2">
+                                    {{ form.dv }}
+                                </div>
+                                {{ form.rut.errors }}
+                                {{ form.dv.errors }}
+                            </div>
+                                <div class="row justify-content-md-center">
+                                    <div class="col-3 col-md-3 col-lg-3">
+                                    {{ form.nombre.label_tag }}
+                                </div>
+                                    <div class="col">
+                                        {{ form.nombre }}
+                                        {{ form.nombre.errors }}
+                                    </div>
+                                </div>
+                                <div class="row justify-content-md-center">
+                                    <div class="col-3 col-md-3 col-lg-3">
+                                        {{ form.apellido.label_tag }}
+                                    </div>
+                                    <div class="col">
+                                        {{ form.apellido }}
+                                        {{ form.apellido.errors }}
+                                    </div>
+                                </div>
+                                <div class="row justify-content-md-center">
+                                    <div class="col-3 col-md-3 col-lg-3">
+                                        {{ form.telefono.label_tag }}
+                                    </div>
+                                    <div class="col">
+                                        {{ form.telefono }}
+                                        {{ form.telefono.errors }}
+                                    </div>
+                                </div>
+                                <div class="row justify-content-md-center">
+                                    <div class="col-3 col-md-3 col-lg-3">
+                                        {{ form.correo.label_tag }}
+                                    </div>
+                                    <div class="col">
+                                        {{ form.correo }}
+                                        {{ form.correo.errors }}
+                                    </div>
+                                </div>
+                                <div class="row justify-content-md-start">
+                                    <div class="col-3 col-md-3 col-lg-3">
+                                        {{ form.password.label_tag }}
+                                    </div>
+                                    <div class="col">
+                                        {{ form.password }}
+                                        {{ form.password.errors }}
+                                    </div>
+                                </div>
+                                <div class="row justify-content-md-start">
+                                    <div class="col-3 col-md-3 col-lg-3">
+                                        {{ form.is_staff.label_tag }}
+                                    </div>
+                                    <div class="col">
+                                        {{ form.is_staff }}
+                                        {{ form.is_staff.errors }}
+                                    </div>
+                                </div>
                             <input type="submit" value="Registrar" class="btn btn-success float-right">
                           </div>
                     </form>

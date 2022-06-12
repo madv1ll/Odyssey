@@ -110,13 +110,6 @@
         let rutDv = rut+'-'+dv
 
         if (Fn.validaRut(rutDv)) {
-            Swal.fire({
-            icon: 'success',
-            title: 'Usuario Registrado',
-            text: 'Revisa la bandeja de tu correo electrónico para poder validar tu correo',
-            showConfirmButton: false,
-            timer: 1500
-            })
             return;
         } else {
             evt.preventDefault();

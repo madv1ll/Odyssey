@@ -101,45 +101,46 @@ class UsuarioForm(forms.ModelForm):
         return user
 
 class UsuarioAdminForm(forms.ModelForm):
-    rut = forms.IntegerField(label= 'RUT', widget=forms.NumberInput(
+    rut = forms.CharField(label= 'RUT',validators=[RegexValidator('[0-9]',message='RUT válido')], widget=forms.TextInput(
+    attrs={
+        'class': 'form-control',
+        'placeholder':'Ingrese RUT',
+        'maxlength': '8',
+    }))
+    dv = forms.CharField(label= 'DV', max_length=1,validators=[RegexValidator('[0-9kK]{1}$')], widget=forms.TextInput(
         attrs={
             'class': 'form-control mb-2',
-            'placeholder':'Ingrese RUT',
-            'maxlength': '8'
-        }))
-    dv = forms.CharField(label= 'DV', max_length=1, widget=forms.TextInput(
-        attrs={
-            'class': 'form-control mb-2',
-            'placeholder':'Ingrese digito verificador',
+            'placeholder':'DV',
         }))
     nombre = forms.CharField(label='Nombre',widget=forms.TextInput(
         attrs={
-            'class': 'form-control md-3',
+            'class': 'form-control mb-2',
             'placeholder':'Ingrese Nombre'
         }))
     apellido = forms.CharField(label='Apellido', widget=forms.TextInput(
         attrs={
-            'class': 'form-control md-3',
+            'class': 'form-control mb-2',
             'placeholder':'Ingrese Apellido'
         }))
     telefono =  forms.CharField(max_length=9, widget=forms.NumberInput(
         attrs={
-            'class': 'form-control md-3',
+            'class': 'form-control mb-2',
             'placeholder':'Ingrese Telefono'
         }))
     correo =forms.EmailField(required=True, widget=forms.EmailInput(
         attrs={
-            'class': 'form-control md-3',
+            'class': 'form-control mb-2',
             'placeholder':'Ingrese Correo'
         }))
 
     password = forms.CharField(label= 'Contraseña', widget=forms.PasswordInput(
         attrs={
-            'class': 'form-control md-3',
+            'class': 'form-control mb-2',
             'placeholder':'Ingrese Contraseña',
             'id': 'password'
         }))
-   
+    is_staff = forms.BooleanField(required=False, label= 'Administrador')
+
     class Meta:
         model = Usuario
         fields = ('rut', 'dv', 'nombre', 'apellido', 'correo', 'telefono', 'is_staff')

@@ -5,10 +5,8 @@ from .forms import CompraEditForm, PrecioEnvioEditForm
 from django.contrib import messages
 from .models import PrecioEnvio
 from user.models import Usuario
-
 from django.template.loader import render_to_string
 from django.core.mail import send_mail, BadHeaderError
-
 
 def administrador(request):
     if request.user.is_staff:
@@ -17,7 +15,6 @@ def administrador(request):
     else:
         print("no es administrador")    
         return render(request, 'acceso-denegado.html')
-
 
 def listar_compra(request):
     compra = Compra.objects.all().order_by('fecha').reverse()
@@ -33,7 +30,6 @@ def listar_productosCompra(request, id):
     else:    
         return render(request, 'acceso-denegado.html')    
 
-
 def modificar_compra(request, id):
     if request.user.is_staff:
         compra = get_object_or_404(Compra, id_compra=id)
@@ -46,8 +42,6 @@ def modificar_compra(request, id):
             if formulario.is_valid():
                 formulario.save()
                 messages.success(request, "modificado correctamente")
-
-
                 estado = compra.estado
                 correoUsuario = compra.rut_usuario.correo
                 nombreUsuario = compra.rut_usuario.nombre
@@ -81,17 +75,13 @@ def modificar_compra(request, id):
         return render(request, 'registrosCompra/modificar_compra.html', data)
     else:
         return render(request,'acceso-denegado.html')
-
-
 #--------------------------- precio envio -------------------------------------
-
 def listar_precioEnvio(request):
     precioEnvio = PrecioEnvio.objects.all()
     if request.user.is_staff:
         return render(request, 'precioEnvio/lista_precio.html', {'entity':precioEnvio})
     else:
         return render(request,'acceso-denegado.html') 
-
 
 def modificar_precioEnvio(request, id):
     if request.user.is_staff:
@@ -110,8 +100,3 @@ def modificar_precioEnvio(request, id):
         return render(request, 'precioEnvio/modificar_precioEnvio.html', data)
     else:
         return render(request,'acceso-denegado.html')    
-
-
-
-
-    
