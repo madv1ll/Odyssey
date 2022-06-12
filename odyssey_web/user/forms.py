@@ -8,7 +8,6 @@ from .models import Usuario, Direccion
 import datetime, random, hashlib
 from django.core.mail import send_mail
 from django.core.validators import RegexValidator
-# +-[0-9kK]{1}$
 class UsuarioForm(forms.ModelForm):
     rut = forms.CharField(label= 'RUT',validators=[RegexValidator('[0-9]',message='RUT válido')], widget=forms.TextInput(
         attrs={
@@ -58,14 +57,17 @@ class UsuarioForm(forms.ModelForm):
         if len(str(rut_cleaned)) < 7 or len(str(rut_cleaned)) > 8:
             raise forms.ValidationError('Ingrese un RUT válido')
         return rut_cleaned
+        
     def clean_password(self):
         password = self.cleaned_data.get('password')
         if len(password) < 8:
             raise forms.ValidationError('La contraseña debe tener mínimo 8 caracteres.')
         return password
+
     def clean_dv(self):
         dv_cleaned = self.cleaned_data.get('dv')
         return str(dv_cleaned).upper()
+
     def clean_correo(self):
         correo_cleaned = self.cleaned_data.get('correo')
         try:
@@ -85,6 +87,9 @@ class UsuarioForm(forms.ModelForm):
         key = hashlib.sha1(str(salt+usern).encode("utf-8")).hexdigest()            
         user.activation_key = key
         user.key_expires = datetime.datetime.today() + datetime.timedelta(2)
+        #si es el primer usuario se crea como admin
+        if len(Usuario.objects.all()) == 0:
+            user.is_staff = True
         
         if commit:
             user.is_active = False
@@ -92,10 +97,8 @@ class UsuarioForm(forms.ModelForm):
              # Enviar un email de confirmación
             email_subject = 'Confirmacion de Cuenta'
             email_body = "Hola %s, Gracias por registrarte. Para activar tu cuenta da clíck en este link en menos de 48 horas: http://127.0.0.1:8000/user/confirmacion/%s" % (user.nombre.lower(), key)
-
             send_mail(email_subject, email_body, 'odysseygamming@outlook.com', [usern], fail_silently=False)
         return user
-
 
 class UsuarioAdminForm(forms.ModelForm):
     rut = forms.IntegerField(label= 'RUT', widget=forms.NumberInput(
@@ -165,12 +168,6 @@ class UsuarioAdminForm(forms.ModelForm):
         if commit:
             user.save()
             return user          
-
-from django.contrib.auth.forms import AuthenticationForm
-
-
-
-
 
 class LoginForm(AuthenticationForm):
     def __init__(self, *args, **kwargs):

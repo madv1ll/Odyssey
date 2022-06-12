@@ -30,11 +30,16 @@ class RegistroView(CreateView):
     form_class = UsuarioForm
     success_url = reverse_lazy('home')
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        if len(Usuario.objects.all()) == 0:
+            context["primer_usuario"] = True
+        return context
 class RegistroAdminView(CreateView):
     model = Usuario
     form_class = UsuarioAdminForm
-    success_url = reverse_lazy('users')    
-
+    success_url = reverse_lazy('users')  
+      
 class LoginView(FormView):
     template_name = 'login.html'
     form_class = LoginForm
@@ -68,7 +73,6 @@ def my_view(request):
     if not request.user.is_authenticated:
         return render(request, 'myapp/login_error.html')
 #-----------------------------
-
 def users(request):
     busqueda = request.GET.get("buscar")
     u = Usuario.objects.all()
@@ -79,8 +83,6 @@ def users(request):
         ).distinct()
 
     return render(request, 'user/listaUsuarios.html', {'entity':u})     
-
-
 
 def eliminar(request, id):
     user = get_object_or_404(Usuario, rut = id)
@@ -208,8 +210,6 @@ def listar_productosCompraCLi(request, id):
     productosCompra = Detalle_compra.objects.filter( id_compra=id)
     return render(request, 'perfil/compra/productos.html', {'entity':productosCompra})
 
-
-
 def password_reset_request(request):
 	if request.method == "POST":
 		password_reset_form = PasswordResetForm(request.POST)
@@ -250,7 +250,6 @@ def confirmacion_correo(request, token):
     if user_profile.key_expires < timezone.now():
         return render(request, 'user/token_expirado.html')
     # Si el token no ha expirado, se activa el usuario y se muestra el html de confirmación
-    user = user_profile.nombre
     user_profile.is_active = True
     user_profile.save()
     return render (request, 'user/confirmacion_correo.html')
