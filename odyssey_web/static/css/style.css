@@ -287,3 +287,7 @@ header {
 #advertencia p {
     color: red;
 }
+
+#detalleProducto{
+    padding-top: 180px;
+}
