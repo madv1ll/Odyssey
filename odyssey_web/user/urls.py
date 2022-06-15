@@ -11,7 +11,6 @@ urlpatterns = [
     path('registro_admin', RegistroAdminView.as_view(template_name = 'register/user_adminForm.html'), name="registro_admin"),
     path('login/', LoginView.as_view(template_name = 'login/login.html'), name='login'),
     path('logout/', LogoutView.as_view(template_name = 'web/home.html'), name='logout'),
-    # path('registro/completado', RegistroView.as_view(template_name = 'register/completado.html'), name="registro_completado"),
     path('registro/completado', registro_compleado, name="registro_completado"),
     
     #administrar usuarios

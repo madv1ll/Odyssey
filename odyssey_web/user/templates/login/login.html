@@ -1,26 +1,18 @@
-{% include 'web/base.html' %}
+{% extends 'web/base.html' %}
+{% block titulo %} Odyssey | Log in{% endblock %}
 {% load static %}
-<!Doctype html>
-<html class="no-js" lang="es">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Odyssey | Iniciar Sesión </title>
-    <meta name="description" content="Ela Admin - HTML5 Admin Template">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/png" href="{% static path %}imagenes/icono3.1.png"/>
-	<link rel="stylesheet" type="text/css" href="{% static path %}login/vendor/bootstrap/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="{% static path %}login/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-	<link rel="stylesheet" type="text/css" href="{% static path %}login/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
-	<link rel="stylesheet" type="text/css" href="{% static path %}login/vendor/animate/animate.css">	
-	<link rel="stylesheet" type="text/css" href="{% static path %}login/vendor/css-hamburgers/hamburgers.min.css">
-	<link rel="stylesheet" type="text/css" href="{% static path %}login/vendor/animsition/css/animsition.min.css">
-	<link rel="stylesheet" type="text/css" href="{% static path %}login/vendor/select2/select2.min.css">	
-	<link rel="stylesheet" type="text/css" href="{% static path %}login/vendor/daterangepicker/daterangepicker.css">
-	<link rel="stylesheet" type="text/css" href="{% static path %}login/css/util.css">
-	<link rel="stylesheet" type="text/css" href="{% static path %}login/css/main.css">
-</head>
 {% block body %}
+<link rel="icon" type="image/png" href="{% static path %}imagenes/icono3.1.png"/>
+<link rel="stylesheet" type="text/css" href="{% static path %}login/vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="{% static path %}login/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="{% static path %}login/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+<link rel="stylesheet" type="text/css" href="{% static path %}login/vendor/animate/animate.css">	
+<link rel="stylesheet" type="text/css" href="{% static path %}login/vendor/css-hamburgers/hamburgers.min.css">
+<link rel="stylesheet" type="text/css" href="{% static path %}login/vendor/animsition/css/animsition.min.css">
+<link rel="stylesheet" type="text/css" href="{% static path %}login/vendor/select2/select2.min.css">	
+<link rel="stylesheet" type="text/css" href="{% static path %}login/vendor/daterangepicker/daterangepicker.css">
+<link rel="stylesheet" type="text/css" href="{% static path %}login/css/util.css">
+<link rel="stylesheet" type="text/css" href="{% static path %}login/css/main.css">
 <div class="limiter p-t-10">
     <div class="container-login100">
         <div class="wrap-login100 p-t-20 p-b-15 p-l-10 p-r-10 border border-warning">
@@ -63,3 +55,4 @@
     </div>
 </div>
 {% endblock %}
+</html>
