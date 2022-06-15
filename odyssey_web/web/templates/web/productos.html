@@ -20,7 +20,8 @@
             {% for p in entity %}
             <div class="col">
                 <div class="card" style="min-height: 452px;">
-                    <img src="{{ p.imagen.url }}" class="card-img-top" alt="..." >
+                    <a href="{% url 'detalleProducto' p.id_producto %}"> <img src="{{ p.imagen.url }}" class="card-img-top" alt="..." style="max-height: 194px;" ></a>
+                   
                     <div class="card-body">
                         <h5 class="card-title">{{ p.nombre | title }}</h5>
                         <h6 class="card-text"> {{ p.Proveedor | title }}</h6>

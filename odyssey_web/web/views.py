@@ -29,6 +29,10 @@ def listar_productosVenta(request):
         ).distinct()
     return render(request, 'web/productos.html', {'entity':productos})
 
+def detalleProducto(request, id):
+    producto = Producto.objects.filter(id_producto = id)
+    return render(request, 'web/detalleProducto.html', {'producto':producto})    
+
 
 
 def agregar_presentacion1(request):

@@ -1,0 +1,31 @@
+{% extends 'web/base.html' %}
+{% load static %}
+{% block body %}
+
+<div class="container-sm" id="detalleProducto">
+    <div class="row">
+        {% for producto in producto  %}
+        <div class="col">
+            <img src="{{ producto.imagen.url }}" class="img-fluid rounded mx-auto d-block" style="max-height: 636px;" alt="...">  
+        </div>
+        <div class="col">
+        
+            <h4>{{ producto.nombre }}</h4>
+            <p>descripcion: <br>
+                {{ producto.descripcion }}
+            </p>
+            <p>precio: $ {{ producto.precio }}</p>
+            <p>categoria: {{ producto.id_categoria }}</p>
+            <p>proveedor: {{ producto.id_proveedor }}</p>
+            <p>stock: {{ producto.stock }}</p>
+            {% if producto.stock != 0 %}
+            <p><a href="#" class="btn btn-primary" onclick="AlertAgregarCarrito({{ producto.id_producto }});">Comprar</a></p>  
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
+
+<script src="{% static 'js/alert.js' %}"></script>
+{% endblock %}

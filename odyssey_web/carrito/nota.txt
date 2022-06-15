@@ -1,1 +1,0 @@
-Debemos crear un cliente generico en la base de datos con el rut: "99.999.999-9"
