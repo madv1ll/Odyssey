@@ -123,25 +123,3 @@ class DetalleCompra(View):
             # print("rechazado")
             registro = "no crear registro"
         return render(request,"carro/confirmacion.html",{"success":success})
-
-	# DEBITO = 4051 8842 3993 7763
-    # 11 111 111 1
-    # 123
-
-# {'vci': 'TSY',
-#  'amount': 99000, 
-#  'status': 'AUTHORIZED', 
-#  'buy_order': '1', 
-#  'session_id': '1', 
-#  'card_detail': {'card_number': '7763'}, 
-#  'accounting_date': '0503', 
-#  'transaction_date': '2022-05-03T05:51:28.484Z', 
-#  'authorization_code': '1415', 
-#  'payment_type_code': 'VD', 
-#  'response_code': 0, 
-#  'installments_number': 0}
-
-
-
-
-
