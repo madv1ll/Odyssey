@@ -12,12 +12,22 @@
 4.- Instalar librerias
         comando: pip install -r requirements.txt
 
-5.- Crar base usuario en base de datos oracle xe 21c o superior utilizando el scrip del archivo:
-        USUARIO.sql
+5.- Crar usuario en base de datos oracle xe 21c o superior utilizando el scrip del archivo:
+        usuario.sql
         **SE DEBE EJECUTAR COMO USUARIO SYS / SYSADMIN
-        
-6.- Poblar base de datos utilizando el archivo:
+
+6.- Navegar a la ruta odyssey_web y realizar migraciones a la base de datos con los comandos:
+        comando 1: python manage.py makemigrations
+        comando 2: python manage.py migrate
+
+7.- Poblar base de datos utilizando el archivo:
         Poblado.sql
 
-7.- Navegar a la ruta odyssey_web y levantar el servidor con el comando:
+8.- Crear procedimiento almacenado y trigger utilizando el archivo
+        procedimiento_almacenado.sql
+
+9.- Navegar a la ruta odyssey_web y levantar el servidor con el comando:
         python manage.py runserver
+
+***Para realizar una compra debe utilizar los datos que aparecen en el archivo
+        datos_tarjeta.txt
